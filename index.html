@@ -126,56 +126,6 @@
             color: white;
         }
 
-        .bandwidth-monitor {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-        }
-
-        .bandwidth-value {
-            color: #4f46e5;
-            font-weight: 600;
-        }
-
-        .tool-group {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .tool-select {
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            color: white;
-            font-size: 0.9rem;
-            min-width: 150px;
-        }
-
-        .tool-select option {
-            background: #1a1a2e;
-            color: white;
-        }
-
-        .search-input {
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            color: white;
-            font-size: 0.9rem;
-            width: 200px;
-        }
-
-        .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
         .main-content {
 			padding-top: 120px;
 			padding-left: 2rem;
@@ -309,10 +259,6 @@
 			position: relative;
 		}
 
-		.custom-layout-controls.active {
-			display: block;
-		}
-
 		.custom-layout-header {
 			display: flex;
 			justify-content: space-between;
@@ -430,15 +376,6 @@
 				min-width: auto;
 			}
 			
-			/* Hide secondary header tools */
-			.secondary-left {
-				display: none;
-			}
-			
-			.secondary-content {
-				justify-content: flex-end;
-			}
-			
 			/* Simplify stats bar */
 			.stat-item {
 				font-size: 0.85rem;
@@ -449,11 +386,6 @@
 			}
 
 			.header {
-				padding: 0.75rem 1rem;
-				height: auto;
-			}
-			
-			.secondary-header {
 				padding: 0.75rem 1rem;
 				height: auto;
 			}
@@ -501,20 +433,6 @@
 			justify-content: space-between;
 			align-items: center;
 			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-		}
-
-		.close-sidebar {
-			background: none;
-			border: none;
-			color: white;
-			font-size: 1.5rem;
-			cursor: pointer;
-			padding: 0;
-			width: 30px;
-			height: 30px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
 		}
 
 		.mobile-sidebar-content {
@@ -1353,7 +1271,7 @@
             <!-- Arab Channels -->
             <div class="video-container" data-region="arab">
                 <div class="video-header">
-                    <div class="video-title">Al Manar - Hezbollah FIXED</div>
+                    <div class="video-title">Al Manar (Hezbollah)</div>
                     <div class="country-badge badge-arab">Arab</div>
                 </div>
                 <video class="video-element" id="video1" muted preload="none" controls></video>
@@ -1364,9 +1282,34 @@
                 <div class="loading-indicator"><div class="spinner"></div></div>
             </div>
 
+			<div class="video-container" data-region="arab">
+                <div class="video-header">
+                    <div class="video-title">Al-Aqsa (Hamas)</div>
+                    <div class="country-badge badge-arab">Arab</div>
+                </div>
+                <video class="video-element" id="video2" muted preload="none" controls></video>
+				<div class="play-overlay" onclick="playVideo('video2', 'https://mn-nl.mncdn.com/palabroad/live/playlist.m3u8')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="loading-indicator"><div class="spinner"></div></div>
+            </div>
+			
+			<div class="video-container" data-region="arab">
+                <div class="video-header">
+                    <div class="video-title">Al Mayadeen (Hezbollah/Iran)</div>
+                    <div class="country-badge badge-arab">Arab</div>
+                </div>
+                <video class="video-element" id="video27" muted preload="none" controls></video>
+                <!-- <div class="play-overlay" onclick="playVideo('video27', 'https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000_t64NDgwcA==.m3u8')"> -->
+				<div class="play-overlay" onclick="playVideo('video27', 'https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="loading-indicator"><div class="spinner"></div></div>
+            </div>
+			
             <div class="video-container" data-region="arab">
                 <div class="video-header">
-                    <div class="video-title">Al Arabiya</div>
+                    <div class="video-title">Al Arabiya (Saudi)</div>
                     <div class="country-badge badge-arab">Arab</div>
                 </div>
                 <video class="video-element" id="video3" muted preload="none" controls></video>
@@ -1378,13 +1321,15 @@
 
             <div class="video-container" data-region="arab">
                 <div class="video-header">
-                    <div class="video-title">Alhurra NOT WORKING</div>
+                    <div class="video-title">Alhurra (US) NOT WORKING</div>
                     <div class="country-badge badge-arab">Arab</div>
                 </div>
                 <video class="video-element" id="video4" muted preload="none" controls></video>
                 <div class="play-overlay" onclick="playVideo('video4', 'https://mbn-ingest-worldsafe.akamaized.net/hls/live/2038900/MBN_Alhurra_Worldsafe_HLS/master_2596.m3u8')">
 				<!-- <div class="play-overlay" onclick="playVideo('video4', 'https://mbn-ingest-worldsafe.akamaized.net/hls/live/2038900/MBN_Alhurra_Worldsafe_HLS/master_1628.m3u8')"> -->
 				<!-- <div class="play-overlay" onclick="playVideo('video4', 'https://mbn-ingest-worldsafe.akamaized.net/hls/live/2038900/MBN_Alhurra_Worldsafe_HLS/merge.m3u8')"> -->
+				<!-- <div class="play-overlay" onclick="playVideo('video4', 'https://mbnv-video-ingest.akamaized.net/hls/live/2038904/MBNV_ALHURRA_MAIN_HLS/merge.m3u8')"> -->
+
                     <i class="fas fa-play"></i>
                 </div>
                 <div class="loading-indicator"><div class="spinner"></div></div>
@@ -1392,7 +1337,7 @@
 
             <div class="video-container" data-region="arab">
                 <div class="video-header">
-                    <div class="video-title">Al Jazeera</div>
+                    <div class="video-title">Al Jazeera (Muslim Brotherhood)</div>
                     <div class="country-badge badge-arab">Arab</div>
                 </div>
                 <video class="video-element" id="video5" muted preload="none" controls></video>
@@ -1404,7 +1349,7 @@
 
             <div class="video-container" data-region="arab">
                 <div class="video-header">
-                    <div class="video-title">Al Jazeera Mubasher</div>
+                    <div class="video-title">Al Jazeera Mubasher (Muslim Brotherhood)</div>
                     <div class="country-badge badge-arab">Arab</div>
                 </div>
                 <video class="video-element" id="video6" muted preload="none" controls></video>
@@ -1416,7 +1361,7 @@
 
             <div class="video-container" data-region="arab">
                 <div class="video-header">
-                    <div class="video-title">Al Hadath - Saudi</div>
+                    <div class="video-title">Al Hadath (Saudi)</div>
                     <div class="country-badge badge-arab">Arab</div>
                 </div>
                 <video class="video-element" id="video7" muted preload="none" controls></video>
@@ -1428,7 +1373,7 @@
 
             <div class="video-container" data-region="arab">
                 <div class="video-header">
-                    <div class="video-title">Palestine Today</div>
+                    <div class="video-title">Palestine Today (Palestinian Islamic Jihad)</div>
                     <div class="country-badge badge-arab">Arab</div>
                 </div>
                 <video class="video-element" id="video8" muted preload="none" controls></video>
@@ -1440,7 +1385,7 @@
 
 			<div class="video-container" data-region="arab">
                 <div class="video-header">
-                    <div class="video-title">Palestine Mubasher</div>
+                    <div class="video-title">Palestine Mubasher (Fatah)</div>
                     <div class="country-badge badge-arab">Arab</div>
                 </div>
                 <video class="video-element" id="video9" muted preload="none" controls></video>
@@ -1452,7 +1397,7 @@
 			
 			<div class="video-container" data-region="arab">
                 <div class="video-header">
-                    <div class="video-title">Palestine Satelite channel</div>
+                    <div class="video-title">Palestine Satelite channel (Fatah)</div>
                     <div class="country-badge badge-arab">Arab</div>
                 </div>
                 <video class="video-element" id="video10" muted preload="none" controls></video>
@@ -1498,6 +1443,30 @@
                 <div class="loading-indicator"><div class="spinner"></div></div>
             </div>
 
+			<div class="video-container" data-region="arab">
+                <div class="video-header">
+                    <div class="video-title">Al Masirah (Houtis)</div>
+                    <div class="country-badge badge-arab">Arab</div>
+                </div>
+                <video class="video-element" id="video38" muted preload="none" controls></video>
+                <div class="play-overlay" onclick="playVideo('video38', 'https://live.cdnbridge.tv/Almasirah/Almasirah_all/Almasirah/Almasirah_360p/chunks.m3u8')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="loading-indicator"><div class="spinner"></div></div>
+            </div>
+			
+			<div class="video-container" data-region="arab">
+                <div class="video-header">
+                    <div class="video-title">Al Quds (Hamas/PIJ ?)</div>
+                    <div class="country-badge badge-arab">Arab</div>
+                </div>
+                <video class="video-element" id="video42" muted preload="none" controls></video>
+                <div class="play-overlay" onclick="playVideo('video42', 'https://euc12.playlist.ttvnw.net/v1/playlist/CtAGPegWwpdFdIZ8h_Ur39lqcx-ZsE6wJQJK4NnnylNFvCfv7nQxvDDbRn9yWsNgGV3h5t0fvogAKm9eiZpILV2hnlD4UQ6nEHVEnkqQ71kE7RPckoaPnuwpKzYaDTJs9BYyND6-WQwV2soxTzbQXUrALotwf2ed4unYEwbLKpr4sRVo4gt3qZA9nU4IcGLhbbdUqNW33WuamSVM809h1wMFtNx7qK7-fOYa1MxLJAZLmdLLTqfk1-LY6Nj1zWgIzXE-B0f_28Q61WRkc_pudD7W8QFhjRKmkTGN5mfauwxvmVOeaUg3kpWriRxK7GMmGhSNWha9QSh6fumLGNfEkPDROBSi7IOiuFMx0QVy0zaHuxY1XOR2XfZgO1kt93HfumxEzjOrGwCK2J9oY7I5EUgS6FvyGxMEXrVxa4wu7FCPztv-gFhqO9jfoJnTO7mHDjCFuYONALMyTVXYogW9cTpdU2YQIHpjnR-wPiQeP0QSUkmQb90JaBiyTVX17QMVS7wQpbaBf7GwFs99kGA-Nhu0mPKuGq_Zx4cQuXGmOxF5ln1nM0-hP8eqbx4XKZ0no2mEUkh4IGylyH2CoG06PYO-fHbF6PuGtfAkBnNqB-Rzy_0rR2Tj21w6j0KyHuhrwEDGlRde-rVjFzbso14eHgoqIHwgNpjlYrVw-wHSjiZoIByIo9dTjxPQY51zo29J5pMa5MN6AiF_HLfu2baI0xKPfA9N3ianhUd5ALE6LGUJJyjfqSHhlEb7uiff5ZoIebvNk3szsomblo2x--4Cc_3oduhqjD8zYqbUmLKG2Z5HBm65rJFb9JO502a9P3aZK1F9FXwsktsqylaGi__so33IvUukqTEatT-hyY4BoQhaeEE31wb2Q43x8SoXbe0PWlkuhZogQU8RnyNEk1O3ruGd7LuFGSYskCFml5CBrvCck2d-Zg7amV0zgv2f7g8KK_mhdEIcFCZ3yP5XnAFmhXxlIm4srZSw93m3FUzt4uKZmlSG-1UM1qGZVTB1LhPzKACaCq8VT0gbtDYGPnUQwv9ECGce10-p56ew6IDp3AkY8ts3E3MqfsIWYpys42W2U90AOu-TptX6LWfUy-OlyhZYYoYbGZWdVXhpM4GMGNSDlp8aDPNgmxtIWMG_ec_52yABKglldS13ZXN0LTIwxw4.m3u8')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="loading-indicator"><div class="spinner"></div></div>
+            </div>
+
             <!-- Israel Channels -->
             <div class="video-container" data-region="israel">
                 <div class="video-header">
@@ -1513,24 +1482,26 @@
 
             <div class="video-container" data-region="israel">
                 <div class="video-header">
-                    <div class="video-title">ערוץ 12 FIXED</div>
+                    <div class="video-title">ערוץ 12</div>
                     <div class="country-badge badge-israel">Israel</div>
                 </div>
                 <video class="video-element" id="video15" muted preload="none" controls></video>
-                <div class="play-overlay" onclick="playVideo('video15', 'https://mako-streaming.akamaized.net/stream/hls/live/2033791/k12n12wad/index.m3u8?b-in-range=0-1800&hdnea=st%3D1772230974%7Eexp%3D1772231874%7Eacl%3D%2F*%7Ehmac%3D273ee965be2fd8f099d06b2bcf45c3b8beb89659a8209fc2038c0634775c08ce&_uid=W28081e5d5f974edb55d919af4f40a50b0bd&dxseg=25SSfD0q%2CMLT0tmGC%2ClVVh9etP%2CmWPE8VTE%2CmqZmzXw7%2CpCTwtlP9%2Cy79VtRne%2CzDDDMl3T%2Cu0UR9fsv%2C40vtNLUs%2CBGue8q07%2CFZOFrmNp%2Cvbk5sJ97%2CC5B5Rnl9&dxu=bee7081a-40a1-4a11-a996-7f51dcef8f04&user_id=fa6990ab321fd2f97ab41832005638ea&cust_params=interests%3D%26smu%3Daf5821f0-8f69-4bf3-8028-74678801be5c&ppid=af5821f0-8f69-4bf3-8028-74678801be5c')">
-                    <i class="fas fa-play"></i>
+                <!-- <div class="play-overlay" onclick="playVideo('video15', 'https://mako-streaming.akamaized.net/stream/hls/live/2033791/k12n12wad/index.m3u8?b-in-range=0-1800&hdnea=st%3D1772230974%7Eexp%3D1772231874%7Eacl%3D%2F*%7Ehmac%3D273ee965be2fd8f099d06b2bcf45c3b8beb89659a8209fc2038c0634775c08ce&_uid=W28081e5d5f974edb55d919af4f40a50b0bd&dxseg=25SSfD0q%2CMLT0tmGC%2ClVVh9etP%2CmWPE8VTE%2CmqZmzXw7%2CpCTwtlP9%2Cy79VtRne%2CzDDDMl3T%2Cu0UR9fsv%2C40vtNLUs%2CBGue8q07%2CFZOFrmNp%2Cvbk5sJ97%2CC5B5Rnl9&dxu=bee7081a-40a1-4a11-a996-7f51dcef8f04&user_id=fa6990ab321fd2f97ab41832005638ea&cust_params=interests%3D%26smu%3Daf5821f0-8f69-4bf3-8028-74678801be5c&ppid=af5821f0-8f69-4bf3-8028-74678801be5c')"> -->
+                <div class="play-overlay" onclick="playVideo('video15', 'https://mako-streaming.akamaized.net/stream/hls/live/2033791/k12dvr/profile/2/hdntl=exp=1772475789~acl=%2f*~data=hdntl~hmac=d0ce2f73df34efd894ae97c6775045053117ef9cc891c9215a9d7c977edf1566/profileManifest.m3u8?_uid=c4d2e1d4-3387-429c-9a72-4cd0d9ed07d1&rK=b5&_did=W28081e5d5f974edb55d919af4f40a50b0bd')">
+					<i class="fas fa-play"></i>
                 </div>
                 <div class="loading-indicator"><div class="spinner"></div></div>
             </div>
 
             <div class="video-container" data-region="israel">
                 <div class="video-header">
-                    <div class="video-title">ערוץ 13 FIXED</div>
+                    <div class="video-title">ערוץ 13 NOT WORKING</div>
                     <div class="country-badge badge-israel">Israel</div>
                 </div>
                 <video class="video-element" id="video16" muted preload="none" controls></video>
                 <!-- <div class="play-overlay" onclick="playVideo('video16', 'https://d18b0e6mopany4.cloudfront.net/out/v1/1a7c55961dec4c72b51d79e5d9216cff/index.m3u8')"> -->
-                <div class="play-overlay" onclick="playVideo('video16', 'https://d18b0e6mopany4.cloudfront.net/out/v1/2f2bc414a3db4698a8e94b89eaf2da2a/index.m3u8')">
+                <!-- <div class="play-overlay" onclick="playVideo('video16', 'https://d18b0e6mopany4.cloudfront.net/out/v1/2f2bc414a3db4698a8e94b89eaf2da2a/index.m3u8')"> -->
+				<div class="play-overlay" onclick="playVideo('video16', 'https://d2xg1g9o5vns8m.cloudfront.net/out/v1/0855d703f7d5436fae6a9c7ce8ca5075/index.m3u8')">
 				<i class="fas fa-play"></i>
                 </div>
                 <div class="loading-indicator"><div class="spinner"></div></div>
@@ -1551,7 +1522,7 @@
 				
             <div class="video-container" data-region="israel">
                 <div class="video-header">
-                    <div class="video-title">i24News FIXED</div>
+                    <div class="video-title">i24News</div>
                     <div class="country-badge badge-israel">Israel</div>
                 </div>
                 <video class="video-element" id="video18" muted preload="none" controls></video>
@@ -1565,30 +1536,19 @@
             <!-- USA Channels -->
             <div class="video-container" data-region="usa">
                 <div class="video-header">
-                    <div class="video-title">CNN FIXED</div>
+                    <div class="video-title">CNN</div>
                     <div class="country-badge badge-usa">USA</div>
                 </div>
                 <video class="video-element" id="video19" muted preload="none" controls></video>
                 <!-- <div class="play-overlay" onclick="playVideo('video19', 'https://cnn-cnninternational-1-eu.rakuten.wurl.tv/playlist.m3u8')"> -->
 				<!-- <div class="play-overlay" onclick="playVideo('video19', 'https://d3bp6dwmpbdajl.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-ury0meh5m4nzm/index.m3u8')"> -->
                 <div class="play-overlay" onclick="playVideo('video19', 'https://turnerlive.warnermediacdn.com/hls/live/586497/cnngo/cnni/VIDEO_0_3564000.m3u8')">
+				<!-- <div class="play-overlay" onclick="playVideo('video19', 'https://turnerlive.warnermediacdn.com/hls/live/586495/cnngo/cnn_slate/VIDEO_4_1064000.m3u8')"> -->
 					<i class="fas fa-play"></i>
                 </div>
                 <div class="loading-indicator"><div class="spinner"></div></div>
             </div>
 
-            <div class="video-container" data-region="usa">
-                <div class="video-header">
-                    <div class="video-title">CNN 2</div>
-                    <div class="country-badge badge-usa">USA</div>
-                </div>
-                <video class="video-element" id="video20" muted preload="none" controls></video>
-                <div class="play-overlay" onclick="playVideo('video20', 'https://turnerlive.warnermediacdn.com/hls/live/586495/cnngo/cnn_slate/VIDEO_4_1064000.m3u8')">
-                    <i class="fas fa-play"></i>
-                </div>
-                <div class="loading-indicator"><div class="spinner"></div></div>
-            </div>
-			
             <div class="video-container" data-region="usa">
                 <div class="video-header">
                     <div class="video-title">FOX News</div>
@@ -1603,7 +1563,7 @@
 
             <div class="video-container" data-region="usa">
                 <div class="video-header">
-                    <div class="video-title">LiveNOW from FOX FIXED</div>
+                    <div class="video-title">LiveNOW from FOX</div>
                     <div class="country-badge badge-usa">USA</div>
                 </div>
                 <video class="video-element" id="video22" muted preload="none" controls></video>
@@ -1617,7 +1577,7 @@
 
             <div class="video-container" data-region="usa">
                 <div class="video-header">
-                    <div class="video-title">NBC News FIXED</div>
+                    <div class="video-title">NBC News</div>
                     <div class="country-badge badge-usa">USA</div>
                 </div>
                 <video class="video-element" id="video23" muted preload="none" controls></video>
@@ -1630,7 +1590,7 @@
 
             <div class="video-container" data-region="usa">
                 <div class="video-header">
-                    <div class="video-title">ABC News FIXED</div>
+                    <div class="video-title">ABC News</div>
                     <div class="country-badge badge-usa">USA</div>
                 </div>
                 <video class="video-element" id="video24" muted preload="none" controls></video>
@@ -1655,26 +1615,12 @@
 
             <div class="video-container" data-region="usa">
                 <div class="video-header">
-                    <div class="video-title">News12 New York FIXED</div>
+                    <div class="video-title">News12 New York</div>
                     <div class="country-badge badge-usa">USA</div>
                 </div>
                 <video class="video-element" id="video26" muted preload="none" controls></video>
                 <!-- <div class="play-overlay" onclick="playVideo('video26', 'https://lnc-news12.tubi.video/index.m3u8')"> -->
 				<div class="play-overlay" onclick="playVideo('video26', 'https://wurlnews12ny.global.transmit.live/hls/68c48577268ca4398b084116/v1/alticeusanewsinc_news12newyork_1/lg_us/latest/main/hls/playlist.m3u8')">
-                    <i class="fas fa-play"></i>
-                </div>
-                <div class="loading-indicator"><div class="spinner"></div></div>
-            </div>
-
-            <!-- Iran Channels -->
-            <div class="video-container" data-region="iran">
-                <div class="video-header">
-                    <div class="video-title">Al Mayadeen FIXED</div>
-                    <div class="country-badge badge-iran">Iran</div>
-                </div>
-                <video class="video-element" id="video27" muted preload="none" controls></video>
-                <!-- <div class="play-overlay" onclick="playVideo('video27', 'https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000_t64NDgwcA==.m3u8')"> -->
-				<div class="play-overlay" onclick="playVideo('video27', 'https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8')">
                     <i class="fas fa-play"></i>
                 </div>
                 <div class="loading-indicator"><div class="spinner"></div></div>
@@ -1694,23 +1640,23 @@
 
             <div class="video-container" data-region="iran">
                 <div class="video-header">
-                    <div class="video-title">Simaye Azadi NOT WORKING</div>
-                    <div class="country-badge badge-iran">Iran</div>
-                </div>
-                <video class="video-element" id="video29" muted preload="none" controls></video>
-                <div class="play-overlay" onclick="playVideo('video29', 'https://simaytv.akamaized.net/hls/live/2043550/simayhls/index.m3u8')">
-                    <i class="fas fa-play"></i>
-                </div>
-                <div class="loading-indicator"><div class="spinner"></div></div>
-            </div>
-
-            <div class="video-container" data-region="iran">
-                <div class="video-header">
                     <div class="video-title">Iran International</div>
                     <div class="country-badge badge-iran">Iran</div>
                 </div>
                 <video class="video-element" id="video30" muted preload="none" controls></video>
                 <div class="play-overlay" onclick="playVideo('video30', 'https://dev-live.livetvstream.co.uk/LS-63503-4/index.m3u8')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="loading-indicator"><div class="spinner"></div></div>
+            </div>
+			
+			<div class="video-container" data-region="iran">
+                <div class="video-header">
+                    <div class="video-title">Simaye Azadi NOT WORKING</div>
+                    <div class="country-badge badge-iran">Iran</div>
+                </div>
+                <video class="video-element" id="video29" muted preload="none" controls></video>
+                <div class="play-overlay" onclick="playVideo('video29', 'https://simaytv.akamaized.net/hls/live/2043550/simayhls/index.m3u8')">
                     <i class="fas fa-play"></i>
                 </div>
                 <div class="loading-indicator"><div class="spinner"></div></div>
@@ -1755,7 +1701,7 @@
             <!-- World Channels -->
             <div class="video-container" data-region="world">
                 <div class="video-header">
-                    <div class="video-title">BBC World</div>
+                    <div class="video-title">BBC (UK)</div>
                     <div class="country-badge badge-world">World</div>
                 </div>
                 <video class="video-element" id="video34" muted preload="none" controls></video>
@@ -1767,7 +1713,7 @@
 
             <div class="video-container" data-region="world">
                 <div class="video-header">
-                    <div class="video-title">Sky News UK</div>
+                    <div class="video-title">Sky News (UK)</div>
                     <div class="country-badge badge-world">World</div>
                 </div>
                 <video class="video-element" id="video35" muted preload="none" controls></video>
@@ -1779,7 +1725,7 @@
 
             <div class="video-container" data-region="world">
                 <div class="video-header">
-                    <div class="video-title">Global News Canada</div>
+                    <div class="video-title">Global News (Canada)</div>
                     <div class="country-badge badge-world">World</div>
                 </div>
                 <video class="video-element" id="video36" muted preload="none" controls></video>
@@ -1791,7 +1737,7 @@
 
             <div class="video-container" data-region="world">
                 <div class="video-header">
-                    <div class="video-title">RT News</div>
+                    <div class="video-title">RT News (Russia)</div>
                     <div class="country-badge badge-world">World</div>
                 </div>
                 <video class="video-element" id="video37" muted preload="none" controls></video>
@@ -1807,11 +1753,8 @@
     <script>
         let activeStreams = new Set();
         let loadedStreams = new Map();
-        let bandwidthMonitor = {
-            startTime: Date.now(),
-            totalBytes: 0,
-            currentBandwidth: 0
-        };
+		let videoListenerControllers = new Map();
+		let lastOrientationWasLandscape = null;
 
 		function adjustStatBarPosition() {
 			const header = document.querySelector('.header');
@@ -1850,8 +1793,8 @@
 			// Reset custom layout
 			document.querySelector('.custom-layout-btn').classList.remove('active');
 			customSelectedChannels.clear();
-			document.querySelectorAll('.video-container').forEach(c => c.classList.remove('hidden'));
 			updateCustomControls();
+			customLayoutApplied = false;
 			
 			filterVideos();
 			updateStats();
@@ -2044,6 +1987,8 @@
 								// Fallback: just pause and destroy
 								video.pause();
 								hls.destroy();
+								video.src = '';
+								video.load();
 							}
 							
 							// Remove from active streams
@@ -2080,6 +2025,7 @@
 				
 				hls.on(Hls.Events.ERROR, function(event, data) {
 					if (completed) return;
+					if (!data.fatal) return;
 					completed = true;
 					console.log('Preview load failed for', videoId);
 					
@@ -2104,9 +2050,41 @@
 					updateStats();
 					if (onComplete) onComplete();
 				});
-			}
+		} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+			video.src = streamUrl;
+			video.addEventListener('loadeddata', function() {
+				video.play().then(() => {
+					setTimeout(() => {
+						const canvas = document.createElement('canvas');
+						canvas.width = video.videoWidth || 640;
+						canvas.height = video.videoHeight || 360;
+						const ctx = canvas.getContext('2d');
+						try { ctx.drawImage(video, 0, 0, canvas.width, canvas.height); video.poster = canvas.toDataURL('image/jpeg', 0.8); } catch(e) {}
+						video.pause();
+						video.src = '';
+						video.load();
+						activeStreams.delete(videoId + '_preview');
+						updateStats();
+						if (onComplete) onComplete();
+					}, 1000);
+				}).catch(() => {
+					const unavailableImage = generateUnavailableImage();
+					video.poster = unavailableImage;
+					video.removeAttribute('controls');
+					const playOverlay = videoContainer.querySelector('.play-overlay');
+					if (playOverlay) playOverlay.style.display = 'none';
+					videoContainer.classList.add('stream-unavailable');
+					activeStreams.delete(videoId + '_preview');
+					updateStats();
+					if (onComplete) onComplete();
+				});
+			}, { once: true });
+		} else {
+			// Browser can't play HLS at all
+			activeStreams.delete(videoId + '_preview');
+			if (onComplete) onComplete();
 		}
-
+}
         // Initialize bandwidth monitoring
         function initializeBandwidthMonitoring() {
             setInterval(updateBandwidthUsage, 1000);
@@ -2117,7 +2095,6 @@
 			let totalBps = 0;
 
 			loadedStreams.forEach((hls, videoId) => {
-				if (videoId.endsWith('_preview')) return;
 				if (!activeStreams.has(videoId)) return;
 
 				if (hls === true) {
@@ -2172,16 +2149,16 @@
             const regionFilters = document.querySelectorAll('.region-filter:not(#allFilter)');
             
             regionFilters.forEach(filter => {
-                filter.addEventListener('click', function() {
+                filter.addEventListener('click', function(event) {
+					event.preventDefault();          // ← add this line
 					const checkbox = this.querySelector('input');
 					const isChecked = !checkbox.checked;
-					
 					checkbox.checked = isChecked;
 					this.classList.toggle('active', isChecked);
 
 					document.querySelector('.custom-layout-btn').classList.remove('active');
 					customSelectedChannels.clear();
-					document.querySelectorAll('.video-container').forEach(c => c.classList.remove('hidden'));
+					document.querySelectorAll('.video-container:not(.stream-unavailable)').forEach(c => c.classList.remove('hidden'));
 					updateCustomControls();
 
 					// Sync All button — active only if all region filters are checked
@@ -2207,6 +2184,7 @@
         }
 
         function updateGridOptionsForOrientation() {
+			if (customSelectedChannels.size > 0) return;
             const selector = document.getElementById('gridSelector');
             
             // Use screen.orientation if available, fallback to dimensions
@@ -2222,21 +2200,25 @@
             }
 
             if (isLandscapeMobile) {
-                selector.innerHTML = `
-                    <option value="grid-2xY">2xY</option>
-                    <option value="grid-3xY">3xY</option>
-                `;
-                changeGrid('grid-2xY');
-            } else {
-                selector.innerHTML = `
-                    <option value="grid-1xY">1xY</option>
-                    <option value="grid-2xY">2xY</option>
-                    <option value="grid-3xY" selected>3xY</option>
-                    <option value="grid-4xY">4xY</option>
-                    <option value="grid-5xY">5xY</option>
-                `;
-                changeGrid('grid-3xY');
-            }
+				if (lastOrientationWasLandscape === true) return;
+				lastOrientationWasLandscape = true;
+				selector.innerHTML = `
+					<option value="grid-2xY">2xY</option>
+					<option value="grid-3xY">3xY</option>
+				`;
+				changeGrid('grid-2xY');
+			} else {
+				if (lastOrientationWasLandscape === false) return;
+				lastOrientationWasLandscape = false;
+				selector.innerHTML = `
+					<option value="grid-1xY">1xY</option>
+					<option value="grid-2xY">2xY</option>
+					<option value="grid-3xY" selected>3xY</option>
+					<option value="grid-4xY">4xY</option>
+					<option value="grid-5xY">5xY</option>
+				`;
+				changeGrid('grid-3xY');
+			}
         }
 
 		// Show custom layout picker
@@ -2300,27 +2282,29 @@
 					loadedStreams.set(videoId, hls);
 					
 					// ADD THESE LINES - Track play/pause events for bandwidth
+					// Cancel any old listeners before adding new ones
+					if (videoListenerControllers.has(videoId)) {
+						videoListenerControllers.get(videoId).abort();
+					}
+					const ac = new AbortController();
+					videoListenerControllers.set(videoId, ac);
+
 					video.addEventListener('play', function() {
-						const realActiveStreams = Array.from(activeStreams).filter(id => !id.endsWith('_preview'));
-						if (realActiveStreams.length >= 6 && !activeStreams.has(videoId)) {
-							video.pause();
-							showErrorMessage(videoContainer, 'Bandwidth limit reached (6 streams / 15 Mbps). Stop a stream first.');
-							return;
-						}
 						activeStreams.add(videoId);
 						updateStats();
-					});
-					
+					}, { signal: ac.signal });
+
 					video.addEventListener('pause', function() {
 						activeStreams.delete(videoId);
 						updateStats();
-					});
+					}, { signal: ac.signal });
 					
 					video.play();
 					updateStats();
 				});
 				
 				hls.on(Hls.Events.ERROR, function(event, data) {
+					if (!data.fatal) return;
 					console.error('HLS Error:', data);
 					loadingIndicator.style.display = 'none';
 					showErrorMessage(videoContainer, 'Stream unavailable');
@@ -2334,50 +2318,54 @@
 					videoContainer.classList.add('playing');
 					activeStreams.add(videoId);
 					loadedStreams.set(videoId, true);
+
+					// Cancel any old listeners before adding new ones
+					if (videoListenerControllers.has(videoId)) {
+						videoListenerControllers.get(videoId).abort();
+					}
+					const ac = new AbortController();
+					videoListenerControllers.set(videoId, ac);
 					
-					// ADD THESE LINES - Track play/pause events for bandwidth
 					video.addEventListener('play', function() {
-						const realActiveStreams = Array.from(activeStreams).filter(id => !id.endsWith('_preview'));
-						if (realActiveStreams.length >= 6 && !activeStreams.has(videoId)) {
-							video.pause();
-							showErrorMessage(videoContainer, 'Bandwidth limit reached (6 streams / 15 Mbps). Stop a stream first.');
-							return;
-						}
 						activeStreams.add(videoId);
 						updateStats();
-					});
+					}, { signal: ac.signal });
 					
 					video.addEventListener('pause', function() {
 						activeStreams.delete(videoId);
 						updateStats();
-					});
+					}, { signal: ac.signal });
 					
 					video.play();
 					updateStats();
-				});
+				}, { once: true });
 			}
 		}
 
         // Stop video and free resources
         function stopVideo(videoId) {
-            const video = document.getElementById(videoId);
-            const videoContainer = video.closest('.video-container');
-            
-            video.pause();
-            video.currentTime = 0;
-            
-            // Destroy HLS instance if exists
-            if (loadedStreams.has(videoId) && loadedStreams.get(videoId) !== true) {
-                const hls = loadedStreams.get(videoId);
-                hls.destroy();
-            }
-            
-            loadedStreams.delete(videoId);
-            activeStreams.delete(videoId);
-            videoContainer.classList.remove('playing');
-            
-            updateStats();
-        }
+			const video = document.getElementById(videoId);
+			const videoContainer = video.closest('.video-container');
+			
+			video.pause();
+			video.currentTime = 0;
+			
+			if (loadedStreams.has(videoId) && loadedStreams.get(videoId) !== true) {
+				const hls = loadedStreams.get(videoId);
+				hls.destroy();
+			}
+			
+			loadedStreams.delete(videoId);
+			activeStreams.delete(videoId);
+			videoContainer.classList.remove('playing');
+			video.classList.remove('playing');
+			if (videoListenerControllers.has(videoId)) {
+				videoListenerControllers.get(videoId).abort();
+				videoListenerControllers.delete(videoId);
+			}
+			
+			updateStats();
+		}
 
         // Show error message
         function showErrorMessage(container, message) {
@@ -2583,13 +2571,21 @@
 			document.getElementById('allFilter').classList.remove('active');
 			
 			updateStats();
+			
+			const selector = document.getElementById('gridSelector');
+			if (customSelectedChannels.size === 1) selector.value = 'grid-1xY';
+			else if (customSelectedChannels.size <= 4) selector.value = 'grid-2xY';
+			else selector.value = 'grid-3xY';
 		}
+
+		// track whether a layout was actually applied:
+		let customLayoutApplied = false;
 
 		// Cancel custom layout
 		function cancelCustomLayout() {
 			document.getElementById('customLayoutOverlay').classList.remove('active');
 			// Only deactivate button if user hasn't applied a custom layout
-			if (customSelectedChannels.size === 0) {
+			if (!customLayoutApplied) {
 				document.querySelector('.custom-layout-btn').classList.remove('active');
 			}
 		}
@@ -2653,8 +2649,7 @@
 			entries.forEach(entry => {
 				const video = entry.target.querySelector('video');
 				if (!entry.isIntersecting && video && activeStreams.has(video.id)) {
-					// Only pause videos that are out of view, don't auto-play
-					video.pause();
+					stopVideo(video.id);
 				}
 				// Removed auto-play when scrolling back into view
 			});
@@ -2723,6 +2718,20 @@
 					<div class="custom-dropdown-item" onclick="openUrl('https://www.tzevaadom.co.il/', 'warMapsDropdown')">🚨 Tzofar - Tzeva Adom</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://www.oref.org.il/heb', 'warMapsDropdown')">🚨 Pikud Ha-oref</div>
 					<div class="custom-dropdown-item separator"></div>
+					<div class="custom-dropdown-item disabled">Military Deployment</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://experience.arcgis.com/experience/6893435f0297454a988ad2e6bf474a7b', 'warMapsDropdown')">🪖 Centcom - Middle East</div>
+					<div class="custom-dropdown-item separator"></div>
+					<div class="custom-dropdown-item disabled">Skies</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://www.flightradar24.com/34.00,36.33/7', 'warMapsDropdown')">✈️ Flight Radar 24</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://www.mooncalc.org/#/51.5071,14.5886,3/2026.02.22/03:19/1/3', 'warMapsDropdown')">🌕 Moon Calculator</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://starwalk.space/en/moon-calendar', 'warMapsDropdown')">🌕 Starwalk Moon</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://satellitemap.space/', 'warMapsDropdown')">🛰️ StarLink</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://www.ventusky.com/#p=37.6;32.5;4', 'warMapsDropdown')">🌧️ Ventusky</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://www.windy.com/?38.150,30.863,4,p:wind', 'warMapsDropdown')">🌨️ Windy</div>
+					<div class="custom-dropdown-item separator"></div>
+					<div class="custom-dropdown-item disabled">Sea</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://www.marinetraffic.com/en/ais/home/centerx:25.2/centery:36.7/zoom:6', 'warMapsDropdown')">🌊 Marine Traffic</div>
+					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">Conflict maps</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://hezbollah.liveuamap.com/', 'warMapsDropdown')">🔴 Hezbollah Map</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://lebanon.liveuamap.com/', 'warMapsDropdown')">🔴 Lebanon Map</div>
@@ -2731,20 +2740,6 @@
 					<div class="custom-dropdown-item" onclick="openUrl('https://health.liveuamap.com/en/ukraine', 'warMapsDropdown')">🔴 Ukraine</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://isis.liveuamap.com/', 'warMapsDropdown')">🔴 ISIS Map</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://iran.liveuamap.com/', 'warMapsDropdown')">🔴 Iran Map</div>
-					<div class="custom-dropdown-item separator"></div>
-					<div class="custom-dropdown-item disabled">Military Deployment</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://experience.arcgis.com/experience/6893435f0297454a988ad2e6bf474a7b', 'warMapsDropdown')">🪖 Centcom - Middle East</div>
-					<div class="custom-dropdown-item separator"></div>
-					<div class="custom-dropdown-item disabled">Skies</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://www.flightradar24.com/34.00,36.33/7', 'warMapsDropdown')">✈️ Flight Radar 24</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://www.windy.com/?38.150,30.863,4,p:wind', 'warMapsDropdown')">🌨️ Windy</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://www.ventusky.com/#p=37.6;32.5;4', 'warMapsDropdown')">🌧️ Ventusky</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://www.mooncalc.org/#/51.5071,14.5886,3/2026.02.22/03:19/1/3', 'warMapsDropdown')">🌕 Moon Calculator</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://starwalk.space/en/moon-calendar', 'warMapsDropdown')">🌕 Starwalk Moon</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://satellitemap.space/', 'warMapsDropdown')">🛰️ StarLink</div>
-					<div class="custom-dropdown-item separator"></div>
-					<div class="custom-dropdown-item disabled">Sea</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://www.marinetraffic.com/en/ais/home/centerx:25.2/centery:36.7/zoom:6', 'warMapsDropdown')">🌊 Marine Traffic</div>
 					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">Hazards</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://eq.gsi.gov.il/heb/earthquake/lastEarthquakes.php', 'warMapsDropdown')">🟤 Earthquakes</div>
@@ -2763,45 +2758,53 @@
 				</button>
 				<div class="custom-dropdown-list" id="newsSitesDropdown-list">
 					<div class="custom-dropdown-item disabled">🇮🇱 Israeli</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://www.n12.co.il/', 'newsSitesDropdown')">N12</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://www.0404.co.il/', 'newsSitesDropdown')">0404</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://www.jpost.com/', 'newsSitesDropdown')">Jerusalem Post</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://www.timesofisrael.com/', 'newsSitesDropdown')">Times of Israel</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://www.zman.co.il/', 'newsSitesDropdown')">Zman Israel</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://rotter.net/', 'newsSitesDropdown')">Rotter</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://www.i24news.tv/en', 'newsSitesDropdown')">i24News</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://www.nziv.net/', 'newsSitesDropdown')">Nziv.net</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://www.calcalist.co.il', 'newsSitesDropdown')">Calcalist</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://www.globes.co.il', 'newsSitesDropdown')">Globes</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://www.haaretz.co.il', 'newsSitesDropdown')">Haaretz</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://www.themarker.com', 'newsSitesDropdown')">The Marker</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://www.i24news.tv/en', 'newsSitesDropdown')">i24News</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://www.jpost.com/', 'newsSitesDropdown')">Jerusalem Post</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://www.mivzaklive.co.il', 'newsSitesDropdown')">Mivzak Live</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://www.n12.co.il/', 'newsSitesDropdown')">N12</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://www.nziv.net/', 'newsSitesDropdown')">Nziv.net</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://rotter.net/', 'newsSitesDropdown')">Rotter</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://www.themarker.com', 'newsSitesDropdown')">The Marker</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://www.timesofisrael.com/', 'newsSitesDropdown')">Times of Israel</div>	
 					<div class="custom-dropdown-item" onclick="openUrl('https://www.ynet.co.il/home/0,7340,L-8,00.html', 'newsSitesDropdown')">Ynet</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://www.zman.co.il/', 'newsSitesDropdown')">Zman Israel</div>
 					<div class="custom-dropdown-item separator"></div>
-					<div class="custom-dropdown-item disabled">🌍 Western</div>
+					<div class="custom-dropdown-item disabled">🇺🇸 USA</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://edition.cnn.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">CNN</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://edition.cnn.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>
-					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.nbcnews.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">NBC</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.nbcnews.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+						<span onclick="openUrl('https://www.axios.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Axios</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.axios.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://apnews.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">AP News</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://apnews.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://edition.cnn.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">CNN</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://edition.cnn.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://www.foxnews.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Fox News</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.foxnews.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://www.ground.news', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Ground News</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.ground.news&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://www.nbcnews.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">NBC</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.nbcnews.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.nytimes.com/international/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">New York Times</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.nytimes.com/international/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.bbc.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">BBC</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.bbc.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>
-					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.reuters.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Reuters</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.reuters.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+						<span onclick="openUrl('https://www.politico.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Politico</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.politico.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.wsj.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Wall Street Journal</span>
@@ -2812,17 +2815,21 @@
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.washingtonpost.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.foxnews.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Fox News</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.foxnews.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>
-					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.washingtoninstitute.org/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Washington Institute</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.washingtoninstitute.org/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
+					<div class="custom-dropdown-item separator"></div>
+					<div class="custom-dropdown-item disabled">🇬🇧 UK</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.trtworld.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">TRT World</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.trtworld.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+						<span onclick="openUrl('https://www.bbc.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">BBC</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.bbc.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://www.reuters.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Reuters</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.reuters.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item separator"></div>
+					<div class="custom-dropdown-item disabled">🇩🇪 Germany</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.spiegel.de/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Der Spiegel</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.spiegel.de/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
@@ -2832,76 +2839,109 @@
 						<span onclick="openUrl('https://www.dw.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">DW News</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.dw.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
-					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.axios.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Axios</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.axios.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>
-					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.politico.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Politico</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.politico.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>
-					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.elpais.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">El País</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.elpais.com&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.elpais.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>
+					<div class="custom-dropdown-item separator"></div>
+					<div class="custom-dropdown-item disabled">🇪🇸 Spain</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.elconfidencial.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">El Confidencial</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.elconfidencial.com&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.elconfidencial.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://www.elpais.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">El País</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.elpais.com&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.elpais.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item separator"></div>
+					<div class="custom-dropdown-item disabled">🇹🇷 Turkey</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://www.trtworld.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">TRT World</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.trtworld.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item separator"></div>
+					<div class="custom-dropdown-item disabled">🌍 Pan-European</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.euronews.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Euronews</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.euronews.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
+					<div class="custom-dropdown-item separator"></div>
+					<div class="custom-dropdown-item disabled">🇱🇧 Lebanon (☠️ Hezbollah)</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.ground.news', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Ground News</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.ground.news&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+						<span onclick="openUrl('https://www.al-akhbar.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Akhbar</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.al-akhbar.com&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.al-akhbar.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://english.almayadeen.net/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Mayadeen</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.almayadeen.net/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.almayadeen.net/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://english.almanar.com.lb/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Manar</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.almanar.com.lb/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.almanar.com.lb/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://www.al-akhbar.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Akhbar</span>
+						<span onclick="event.stopPropagation(); openUrl('https://en.al-akhbar.com/', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.al-akhbar.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item separator"></div>
+					<div class="custom-dropdown-item disabled">🇮🇷 Iran</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://www.alalam.ir/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Alam</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alalam.ir/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alalam.ir/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://tasnimnews.ir', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Tasnim News</span>
+						<span onclick="event.stopPropagation(); openUrl('https://tasnimnews.ir/en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://tasnimnews.ir/he', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">🇶🇦 Qatar</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.aljazeera.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al-Jazeera</span>
+						<span onclick="openUrl('https://www.aljazeera.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Jazeera</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.aljazeera.com/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.aljazeera.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">🇸🇦 Saudi Arabia</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://english.almayadeen.net/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al-Mayadeen</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.almayadeen.net/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.almayadeen.net/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>
-					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.alhadath.net/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al-Hadath</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alhadath.net/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alhadath.net/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>
-					<div class="custom-dropdown-item separator"></div>
-					<div class="custom-dropdown-item disabled">🇮🇷 Iran</div>
-					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.alalam.ir/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al-Alam</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alalam.ir/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alalam.ir/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>
-					<div class="custom-dropdown-item separator"></div>
-					<div class="custom-dropdown-item disabled">☠️ Hezbollah</div>
-					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://english.alarabiya.net/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al-Arabiya</span>
+						<span onclick="openUrl('https://english.alarabiya.net/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Arabiya</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.alarabiya.net/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.alarabiya.net/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://english.almanar.com.lb/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al-Manar</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.almanar.com.lb/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.almanar.com.lb/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+						<span onclick="openUrl('https://www.alhadath.net/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Hadath</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alhadath.net/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alhadath.net/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item separator"></div>
-					<div class="custom-dropdown-item disabled">🇺🇸 US-funded Arabic</div>
+					<div class="custom-dropdown-item disabled">🇵🇸 Palestinian</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.alhurra.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al-Hurra</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alhurra.com/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alhurra.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+						<span onclick="openUrl('https://www.aqsatv.ps/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Aqsa TV</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.aqsatv.ps/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.aqsatv.ps/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://www.alquds.com/ar/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Quds</span>
+						<span onclick="event.stopPropagation(); openUrl('https://www.alquds.com/en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://www.alquds.com/he', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://quds.tv/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Quds 2</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://quds.tv/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://quds.tv/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://qudstv.co/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Quds 3</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://qudstv.co/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://qudstv.co/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+					</div>
+					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
+						<span onclick="openUrl('https://www.alquds.co.uk/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Quds Al Arabi</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alquds.co.uk/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alquds.co.uk/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.shehabnews.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Shehab News</span>
@@ -2913,30 +2953,19 @@
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.qudsn.net&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.qudsn.net&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
+					<div class="custom-dropdown-item separator"></div>
+					<div class="custom-dropdown-item disabled">🇺🇸 US-funded Arabic</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.al-akhbar.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al-Akhbar</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.al-akhbar.com&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.al-akhbar.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+						<span onclick="openUrl('https://www.alhurra.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Hurra</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alhurra.com/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alhurra.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
+					<div class="custom-dropdown-item separator"></div>
+					<div class="custom-dropdown-item disabled">🇾🇪 Houties</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://tasnimnews.ir', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Tasnim News</span>
-						<span onclick="event.stopPropagation(); openUrl('https://tasnimnews.ir/en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://tasnimnews.ir/he', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>
-					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.aqsatv.ps', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Aqsa TV</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.aqsatv.ps&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.aqsatv.ps&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>
-					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.alquds.com/ar/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Quds</span>
-						<span onclick="event.stopPropagation(); openUrl('https://www.alquds.com/en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://www.alquds.com/he', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>
-					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.alquds.co.uk/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Quds Al Arabi</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alquds.co.uk/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alquds.co.uk/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+						<span onclick="openUrl('https://masirahtv.net/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Masirah</span>
+						<span onclick="event.stopPropagation(); openUrl('https://english.masirahtv.net/', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.masirahtv.net/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">📈 Poles</div>
@@ -2947,7 +2976,8 @@
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://usstrikeradar.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Strike Radar</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://usstrikeradar.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>				</div>
+					</div>
+				</div>
 			</div>
         </div>
 		<div class="mobile-tool-section" style="margin-top: -1.5rem;">
@@ -3027,37 +3057,85 @@
 			'&mode=artlist&maxrecords=75&format=json&timespan=24h&sort=hybridrel';
 
 		const RSS_FEEDS = [
-			{ name: 'Times of Israel', url: 'https://www.timesofisrael.com/feed/',             flag: '🇮🇱' },
-			{ name: 'Jerusalem Post',  url: 'https://www.jpost.com/rss/rssfeedsfrontpage.aspx', flag: '🇮🇱' },
-			{ name: 'i24 News',        url: 'https://www.i24news.tv/en/rss',                    flag: '🇮🇱' },
-			{ name: 'Haaretz',         url: 'https://www.haaretz.com/cmlink/1.628765',          flag: '🇮🇱' },
-			{ name: 'Al Jazeera',      url: 'https://www.aljazeera.com/xml/rss/all.xml',        flag: '🇶🇦' },
-			{ name: 'BBC World',       url: 'https://feeds.bbci.co.uk/news/world/rss.xml',      flag: '🇬🇧' },
-			{ name: 'Reuters',         url: 'https://feeds.reuters.com/reuters/topNews',        flag: '🌍' },
-			{ name: 'CNN',             url: 'http://rss.cnn.com/rss/edition_world.rss',         flag: '🇺🇸' },
-			{ name: 'Fox News',        url: 'https://moxie.foxnews.com/google-publisher/world.xml', flag: '🇺🇸' },
-			{ name: 'France 24',       url: 'https://www.france24.com/en/rss',                  flag: '🇫🇷' },
-			{ name: 'DW News',         url: 'https://rss.dw.com/rdf/rss-en-all',               flag: '🇩🇪' },
-			{ name: 'Euronews',        url: 'https://feeds.feedburner.com/euronews/en/news/',   flag: '🇪🇺' },
-			{ name: 'Press TV',        url: 'https://www.presstv.ir/rss',                       flag: '🇮🇷' },
-			{ name: 'Al Arabiya',      url: 'https://www.alarabiya.net/tools/rss',              flag: '🇸🇦' },
+			
+			{ name: 'Al Akhbar',       url: 'https://al-akhbar.com/rss',                                                        flag: '🇱🇧' },
+			{ name: 'Al Alam',         url: 'https://www.alalam.ir/rss',                                                        flag: '🇮🇷' },
+			{ name: 'Al Arabiya',      url: 'https://www.alarabiya.net/tools/rss',              								flag: '🇸🇦' },
+			{ name: 'Al Hadath',       url: 'https://www.alhadath.net/api/syndication/rss',                                     flag: '🇸🇦' },
+			{ name: 'Al Hurra',        url: 'https://www.alhurra.com/api/zymcm-_yqg/rss',                   					flag: '🇺🇸' },
+			{ name: 'Al Jazeera',      url: 'https://www.aljazeera.com/xml/rss/all.xml',        								flag: '🇶🇦' },
+			{ name: 'Al Mayadeen',     url: 'https://english.almayadeen.net/rss.xml',                      					    flag: '🇱🇧' },
+			{ name: 'Al Manar',        url: 'https://english.almanar.com.lb/feed',                           					flag: '🇱🇧' },
+			{ name: 'AP News',         url: 'https://rss.ap.org/topics/world-news',                          					flag: '🇺🇸' },
+			{ name: 'AP News',         url: 'https://rsshub.app/apnews/topics/world-news',                                      flag: '🇺🇸' },
+			{ name: 'Al Quds',         url: 'https://www.alquds.com/feed/',                                                     flag: '🇵🇸' },
+			{ name: 'Al Quds Arabi',   url: 'https://www.alquds.co.uk/feed/',     												flag: '🇵🇸' },
+			{ name: 'BBC World',       url: 'https://feeds.bbci.co.uk/news/world/rss.xml',      								flag: '🇬🇧' },
+			{ name: 'CBS News',        url: 'https://www.cbsnews.com/latest/rss/world',                      					flag: '🇺🇸' },
+			{ name: 'CNN',             url: 'https://rss.cnn.com/rss/edition_world.rss',         								flag: '🇺🇸' },
+			{ name: 'Der Spiegel',     url: 'https://www.spiegel.de/international/index.rss',                                   flag: '🇩🇪' },
+			{ name: 'DW News',         url: 'https://rss.dw.com/rdf/rss-en-all',               									flag: '🇩🇪' },
+			{ name: 'El País',         url: 'https://feeds.elpais.com/mrss-s/pages/ep/site/english.elpais.com/portada',         flag: '🇪🇸' },
+			{ name: 'Euronews',        url: 'https://feeds.feedburner.com/euronews/en/news/',   								flag: '🇪🇺' },
+			{ name: 'Fox News',        url: 'https://moxie.foxnews.com/google-publisher/world.xml', 							flag: '🇺🇸' },
+			{ name: 'France 24',       url: 'https://www.france24.com/en/rss',                  								flag: '🇫🇷' },
+			{ name: 'Globes',          url: 'https://www.globes.co.il/webservice/rss/rssfeeder.asmx/FeederNode?iID=1725',       flag: '🇮🇱' },
+			{ name: 'Haaretz',         url: 'https://www.haaretz.com/cmlink/1.628765',          								flag: '🇮🇱' },
+			{ name: 'i24 News',        url: 'https://www.i24news.tv/en/rss',                    								flag: '🇮🇱' },
+			{ name: 'Jerusalem Post',  url: 'https://www.jpost.com/rss/rssfeedsfrontpage.aspx', 								flag: '🇮🇱' },
+			{ name: 'NBC News',        url: 'https://feeds.nbcnews.com/nbcnews/public/world',                					flag: '🇺🇸' },
+			{ name: 'New York Times',  url: 'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',        					flag: '🇺🇸' },
+			{ name: 'Politico',        url: 'https://www.politico.com/rss/politicopicks.xml',                                   flag: '🇺🇸' },
+			{ name: 'Press TV',        url: 'https://www.presstv.ir/rss',                       								flag: '🇮🇷' },
+			{ name: 'Reuters',         url: 'https://feeds.reuters.com/reuters/topNews',        								flag: '🌍' },
+			{ name: 'Tasnim News',     url: 'https://www.tasnimnews.com/en/rss',                             					flag: '🇮🇷' },
+			{ name: 'The Marker',      url: 'https://www.themarker.com/srv/themarker-latest',                                   flag: '🇮🇱' },
+			{ name: 'Times of Israel', url: 'https://www.timesofisrael.com/feed/',             									flag: '🇮🇱' },
+			{ name: 'TRT World',       url: 'https://www.trtworld.com/rss',                                  					flag: '🇹🇷' },
+			{ name: 'Wall St Journal', url: 'https://feeds.a.dj.com/rss/RSSWorldNews.xml',                                      flag: '🇺🇸' },
+			{ name: 'Walla',           url: 'https://rss.walla.co.il/feed/22',                                                  flag: '🇮🇱' },
+			{ name: 'Washington Post', url: 'https://feeds.washingtonpost.com/rss/world',                    					flag: '🇺🇸' },
+			{ name: 'Ynet',            url: 'https://www.ynet.co.il/Integration/StoryRss2.xml',                                 flag: '🇮🇱' },
 		];
 
 		const SOURCE_FLAGS = {
-			'Times of Israel': 'il',
-			'Jerusalem Post':  'il',
-			'i24 News':        'il',
-			'Haaretz':         'il',
+			'Al Akhbar':	   'lb',
+			'Al Alam':		   'ir',
+			'Al Arabiya':      'sa',
+			'Al Hadath':	   'sa',
+			'Al Hurra':        'us',
 			'Al Jazeera':      'qa',
+			'Al Manar':        'lb',
+			'Al Mayadeen':     'lb',
+			'AP News':		   'us',
+			'Al Quds':		   'ps',
+			'Al Quds Arabi':   'ps',
 			'BBC World':       'gb',
-			'Reuters':         'gb',
+			'CBS News':        'us',
 			'CNN':             'us',
+			'Der Spiegel':     'de',
+			'DW News':         'de',
+			'El País':		   'es',
+			'Euronews':        'eu',
 			'Fox News':        'us',
 			'France 24':       'fr',
-			'DW News':         'de',
-			'Euronews':        'eu',
+			'Globes':		   'il',
+			'Haaretz':         'il',
+			'i24 News':        'il',
+			'Jerusalem Post':  'il',
+			'NBC News':        'us',
+			'New York Times':  'us',
+			'Politico':		   'us',
 			'Press TV':        'ir',
-			'Al Arabiya':      'sa',
+			'Tasnim News':	   'ir',
+			'The Marker':	   'il',
+			'Times of Israel': 'il',
+			'TRT World':	   'tr',
+			'Reuters':         'gb',
+			'Walla':		   'il',
+			'Wall St Journal': 'us',
+			'Washington Post': 'us',
+			'Ynet':			   'il',
 		};
 
 		function getSourceFlag(sourceName) {
@@ -3195,6 +3273,7 @@
 
 		let allArticles = [];
 		let groupedStories = [];
+		let fetchGeneration = 0;
 
 		function openAiSum() {
 			document.getElementById('aiSumOverlay').classList.add('active');
@@ -3209,12 +3288,15 @@
 
 		async function fetchAiSum() {
 			const btn      = document.getElementById('aiSumFetchBtn');
+			fetchGeneration++;
+			const myGeneration = fetchGeneration;
 			const loading  = document.getElementById('aiSumLoading');
 			const list     = document.getElementById('aiSumList');
 			const empty    = document.getElementById('aiSumEmpty');
 			const bar      = document.getElementById('aiSumSummaryBar');
 
 			btn.disabled = true;
+			document.getElementById('geminiEnhanceBtn').disabled = true;
 			loading.classList.add('active');
 			list.innerHTML = '';
 			empty.classList.remove('active');
@@ -3541,7 +3623,7 @@
 		}
 
 		async function translateToHebrew(text, rank) {
-			// Already Hebrew - no need to translate
+			const myGen = fetchGeneration;   // ← ADD THIS — snapshot at call time
 			if (/[\u0590-\u05FF]/.test(text)) {
 				const el = document.getElementById('he-' + rank);
 				if (el) el.textContent = text;
@@ -3551,11 +3633,12 @@
 				const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=iw&dt=t&q=${encodeURIComponent(text)}`;
 				const res = await fetch(url);
 				const data = await res.json();
-				// Response structure: [[[translatedText, originalText, ...],...],...]
 				const translated = data[0].reduce((acc, seg) => acc + (seg[0] || ''), '');
+				if (fetchGeneration !== myGen) return;   // ← ADD THIS — stale, discard
 				const el = document.getElementById('he-' + rank);
 				if (el) el.textContent = translated || '';
 			} catch(e) {
+				if (fetchGeneration !== myGen) return;   // ← ADD THIS
 				const el = document.getElementById('he-' + rank);
 				if (el) el.textContent = '';
 			}
