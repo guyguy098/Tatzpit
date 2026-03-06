@@ -4451,7 +4451,16 @@
 		};
 		for (const [id, poster] of Object.entries(POSTERS)) {
 			const el = document.getElementById(id);
-			if (el) el.setAttribute('poster', poster);
+			if (!el) continue;
+			el.setAttribute('poster', poster);
+			const overlay = el.closest('.video-container')?.querySelector('.play-overlay');
+			if (overlay) {
+				overlay.style.backgroundImage = `url('${poster}')`;
+				overlay.style.backgroundSize = 'contain';
+				overlay.style.backgroundRepeat = 'no-repeat';
+				overlay.style.backgroundPosition = 'center';
+				overlay.style.backgroundColor = 'rgba(0,0,0,0.55)';
+			}
 		}
 	}
 </script>
