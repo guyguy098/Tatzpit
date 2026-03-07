@@ -1180,6 +1180,9 @@
 
 
     </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<style>.leaflet-div-icon{background:none!important;border:none!important;box-shadow:none!important;}</style>
+
 </head>
 <body>
     <header class="header">
@@ -2356,6 +2359,29 @@
 			const video = document.getElementById(videoId);
 			const videoContainer = video.closest('.video-container');
 			
+			// On iPhone, capture last frame before stopping and show it as poster
+			if (video.readyState >= 2) {
+				try {
+					const canvas = document.createElement('canvas');
+					canvas.width = video.videoWidth || 320;
+					canvas.height = video.videoHeight || 180;
+					canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+					const snapshot = canvas.toDataURL('image/jpeg', 0.8);
+					const existingImg = videoContainer.querySelector('img[style*="position:absolute"]');
+					if (existingImg) {
+						existingImg.src = snapshot;
+					} else {
+						const header = videoContainer.querySelector('.video-header');
+						const headerH = header ? header.offsetHeight : 0;
+						const img = document.createElement('img');
+						img.src = snapshot;
+						img.style.cssText = `position:absolute;top:${headerH}px;left:0;width:100%;height:calc(100% - ${headerH}px);object-fit:fill;z-index:5;pointer-events:none;display:block;`;
+						videoContainer.appendChild(img);
+						video.addEventListener('play', () => { img.remove(); }, { once: true });
+					}
+				} catch(e) {}
+			}
+			
 			video.pause();
 			video.currentTime = 0;
 			
@@ -2727,6 +2753,13 @@
 					<div class="custom-dropdown-item" onclick="openUrl('https://www.tzevaadom.co.il/', 'warMapsDropdown')">🚨 Tzofar - Tzeva Adom</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://www.oref.org.il/heb', 'warMapsDropdown')">🚨 Pikud Ha-oref</div>
 					<div class="custom-dropdown-item separator"></div>
+					<div class="custom-dropdown-item disabled">Israel war 2026</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://e.infogram.com/66fd30d8-aac7-47e3-be4f-62fe8dc46bf2?parent_url=https%3A%2F%2Fwww.mako.co.il%2Fnews-specials%2Fdata_n12%2FArticle-42dc9c9ee73ac91026.htm&src=embed#async_embed', 'warMapsDropdown')">🎯 Iran Strikes (Israel & US)</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://e.infogram.com/9558c27e-2622-4277-98d1-6b5623d78ac8?parent_url=https%3A%2F%2Fwww.mako.co.il%2Fnews-military%2FIsrael_iran_war%2FArticle-f841a61b945ac91027.htm&amp;src=embed#async_embed', 'warMapsDropdown')">🎯 Alarms by city</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://iranwarmap.com/', 'warMapsDropdown')">🎯 Iran war map *****</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://storymaps.arcgis.com/stories/089bc1a2fe684405a67d67f13bd31324', 'warMapsDropdown')">🎯 Story maps</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://live-iran-map.com/map', 'warMapsDropdown')">🎯 Conflict tracker *****</div>
+					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">Military Deployment</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://experience.arcgis.com/experience/6893435f0297454a988ad2e6bf474a7b', 'warMapsDropdown')">🪖 Centcom - Middle East</div>
 					<div class="custom-dropdown-item separator"></div>
@@ -2786,7 +2819,6 @@
 					<div class="custom-dropdown-item disabled">🇺🇸 USA</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.axios.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Axios</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.axios.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://apnews.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">AP News</span>
@@ -2814,15 +2846,12 @@
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.politico.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Politico</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.politico.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.wsj.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Wall Street Journal</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.wsj.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.washingtonpost.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Washington Post</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.washingtonpost.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.washingtoninstitute.org/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Washington Institute</span>
@@ -2836,13 +2865,12 @@
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.reuters.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Reuters</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.reuters.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">🇩🇪 Germany</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.spiegel.de/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Der Spiegel</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.spiegel.de/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.spiegel.de/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🇺🇸</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.spiegel.de/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
@@ -2853,12 +2881,12 @@
 					<div class="custom-dropdown-item disabled">🇪🇸 Spain</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.elconfidencial.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">El Confidencial</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.elconfidencial.com&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.elconfidencial.com&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🇺🇸</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.elconfidencial.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.elpais.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">El País</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.elpais.com&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://english.elpais.com/', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🇺🇸</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.elpais.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item separator"></div>
@@ -2877,115 +2905,88 @@
 					<div class="custom-dropdown-item disabled">🇱🇧 Lebanon (☠️ Hezbollah)</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.al-akhbar.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Akhbar</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.al-akhbar.com&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.al-akhbar.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+						<span onclick="event.stopPropagation(); openUrl('https://en.al-akhbar.com/', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🇺🇸</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://english.almayadeen.net/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Mayadeen</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.almayadeen.net/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.almayadeen.net/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+						<span onclick="openUrl('https://www.almayadeen.net', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Mayadeen (GeoBlocked)</span>
+						<span onclick="event.stopPropagation(); openUrl('https://english.almayadeen.net/', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🇺🇸</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://english.almanar.com.lb/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Manar</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.almanar.com.lb/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="openUrl('https://www.almanar.com.lb/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Manar</span>
+						<span onclick="event.stopPropagation(); openUrl('https://english.almanar.com.lb/', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🇺🇸</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.almanar.com.lb/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>
-					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.al-akhbar.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Akhbar</span>
-						<span onclick="event.stopPropagation(); openUrl('https://en.al-akhbar.com/', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.al-akhbar.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">🇮🇷 Iran</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.alalam.ir/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Alam</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alalam.ir/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alalam.ir/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🇺🇸</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alalam.ir/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://tasnimnews.ir', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Tasnim News</span>
-						<span onclick="event.stopPropagation(); openUrl('https://tasnimnews.ir/en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://tasnimnews.ir/en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🇺🇸</span>
 						<span onclick="event.stopPropagation(); openUrl('https://tasnimnews.ir/he', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">🇶🇦 Qatar</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.aljazeera.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Jazeera</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.aljazeera.com/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.aljazeera.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+						<span onclick="openUrl('https://www.aljazeera.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Jazeera (GeoBlocked)</span>
 					</div>
 					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">🇸🇦 Saudi Arabia</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://english.alarabiya.net/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Arabiya</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.alarabiya.net/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.alarabiya.net/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+						<span onclick="openUrl('https://www.alarabiya.net/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Arabiya</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.alhadath.net/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Hadath</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alhadath.net/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alhadath.net/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">🇵🇸 Palestinian</div>
+					
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.aqsatv.ps/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Aqsa TV</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.aqsatv.ps/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.aqsatv.ps/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>
-					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://www.alquds.com/ar/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Quds</span>
-						<span onclick="event.stopPropagation(); openUrl('https://www.alquds.com/en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://www.alquds.com/he', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+						<span onclick="openUrl('https://www.alquds.com/ar/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Quds 1</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://quds.tv/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Quds 2</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://quds.tv/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://quds.tv/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🇺🇸</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://quds.tv/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://qudstv.co/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Quds 3</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://qudstv.co/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://qudstv.co/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🇺🇸</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://qudstv.co/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.alquds.co.uk/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Quds Al Arabi</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alquds.co.uk/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alquds.co.uk/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.shehabnews.com', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Shehab News</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.shehabnews.com&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.shehabnews.com&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🇺🇸</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.shehabnews.com&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.qudsn.net', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Quds News Network</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.qudsn.net&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.qudsn.net&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">🇺🇸 US-funded Arabic</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://www.alhurra.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Hurra</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alhurra.com/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alhurra.com/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🇺🇸</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://www.alhurra.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">🇾🇪 Houties</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://masirahtv.net/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Al Masirah</span>
-						<span onclick="event.stopPropagation(); openUrl('https://english.masirahtv.net/', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🌐</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://english.masirahtv.net/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://masirahtv.net/&hl=en&sl=auto&tl=en', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.5rem; cursor:pointer;" title="Translate to English">🇺🇸</span>
+						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://masirahtv.net/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">📈 Poles</div>
 					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
 						<span onclick="openUrl('https://polymarket.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">polymarket</span>
 						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://polymarket.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
-					</div>
-					<div class="custom-dropdown-item" style="display:flex; justify-content:space-between; align-items:center;">
-						<span onclick="openUrl('https://usstrikeradar.com/', 'newsSitesDropdown')" style="flex:1; cursor:pointer;">Strike Radar</span>
-						<span onclick="event.stopPropagation(); openUrl('https://translate.google.com/translate?u=https://usstrikeradar.com/&hl=iw&sl=auto&tl=iw', 'newsSitesDropdown')" style="font-size:1rem; padding-left:0.25rem; cursor:pointer;" title="Translate to Hebrew">🇮🇱</span>
 					</div>
 				</div>
 			</div>
@@ -3007,7 +3008,19 @@
 			</div>
 			<button onclick="openAlertAnalytics(); closeMobileMenu();" style="margin-top:0.75rem;width:100%;padding:0.75rem;background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.4);border-radius:8px;color:#f87171;font-size:0.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
 				<i class="fas fa-rocket"></i> Israel Alert Analytics
-			</button>																																																																																												
+			</button>
+			<button onclick="openIranAttacks(); closeMobileMenu();" style="margin-top:0.5rem;width:100%;padding:0.75rem;background:rgba(251,146,60,0.12);border:1px solid rgba(251,146,60,0.35);border-radius:8px;color:#fb923c;font-size:0.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+				<i class="fas fa-globe"></i> Iran's Attacks Since 28/2/2026
+			</button>
+			<button onclick="openIranArsenal(); closeMobileMenu();" style="margin-top:0.5rem;width:100%;padding:0.75rem;background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.35);border-radius:8px;color:#a78bfa;font-size:0.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+				<i class="fas fa-bomb"></i> Iran's Arsenal vs Israel
+			</button>
+			<button onclick="openHezbollahArsenal(); closeMobileMenu();" style="margin-top:0.5rem;width:100%;padding:0.75rem;background:rgba(34,197,94,0.10);border:1px solid rgba(34,197,94,0.3);border-radius:8px;color:#4ade80;font-size:0.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+				<i class="fas fa-bomb"></i> Hezbollah's Arsenal vs Israel
+			</button>
+			<button onclick="openHamasArsenal(); closeMobileMenu();" style="margin-top:0.5rem;width:100%;padding:0.75rem;background:rgba(234,179,8,0.10);border:1px solid rgba(234,179,8,0.3);border-radius:8px;color:#facc15;font-size:0.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+				<i class="fas fa-bomb"></i> Hamas's Arsenal vs Israel
+			</button>																																																																																									
 		</div>
     </div>
 </div>
@@ -3060,6 +3073,62 @@
 		</div>
 	</div>
 
+<!-- Hezbollah Arsenal Overlay -->
+	<div class="ai-sum-overlay" id="hezbollahArsenalOverlay">
+		<div class="ai-sum-panel">
+			<div class="ai-sum-header">
+				<div class="ai-sum-title">
+					<i class="fas fa-bomb" style="color:#4ade80;"></i>
+					<span style="background:linear-gradient(135deg,#4ade80,#facc15);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Hezbollah's Arsenal vs Israel</span>
+				</div>
+				<button class="ai-sum-close" onclick="closeHezbollahArsenal()">&#215;</button>
+			</div>
+			<div id="hezbollahArsenalContent" style="padding:1.5rem;"></div>
+		</div>
+	</div>
+
+	<!-- Hamas Arsenal Overlay -->
+	<div class="ai-sum-overlay" id="hamasArsenalOverlay">
+		<div class="ai-sum-panel">
+			<div class="ai-sum-header">
+				<div class="ai-sum-title">
+					<i class="fas fa-bomb" style="color:#facc15;"></i>
+					<span style="background:linear-gradient(135deg,#facc15,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Hamas's Arsenal vs Israel</span>
+				</div>
+				<button class="ai-sum-close" onclick="closeHamasArsenal()">&#215;</button>
+			</div>
+			<div id="hamasArsenalContent" style="padding:1.5rem;"></div>
+		</div>
+	</div>
+
+	<!-- Iran Arsenal Overlay -->
+	<div class="ai-sum-overlay" id="iranArsenalOverlay">
+		<div class="ai-sum-panel">
+			<div class="ai-sum-header">
+				<div class="ai-sum-title">
+					<i class="fas fa-bomb" style="color:#a78bfa;"></i>
+					<span style="background:linear-gradient(135deg,#a78bfa,#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Iran's Arsenal That Can Reach Israel</span>
+				</div>
+				<button class="ai-sum-close" onclick="closeIranArsenal()">&#215;</button>
+			</div>
+			<div id="iranArsenalContent" style="padding:1.5rem;overflow:visible;"></div>
+		</div>
+	</div>
+	
+	<!-- Iran Attacks Overlay -->
+	<div class="ai-sum-overlay" id="iranAttacksOverlay">
+		<div class="ai-sum-panel">
+			<div class="ai-sum-header">
+				<div class="ai-sum-title">
+					<i class="fas fa-globe" style="color:#fb923c;"></i>
+					<span style="background:linear-gradient(135deg,#fb923c,#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Iran's Attacks Since 28/2/2026</span>
+				</div>
+				<button class="ai-sum-close" onclick="closeIranAttacks()">&#215;</button>
+			</div>
+			<div id="iranAttacksContent" style="padding:1.5rem;"></div>
+		</div>
+	</div>
+	
 	<!-- Alert Analytics Overlay -->
 	<div class="ai-sum-overlay" id="alertAnalyticsOverlay">
 		<div class="ai-sum-panel">
@@ -4409,6 +4478,1027 @@
 				</div>`;
 		}
 
+// ── Hezbollah Arsenal ─────────────────────────────────────────────────────
+		const HEZBOLLAH_ARSENAL_DATA = [
+			{
+				category: 'Long-Range Ballistic Missiles',
+				items: [
+					{ name:'Scud-D',        wiki:'Scud missile',          range_km:700, payload_kg:985, accuracy:'~450m CEP', status:'Operational', used_against_israel:false, notes:'Soviet-origin ballistic missile. Can reach all of Israel including Tel Aviv and Dimona. Most feared long-range asset.' },
+					{ name:'Scud-C',        wiki:'Scud missile',          range_km:500, payload_kg:770, accuracy:'~700m CEP', status:'Operational', used_against_israel:false, notes:'Extended range Scud variant transferred via Syria. Capable of hitting deep into Israel.' },
+					{ name:'Zelzal-2',      wiki:'Zelzal-2',         range_km:210, payload_kg:600, accuracy:'unguided',  status:'Operational', used_against_israel:false, notes:'Iranian-supplied heavy unguided rocket. 600kg warhead can cause massive damage in dense areas.' },
+					{ name:'Fateh-110',     wiki:'Fateh-110',             range_km:300, payload_kg:500, accuracy:'~10m CEP',  status:'Operational', used_against_israel:true,  notes:'Precision-guided Iranian ballistic missile. First used by Hezbollah in November 2024. Can precisely target military bases anywhere in Israel.' },
+					{ name:'Qadr-1',        wiki:'Fateh-110',             range_km:190, payload_kg:500, accuracy:'~50m CEP',  status:'Operational', used_against_israel:true,  notes:'Iranian Fateh-100 early variant. 500kg warhead used in 2024 war against Israeli positions.' },
+					{ name:'Qadr-2',        wiki:'Zelzal rocket',         range_km:250, payload_kg:405, accuracy:'~30m CEP',  status:'Operational', used_against_israel:true,  notes:'Zelzal-2 retrofitted with precision guidance kit. Used in 2024 against Israeli targets including Haifa area.' },
+				]
+			},
+			{
+				category: 'Medium-Range Rockets',
+				items: [
+					{ name:'Nasr-2',        wiki:'Nasr (rocket)',         range_km:150, payload_kg:140, accuracy:'guided',    status:'Operational', used_against_israel:true,  notes:'Precision-guided 302mm rocket. First used October 2024. Can reach Tel Aviv from southern Lebanon.' },
+					{ name:'Fadi-6',        wiki:'',          range_km:225, payload_kg:140, accuracy:'~200m CEP', status:'Operational', used_against_israel:true,  notes:'302mm rocket with guidance kit. First used November 2024. Range covers all of northern and central Israel.' },
+					{ name:'Nasr-1',        wiki:'Nasr-1',          range_km:100, payload_kg:100, accuracy:'guided',    status:'Operational', used_against_israel:true,  notes:'M-302 retrofitted with guidance system. Used extensively in 2024. Reached Haifa and Krayot.' },
+					{ name:'Fadi-2',        wiki:'',          range_km:100, payload_kg:170, accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'302mm unguided rocket, Syrian-origin M-302. Used heavily in 2024 conflict against Haifa metro area.' },
+					{ name:'Fadi-1',        wiki:'Fajr-3 rocket',         range_km:70,  payload_kg:83,  accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'220mm unguided rocket. First used in the 2024 war, targeting Jezreel Valley and Krayot suburbs of Haifa.' },
+					{ name:'Fajr-5',        wiki:'Fajr-5',                range_km:75,  payload_kg:90,  accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Iranian-supplied 333mm rocket. Puts Tel Aviv in range from Lebanon. Used in 2006 and subsequent conflicts.' },
+					{ name:'Khaibar-1 (M-302)', wiki:'Khaibar-1',      range_km:100, payload_kg:144, accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Syrian-made Chinese-designed rocket. Can target Tel Aviv. Puts ~3.5 million Israelis within range.' },
+				]
+			},
+			{
+				category: 'Short-Range Rockets',
+				items: [
+					{ name:'Burkan 2',        wiki:'Burkan-2',         range_km:10,  payload_kg:500, accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Enormous 500kg warhead, 150m destruction radius. Used extensively in 2024 against IDF border positions. Most destructive short-range weapon.' },
+					{ name:'Raad-1 (Fajr-3)',        wiki:'Fajr-3 (artillery rocket)',         range_km:65,  payload_kg:45,  accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Uragan-type 220mm rocket. Can target Haifa from Lebanon. Fired in large salvos to overwhelm Iron Dome.' },
+					{ name:'Katyusha (122mm)', wiki:'Katyusha rocket',    range_km:40,  payload_kg:19,  accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Soviet-origin BM-21 Grad rocket. Primary weapon of Hezbollah since 2006. Tens of thousands stockpiled. Can reach Haifa.' },
+					{ name:'Falaq-1',       wiki:'Falaq-1',          range_km:11,  payload_kg:120, accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Iranian 333mm heavy rocket. Large warhead for short range. Used for devastating attacks on border communities.' },
+					{ name:'Falaq-2',       wiki:'Falaq-2',          range_km:11,  payload_kg:120, accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Iranian 333mm heavy rocket. Large warhead for short range. Used for devastating attacks on border communities.' },
+					{ name:'Grad (122mm)',   wiki:'BM-21 Grad',                range_km:40, payload_kg:20, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Russian-origin smuggled rocket. More reliable than Qassam. Used in mass barrages to overwhelm Iron Dome.' },
+				]
+			},
+			{
+				category: 'Drones (UAV)',
+				items: [
+					{ name:'Shahed-136',    wiki:'Shahed 136',            range_km:2000, payload_kg:50,  accuracy:'~5m CEP',  status:'Operational', used_against_israel:true,  notes:'Iran-supplied loitering munition. Used against Israel multiple times since Oct 2023. Slow but nearly silent and cheap.' },
+					{ name:'Mirsad-1',      wiki:'Mirsad-1',              range_km:150,  payload_kg:40,  accuracy:'~10m CEP', status:'Operational', used_against_israel:true,  notes:'Iranian-origin drone used since 2004. Deployed for both reconnaissance and strike missions against Israel.' },
+					{ name:'Ababil-T',      wiki:'HESA Ababil',          range_km:150,  payload_kg:45,  accuracy:'~10m CEP', status:'Operational', used_against_israel:true,  notes:'Iranian-built UAV. Used for reconnaissance over Israeli positions and explosive-laden attack missions.' },
+					{ name:'Sayyad 107',      wiki:'',          range_km:150,  payload_kg:45,  accuracy:'~10m CEP', status:'Operational', used_against_israel:true,  notes:'Iranian-built UAV. Used for reconnaissance over Israeli positions and explosive-laden attack missions.' },
+					{ name:'Shahed 101',      wiki:'',          range_km:150,  payload_kg:45,  accuracy:'~10m CEP', status:'Operational', used_against_israel:true,  notes:'Iranian-built UAV. Used for reconnaissance over Israeli positions and explosive-laden attack missions.' },
+				]
+			},
+			{
+				category: 'Anti-Ship & Anti-Tank',
+				items: [
+					{ name:'C-802 (Noor)',  wiki:'C-802',                 range_km:120,  payload_kg:165, accuracy:'active radar', status:'Operational', used_against_israel:true,  notes:'Used to hit Israeli corvette INS Hanit in 2006. Can threaten Israel\'s offshore Leviathan gas platforms.' },
+					{ name:'Kornet ATGM',   wiki:'9M133 Kornet',          range_km:5.5,  payload_kg:7,   accuracy:'laser guided', status:'Operational', used_against_israel:true,  notes:'Russian anti-tank missile. Destroyed multiple Merkava tanks in 2006 and used extensively in 2024 war.' },
+					{ name:'Almas-3',       wiki:'Almas (missile)',        range_km:8,    payload_kg:8,   accuracy:'imaging IR',   status:'Operational', used_against_israel:true,  notes:'Iranian fire-and-forget ATGM. Used in 2024 against IDF forces crossing the border.' },
+				]
+			}
+		];
+
+		let _hezbollahSort = 'range';
+		function openHezbollahArsenal() {
+			document.getElementById('hezbollahArsenalOverlay').classList.add('active');
+			document.body.style.overflow = 'hidden';
+			renderGroupArsenal('hezbollahArsenalContent', HEZBOLLAH_ARSENAL_DATA, '_hezbollahSort', '#4ade80', 'renderHezbollahArsenal');
+		}
+		function closeHezbollahArsenal() {
+			document.getElementById('hezbollahArsenalOverlay').classList.remove('active');
+			document.body.style.overflow = 'auto';
+		}
+		function sortHezbollahArsenal(by) {
+			_hezbollahSort = by;
+			renderGroupArsenal('hezbollahArsenalContent', HEZBOLLAH_ARSENAL_DATA, '_hezbollahSort', '#4ade80', 'renderHezbollahArsenal');
+		}
+		function renderHezbollahArsenal() { openHezbollahArsenal(); }
+
+		// ── Hamas Arsenal ─────────────────────────────────────────────────────────
+		const HAMAS_ARSENAL_DATA = [
+			{
+				category: 'Long-Range Rockets',
+				items: [
+					{ name:'M-302 (R-160)',  wiki:'M-302 rocket',          range_km:180, payload_kg:144, accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Syrian-supplied Chinese-designed rocket. Longest-range in Hamas arsenal. Can hit Haifa, Tel Aviv, Jerusalem from Gaza.' },
+					{ name:'R-160',          wiki:'Palestinian rocket arsenal', range_km:160, payload_kg:60, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Locally produced long-range rocket. Named after Hamas commander Abdel-Aziz Rantissi. First used in 2014 war.' },
+					{ name:'A-120 (Ayyash)', wiki:'Palestinian rocket arsenal', range_km:220, payload_kg:100, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Hamas\'s longest-range domestically produced rocket. First used in May 2021. Can reach central Israel including Ben Gurion Airport.' },
+					{ name:'J-90 (Jabari)',  wiki:'Palestinian rocket arsenal', range_km:90,  payload_kg:60,  accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Named after IQB commander Ahmed Jabari. Medium-range rocket targeting Tel Aviv and Ben Gurion Airport area.' },
+				]
+			},
+			{
+				category: 'Medium-Range Rockets',
+				items: [
+					{ name:'M-75',           wiki:'Palestinian rocket arsenal', range_km:80, payload_kg:60, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Hamas-built version of Iranian Fajr-5. Reached Tel Aviv in 2012, first Hamas rocket to do so. Named after Ibrahim al-Makadmeh.' },
+					{ name:'SH-85',          wiki:'Palestinian rocket arsenal', range_km:85, payload_kg:60, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Named after Hamas commander Mohammed Abu Shamala. Can target Tel Aviv and greater central Israel from Gaza.' },
+					{ name:'Fajr-5',         wiki:'Fajr-5',                     range_km:75, payload_kg:90, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Iranian-supplied 333mm rocket. Put Tel Aviv in range from Gaza for first time in 2012 conflict.' },
+					{ name:'J-80 (Jabari)',  wiki:'Palestinian rocket arsenal', range_km:80, payload_kg:50, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Longer-range variant named after Ahmed Jabari. Used in 2014 and 2021 to target Tel Aviv area.' },
+					{ name:'Sajjeel-55',     wiki:'Palestinian rocket arsenal', range_km:55, payload_kg:40, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Domestically produced medium-range rocket first seen in 2014 war. Targets cities in southern and central Israel.' },
+				]
+			},
+			{
+				category: 'Short-Range Rockets',
+				items: [
+					{ name:'S-40',           wiki:'Palestinian rocket arsenal', range_km:40, payload_kg:30, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Named after its range. Used in 2019 and 2021 against Ashkelon, Ashdod, Beersheba. Produced locally in large numbers.' },
+					{ name:'Qassam-3',       wiki:'Qassam rocket',             range_km:16, payload_kg:10, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Most numerous Hamas rocket. Primitive homemade design but produced in the thousands. Targets border communities.' },
+					{ name:'Grad (122mm)',   wiki:'BM-21 Grad',                range_km:40, payload_kg:20, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Russian-origin smuggled rocket. More reliable than Qassam. Used in mass barrages to overwhelm Iron Dome.' },
+					{ name:'Al-Quds',        wiki:'Palestinian rocket arsenal', range_km:16, payload_kg:9,  accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Palestinian Islamic Jihad rocket based on Qassam design. Slightly heavier and more reliable than original Qassam.' },
+				]
+			},
+			{
+				category: 'Drones & Naval',
+				items: [
+					{ name:'Shehab UAV',     wiki:'Palestinian rocket arsenal', range_km:200, payload_kg:10, accuracy:'guided', status:'Operational', used_against_israel:true, notes:'Hamas attack drone unveiled 2021. Used on October 7 2023 to disable Iron Dome radar systems before the ground attack.' },
+					{ name:'Al-Asef Torpedo', wiki:'Palestinian rocket arsenal', range_km:5,  payload_kg:50, accuracy:'guided', status:'Operational', used_against_israel:true, notes:'Hamas underwater torpedo first revealed October 2023. Used in naval commando operations. Threatens Israeli naval vessels and offshore gas infrastructure.' },
+				]
+			}
+		];
+
+		let _hamasSort = 'range';
+		function openHamasArsenal() {
+			document.getElementById('hamasArsenalOverlay').classList.add('active');
+			document.body.style.overflow = 'hidden';
+			renderGroupArsenal('hamasArsenalContent', HAMAS_ARSENAL_DATA, '_hamasSort', '#facc15', 'renderHamasArsenal');
+		}
+		function closeHamasArsenal() {
+			document.getElementById('hamasArsenalOverlay').classList.remove('active');
+			document.body.style.overflow = 'auto';
+		}
+		function sortHamasArsenal(by) {
+			_hamasSort = by;
+			renderGroupArsenal('hamasArsenalContent', HAMAS_ARSENAL_DATA, '_hamasSort', '#facc15', 'renderHamasArsenal');
+		}
+		function renderHamasArsenal() { openHamasArsenal(); }
+
+		// ── Shared arsenal renderer ────────────────────────────────────────────────
+		function renderGroupArsenal(contentId, data, sortVar, accentColor, rerenderFn) {
+			const currentSort = window[sortVar] || 'range';
+			const CAT_CFG = {
+				'Long-Range Ballistic Missiles': { color:'#f87171', icon:'🚀' },
+				'Long-Range Rockets':            { color:'#f87171', icon:'🚀' },
+				'Medium-Range Rockets':          { color:'#fb923c', icon:'💥' },
+				'Short-Range Rockets':           { color:'#fbbf24', icon:'🎯' },
+				'Drones (UAV)':                  { color:'#60a5fa', icon:'✈️' },
+				'Drones & Naval':                { color:'#38bdf8', icon:'🌊' },
+				'Anti-Ship & Anti-Tank':         { color:'#a78bfa', icon:'⚔️' },
+			};
+
+			const sorted = data.map(cat => ({
+				...cat,
+				items: [...(cat.items||[])].sort((a,b) =>
+					currentSort === 'payload' ? (b.payload_kg||0)-(a.payload_kg||0) : (b.range_km||0)-(a.range_km||0)
+				)
+			}));
+
+			const btnStyle = (key) => currentSort === key
+				? `padding:0.25rem 0.7rem;border-radius:5px;font-size:0.72rem;font-weight:600;cursor:pointer;border:1px solid ${accentColor};background:${accentColor}22;color:${accentColor};`
+				: 'padding:0.25rem 0.7rem;border-radius:5px;font-size:0.72rem;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.4);';
+
+			let html = `
+				<div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;">
+					<span style="font-size:0.7rem;color:rgba(255,255,255,0.35);">Sort by:</span>
+					<button onclick="${rerenderFn === 'renderHezbollahArsenal' ? 'sortHezbollahArsenal' : 'sortHamasArsenal'}('range')"   style="${btnStyle('range')}">📏 Range</button>
+					<button onclick="${rerenderFn === 'renderHezbollahArsenal' ? 'sortHezbollahArsenal' : 'sortHamasArsenal'}('payload')" style="${btnStyle('payload')}">💣 Payload</button>
+				</div>`;
+
+			for (const cat of sorted) {
+				const cfg = CAT_CFG[cat.category] || { color: accentColor, icon:'⚔️' };
+				html += `
+				<div style="margin-bottom:1.25rem;">
+					<div style="font-size:0.8rem;font-weight:800;color:${cfg.color};margin-bottom:0.5rem;padding-bottom:0.3rem;border-bottom:1px solid rgba(255,255,255,0.07);">${cfg.icon} ${cat.category} <span style="font-size:0.65rem;color:rgba(255,255,255,0.3);font-weight:400;">${(cat.items||[]).length} weapons</span></div>
+					<div style="display:flex;flex-direction:column;gap:0.5rem;">
+						${(cat.items||[]).map(item=>`
+						<div style="display:flex;gap:0.75rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-left:3px solid ${item.used_against_israel ? '#f87171' : cfg.color};border-radius:8px;padding:0.65rem;align-items:flex-start;">
+							<div style="flex-shrink:0;width:110px;height:72px;border-radius:8px;overflow:visible;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.08);position:relative;z-index:1;">
+								<img data-wiki="${item.wiki||''}"
+									style="width:110px;height:72px;object-fit:cover;object-position:center;display:none;border-radius:8px;cursor:zoom-in;transition:transform 0.25s ease,box-shadow 0.25s ease;transform-origin:left center;"
+									onmouseover="this.style.transform='scale(5)';this.style.boxShadow='0 12px 48px rgba(0,0,0,0.95)';this.style.zIndex='99999';this.style.position='relative';let p=this.parentElement;while(p&&p.id!=='${contentId}'){p.style.zIndex='99999';p.style.position='relative';p=p.parentElement;}"
+									onmouseout="this.style.transform='scale(1)';this.style.boxShadow='none';this.style.zIndex='1';let p=this.parentElement;while(p&&p.id!=='${contentId}'){p.style.zIndex='';p.style.position='';p=p.parentElement;}"
+								/>
+								<div class="wiki-img-fallback" style="font-size:2.2rem;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.03);border-radius:8px;">${cfg.icon}</div>
+							</div>
+							<div style="flex:1;min-width:0;">
+								<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:0.3rem;margin-bottom:0.25rem;">
+									<span style="font-size:0.8rem;font-weight:700;color:${cfg.color};cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,0.2);" onclick="window.open('https://en.wikipedia.org/wiki/${encodeURIComponent(''+item.wiki)}','_blank')">${item.name} <span style="font-size:0.65rem;opacity:0.5;">↗</span></span>
+									${item.used_against_israel ? `<span style="font-size:0.62rem;background:rgba(248,113,113,0.15);color:#f87171;border:1px solid rgba(248,113,113,0.3);border-radius:3px;padding:0.1rem 0.35rem;">⚔️ Used vs Israel</span>` : ''}
+								</div>
+								<div style="display:flex;flex-wrap:wrap;gap:0.4rem 1rem;margin-bottom:0.25rem;">
+									${item.range_km   ? `<span style="font-size:0.68rem;color:rgba(255,255,255,0.45);">📏 <span style="color:rgba(255,255,255,0.75);">${item.range_km} km</span></span>` : ''}
+									${item.payload_kg ? `<span style="font-size:0.68rem;color:rgba(255,255,255,0.45);">💣 <span style="color:rgba(255,255,255,0.75);">${item.payload_kg} kg</span></span>` : ''}
+									${item.accuracy   ? `<span style="font-size:0.68rem;color:rgba(255,255,255,0.45);">🎯 <span style="color:rgba(255,255,255,0.75);">${item.accuracy}</span></span>` : ''}
+								</div>
+								<div style="margin-bottom:0.2rem;">
+									<span style="font-size:0.62rem;padding:0.1rem 0.4rem;border-radius:3px;background:${item.status==='Operational'?'rgba(52,211,153,0.15)':'rgba(251,191,36,0.15)'};color:${item.status==='Operational'?'#34d399':'#fbbf24'};border:1px solid ${item.status==='Operational'?'rgba(52,211,153,0.3)':'rgba(251,191,36,0.3)'};">${item.status||'Unknown'}</span>
+								</div>
+								${item.notes ? `<div style="font-size:0.72rem;color:rgba(255,255,255,0.5);line-height:1.5;">${item.notes}</div>` : ''}
+							</div>
+						</div>`).join('')}
+					</div>
+				</div>`;
+			}
+
+			html += `<div style="font-size:0.6rem;color:rgba(255,255,255,0.18);text-align:center;padding-top:0.5rem;border-top:1px solid rgba(255,255,255,0.06);">Sources: CSIS, Alma Research, INSS, Jane's Defence · ${new Date().toLocaleDateString('en-GB')}</div>`;
+			document.getElementById(contentId).innerHTML = html;
+
+			document.querySelectorAll(`#${contentId} img[data-wiki]`).forEach(img => {
+				const article = img.getAttribute('data-wiki');
+				if (article) loadWikiImage(img, article);
+			});
+		}
+		// ── End Hezbollah/Hamas Arsenal ────────────────────────────────────────────
+
+		// ── Iran Arsenal ──────────────────────────────────────────────────────────
+		function openIranArsenal() {
+			document.getElementById('iranArsenalOverlay').classList.add('active');
+			document.body.style.overflow = 'hidden';
+			renderIranArsenal(IRAN_ARSENAL_DATA);
+		}
+		function closeIranArsenal() {
+			document.getElementById('iranArsenalOverlay').classList.remove('active');
+			document.body.style.overflow = 'auto';
+		}
+
+		const IRAN_ARSENAL_DATA = [
+			{
+				category: 'Ballistic Missiles',
+				items: [
+					{ name:'Sejjil-2',              wiki:'Sejjil',                   range_km:2500, payload_kg:750,  accuracy:'30–50m CEP',  status:'Operational', used_against_israel:false, notes:'Solid-fuel MRBM, fastest launch time of any Iranian ballistic missile. Can reach all of Israel in ~11 min.' },
+					{ name:'Khorramshahr-4 (Kheibar)', wiki:'Kheibar (missile)',        range_km:2000, payload_kg:1500, accuracy:'30m CEP',     status:'Operational', used_against_israel:true,  notes:'Used in October 2024 True Promise II attack. MaRV warhead allows maneuvering during reentry, harder to intercept.' },
+					{ name:'Fattah-1 (Hypersonic)', wiki:'Fattah (missile)',          range_km:1400, payload_kg:500,  accuracy:'~10m CEP',   status:'Operational', used_against_israel:true,  notes:'Iran\'s first claimed hypersonic glide missile. Used in October 2024 attack on Israel. Travels at Mach 13–15, extremely difficult to intercept.' },
+					{ name:'Fattah-2 (Hypersonic)', wiki:'Fattah-2',                  range_km:1500, payload_kg:500,  accuracy:'~10m CEP',   status:'Operational', used_against_israel:true,  notes:'Upgraded Fattah with enhanced maneuverability. Used in March 2026 attacks on Israel and US Gulf bases. Penetrated multiple air defense systems.' },
+					{ name:'Ghadr-110',             wiki:'Ghadr-110',                range_km:2000, payload_kg:750,  accuracy:'30–50m CEP', status:'Operational', used_against_israel:true,  notes:'Liquid-fuel variant of Shahab-3. Used in multiple strikes on Israel in 2024. Improved guidance over Shahab-3.' },
+					{ name:'Emad',                  wiki:'Emad (missile)',            range_km:1700, payload_kg:750,  accuracy:'~500m CEP',  status:'Operational', used_against_israel:false, notes:'Shahab-3 derivative with maneuverable reentry vehicle. Assessed by CSIS as reaching all of Israel.' },
+					{ name:'Kheibar Shekan',        wiki:'Kheibar Shekan',           range_km:1450, payload_kg:500,  accuracy:'~30m CEP',   status:'Operational', used_against_israel:true,  notes:'Solid-fuel, fin-guided MRBM with satellite navigation. Used in April and October 2024 attacks. Struck Nevatim Air Base.' },
+					{ name:'Haj Qasem',             wiki:'Haj Qasem (missile)',      range_km:1400, payload_kg:500,  accuracy:'~30m CEP',   status:'Operational', used_against_israel:true,  notes:'Named after Qasem Soleimani. Solid-fuel MRBM with guidance fins. Used in True Promise II (October 2024).' },
+					{ name:'Shahab-3',              wiki:'Shahab-3',                 range_km:1300, payload_kg:760,  accuracy:'~2500m CEP', status:'Operational', used_against_israel:false, notes:'Iran\'s workhorse liquid-fuel MRBM. Older system, less accurate but in large quantities. Backbone of Iranian arsenal for decades.' },
+					{ name:'Qasem Basir',           wiki:'Qasem Basir',              range_km:1500, payload_kg:500,  accuracy:'~30m CEP',   status:'Operational', used_against_israel:false, notes:'Iran\'s newest solid-fuel MRBM unveiled in 2025. High maneuverability in terminal phase designed to evade Arrow and Patriot interception systems.' },
+				]
+			},
+			{
+				category: 'Cruise Missiles',
+				items: [
+					{ name:'Soumar',   wiki:'Soumar (missile)',   range_km:3000, payload_kg:450, accuracy:'~5m CEP', status:'Operational', used_against_israel:false, notes:'Iran\'s longest-range cruise missile. Based on Soviet Kh-55 design. Flies low to evade radar. Rarely used operationally.' },
+					{ name:'Hoveyzeh', wiki:'Hoveyzeh (cruise missile)', range_km:1350, payload_kg:450, accuracy:'~5m CEP', status:'Operational', used_against_israel:true,  notes:'Terrain-hugging cruise missile. Used in April 2024 attack on Israel alongside ballistic missiles and drones.' },
+					{ name:'Paveh',    wiki:'Paveh cruise missile',    range_km:1650, payload_kg:500, accuracy:'~5m CEP', status:'Operational', used_against_israel:true,  notes:'Long-range terrain-hugging cruise missile unveiled in 2023. Used in attacks on Israel and US bases in the region. Flies at low altitude to evade radar.' },
+				]
+			},
+			{
+				category: 'Drones (UAV)',
+				items: [
+					{ name:'Shahed-136 (Geran-2)', wiki:'Shahed 136',  range_km:2500, payload_kg:50,  accuracy:'~5m CEP',  status:'Operational', used_against_israel:true,  notes:'One-way loitering munition. Used en masse (170+) in April 2024 to saturate Israeli air defenses. Cheap and produced in large numbers.' },
+					{ name:'Shahed-238',           wiki:'Shahed 238',  range_km:2000, payload_kg:50,  accuracy:'~5m CEP',  status:'Operational', used_against_israel:true,  notes:'Jet-powered upgrade of Shahed-136. 185 used in April 2024 attack. Faster and harder to intercept than propeller variant.' },
+					{ name:'Arash-2 (Kian-2)',     wiki:'Arash-2',     range_km:1600, payload_kg:100, accuracy:'~10m CEP', status:'Operational', used_against_israel:false, notes:'Large loitering munition, larger warhead than Shahed series. Can carry heavier payload for more destructive strikes.' },
+					{ name:'Karrar',               wiki:'Karrar (UAV)',range_km:1000, payload_kg:500, accuracy:'~10m CEP', status:'Operational', used_against_israel:false, notes:'Jet-powered combat UAV. Can carry bombs or anti-ship missiles. Also used as decoy to overwhelm air defense radars.' },
+				]
+			},
+			{
+				category: 'Submarines',
+				items: [
+					{ name:'Fateh-class',        wiki:'IRIS Fateh',            range_km:1000, payload_kg:null, accuracy:'N/A', status:'Operational', used_against_israel:false, notes:'Iran\'s most advanced domestically-built submarine. Can launch cruise missiles. Primarily a Gulf/regional threat.' },
+					{ name:'Ghadir-class',       wiki:'Ghadir-class submarine', range_km:600,  payload_kg:null, accuracy:'N/A', status:'Operational', used_against_israel:false, notes:'21 units in service. Small coastal submarines designed for Persian Gulf operations, mining, and surprise attacks on shipping.' },
+					{ name:'Kilo-class (877EKM)', wiki:'Kilo-class submarine',  range_km:6000, payload_kg:null, accuracy:'N/A', status:'Operational', used_against_israel:false, notes:'3 Russian-built subs. Can fire cruise missiles. Range enough to operate in Red Sea and Mediterranean.' },
+				]
+			}
+		];
+
+		async function fetchIranArsenal() {
+			document.getElementById('iranArsenalContent').innerHTML = `
+				<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1rem;gap:1rem;">
+					<div style="width:40px;height:40px;border:3px solid rgba(168,85,247,0.2);border-top-color:#a78bfa;border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+					<div style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Searching for arsenal data...</div>
+				</div>`;
+			renderIranArsenal(IRAN_ARSENAL_DATA);
+		}
+
+		function loadWikiImage(imgEl, articleTitle) {
+			const fallback = imgEl.parentElement.querySelector('.wiki-img-fallback');
+			fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(articleTitle)}`)
+				.then(r => { if (!r.ok) throw new Error('bad response'); return r.json(); })
+				.then(data => {
+					const src = data?.thumbnail?.source || data?.originalimage?.source;
+					if (!src) throw new Error('no image in response');
+					imgEl.onload = () => {
+						imgEl.style.display = 'block';
+						if (fallback) fallback.style.display = 'none';
+					};
+					imgEl.onerror = () => {
+						imgEl.style.display = 'none';
+						if (fallback) fallback.style.display = 'flex';
+					};
+					imgEl.src = src;
+				})
+				.catch(() => {
+					imgEl.style.display = 'none';
+					if (fallback) fallback.style.display = 'flex';
+				});
+		}
+
+		let _arsenalSort = 'range'; // 'range' | 'payload'
+
+		function sortIranArsenal(by) {
+			_arsenalSort = by;
+			document.querySelectorAll('.arsenal-sort-btn').forEach(b => {
+				const active = b.dataset.sort === by;
+				b.style.background = active ? 'rgba(168,85,247,0.25)' : 'rgba(255,255,255,0.04)';
+				b.style.borderColor = active ? 'rgba(168,85,247,0.6)' : 'rgba(255,255,255,0.12)';
+				b.style.color = active ? '#a78bfa' : 'rgba(255,255,255,0.4)';
+			});
+			// Re-sort each category's item list in the DOM — just re-render
+			renderIranArsenal(IRAN_ARSENAL_DATA);
+		}
+
+		function renderIranArsenal(categories) {
+			const CAT_CFG = {
+				'Ballistic Missiles': { color:'#f87171', icon:'🚀' },
+				'Cruise Missiles':    { color:'#fbbf24', icon:'💥' },
+				'Drones':             { color:'#fb923c', icon:'✈️' },
+				'Submarines':         { color:'#38bdf8', icon:'🌊' },
+				'Other':              { color:'#94a3b8', icon:'⚔️' },
+			};
+
+			const totalItems = categories.reduce((s,c)=>s+(c.items||[]).length, 0);
+			const usedCount  = categories.reduce((s,c)=>s+(c.items||[]).filter(i=>i.used_against_israel).length, 0);
+
+			// Sort items within each category
+			const sorted = categories.map(cat => ({
+				...cat,
+				items: [...(cat.items||[])].sort((a,b) => {
+					if (_arsenalSort === 'payload') {
+						return (b.payload_kg||0) - (a.payload_kg||0);
+					}
+					return (b.range_km||0) - (a.range_km||0);
+				})
+			}));
+			categories = sorted;
+
+			const btnStyle = (key) => _arsenalSort === key
+				? 'padding:0.25rem 0.7rem;border-radius:5px;font-size:0.72rem;font-weight:600;cursor:pointer;border:1px solid rgba(168,85,247,0.6);background:rgba(168,85,247,0.25);color:#a78bfa;'
+				: 'padding:0.25rem 0.7rem;border-radius:5px;font-size:0.72rem;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.4);';
+			let html = `
+				<div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;">
+					<span style="font-size:0.7rem;color:rgba(255,255,255,0.35);">Sort by:</span>
+					<button class="arsenal-sort-btn" data-sort="range"   onclick="sortIranArsenal('range')"   style="${btnStyle('range')}">📏 Range</button>
+					<button class="arsenal-sort-btn" data-sort="payload" onclick="sortIranArsenal('payload')" style="${btnStyle('payload')}">💣 Payload</button>
+				</div>`;
+
+			for (const cat of categories) {
+				const cfg = CAT_CFG[cat.category] || CAT_CFG['Other'];
+				html += `
+				<div style="margin-bottom:1.25rem;">
+					<div style="font-size:0.8rem;font-weight:800;color:${cfg.color};margin-bottom:0.5rem;padding-bottom:0.3rem;border-bottom:1px solid rgba(255,255,255,0.07);">${cfg.icon} ${cat.category} <span style="font-size:0.65rem;color:rgba(255,255,255,0.3);font-weight:400;">${(cat.items||[]).length} weapons</span></div>
+					<div style="display:flex;flex-direction:column;gap:0.5rem;">
+						${(cat.items||[]).map(item=>`
+						<div style="display:flex;gap:0.75rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-left:3px solid ${item.used_against_israel?'#f87171':cfg.color};border-radius:8px;padding:0.65rem;align-items:flex-start;">
+							<div style="flex-shrink:0;width:110px;height:72px;border-radius:8px;overflow:visible;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.08);position:relative;z-index:1;">
+								<img data-wiki="${item.wiki||''}"
+									style="width:110px;height:72px;object-fit:cover;object-position:center;display:none;border-radius:8px;cursor:zoom-in;transition:transform 0.25s ease,box-shadow 0.25s ease;transform-origin:left center;"
+									onmouseover="this.style.transform='scale(5)';this.style.boxShadow='0 12px 48px rgba(0,0,0,0.95)';this.style.zIndex='99999';this.style.position='relative';let p=this.parentElement;while(p&&p.id!=='iranArsenalContent'){p.style.zIndex='99999';p.style.position='relative';p=p.parentElement;}"
+									onmouseout="this.style.transform='scale(1)';this.style.boxShadow='none';this.style.zIndex='1';let p=this.parentElement;while(p&&p.id!=='iranArsenalContent'){p.style.zIndex='';p.style.position='';p=p.parentElement;}"
+							/>
+								<div class="wiki-img-fallback" style="font-size:2.2rem;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.03);border-radius:8px;">${cfg.icon}</div>
+							</div>
+							<div style="flex:1;min-width:0;">
+								<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:0.3rem;margin-bottom:0.25rem;">
+									<span style="font-size:0.8rem;font-weight:700;color:${cfg.color};cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(168,85,247,0.4);" onclick="window.open('https://en.wikipedia.org/wiki/${encodeURIComponent(item.wiki||item.name)}','_blank')">${item.name} <span style="font-size:0.65rem;opacity:0.5;">↗</span></span>
+									${item.used_against_israel?`<span style="font-size:0.62rem;background:rgba(248,113,113,0.15);color:#f87171;border:1px solid rgba(248,113,113,0.3);border-radius:3px;padding:0.1rem 0.35rem;">Used vs Israel</span>`:''}
+								</div>
+								<div style="display:flex;flex-wrap:wrap;gap:0.4rem 1rem;margin-bottom:0.25rem;">
+									${item.range_km?`<span style="font-size:0.68rem;color:rgba(255,255,255,0.45);">📏 Range: <span style="color:rgba(255,255,255,0.75);">${item.range_km.toLocaleString()} km</span></span>`:''}
+									${item.payload_kg?`<span style="font-size:0.68rem;color:rgba(255,255,255,0.45);">💣 Payload: <span style="color:rgba(255,255,255,0.75);">${item.payload_kg} kg</span></span>`:''}
+									${item.accuracy?`<span style="font-size:0.68rem;color:rgba(255,255,255,0.45);">🎯 CEP: <span style="color:rgba(255,255,255,0.75);">${item.accuracy}</span></span>`:''}
+								</div>
+								<div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.2rem;">
+									<span style="font-size:0.62rem;padding:0.1rem 0.4rem;border-radius:3px;background:${item.status==='Operational'?'rgba(52,211,153,0.15)':'rgba(251,191,36,0.15)'};color:${item.status==='Operational'?'#34d399':'#fbbf24'};border:1px solid ${item.status==='Operational'?'rgba(52,211,153,0.3)':'rgba(251,191,36,0.3)'};">${item.status||'Unknown'}</span>
+								</div>
+								${item.notes?`<div style="font-size:0.72rem;color:rgba(255,255,255,0.5);line-height:1.5;">${item.notes}</div>`:''}
+							</div>
+						</div>`).join('')}
+					</div>
+				</div>`;
+			}
+
+			html += `<div style="font-size:0.6rem;color:rgba(255,255,255,0.18);text-align:center;padding-top:0.5rem;border-top:1px solid rgba(255,255,255,0.06);">Sources: IISS Military Balance, CSIS Missile Defense Project, Jane's Defence · ${new Date().toLocaleDateString('en-GB')}</div>`;
+
+			document.getElementById('iranArsenalContent').innerHTML = html;
+			// Load Wikipedia thumbnails for all weapons
+			document.querySelectorAll('#iranArsenalContent img[data-wiki]').forEach(img => {
+				const article = img.getAttribute('data-wiki');
+				if (article) loadWikiImage(img, article, '');
+			});
+		}
+		// ── End Iran Arsenal ──────────────────────────────────────────────────────
+		
+		// ── Iran Attacks Since Oct 7 ──────────────────────────────────────────────
+		let _iranEventsFlat = [];
+		let _iranTimeRange  = '7d';
+		let _iranCountries  = null;
+		let _iranFetching   = false;
+
+		function iranFlagImg(name) {
+			const MAP = {
+				'Israel':'il','UAE':'ae','Saudi Arabia':'sa','Bahrain':'bh',
+				'Qatar':'qa','Kuwait':'kw','Jordan':'jo','Oman':'om',
+				'Iraq':'iq','Syria':'sy','Yemen':'ye','Lebanon':'lb',
+				'Pakistan':'pk','Turkey':'tr','Egypt':'eg','Libya':'ly',
+				'Tunisia':'tn','Morocco':'ma','Algeria':'dz','Sudan':'sd',
+				'Afghanistan':'af','Iran':'ir','Red Sea / Ships':'',
+			};
+			const code = MAP[name];
+			if (!code) return '<span style="font-size:0.9rem;">🚢</span>';
+			return `<img src="https://flagcdn.com/16x12/${code}.png" style="width:20px;height:15px;border-radius:2px;vertical-align:middle;display:inline-block;">`;
+		}
+
+		function openIranAttacks() {
+			document.getElementById('iranAttacksOverlay').classList.add('active');
+			document.body.style.overflow = 'hidden';
+			// Always show loading and fetch fresh live data on every open
+			document.getElementById('iranAttacksContent').innerHTML = `
+				<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1rem;gap:1rem;">
+					<div style="width:40px;height:40px;border:3px solid rgba(251,146,60,0.2);border-top-color:#fb923c;border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+					<div style="color:rgba(255,255,255,0.5);font-size:0.85rem;">Fetching latest attack data...</div>
+					<div style="color:rgba(255,255,255,0.25);font-size:0.72rem;">Searching live news sources</div>
+				</div>`;
+			fetchIranLiveData();
+		}
+		function closeIranAttacks() {
+			document.getElementById('iranAttacksOverlay').classList.remove('active');
+			document.body.style.overflow = 'auto';
+		}
+		function setIranRange(r) {
+			_iranTimeRange = r;
+			renderIranAttacks();
+		}
+
+		function getIranBaseData() {
+			return [
+				{ name:'Israel', color:'#fbbf24', events:[
+					{ ts:'2026-02-28T22:00', types:['missiles','drones'], targets:['Residential','Military base'], counts:{missiles:70,drones:100}, cas:{k:1,i:12}, detail:'~70 ballistic missiles + 100 drones. 1 woman killed in Tel Aviv from shrapnel. Iron Dome/Arrow intercepted majority.' },
+					{ ts:'2026-03-01T06:00', types:['missiles'], targets:['Residential'], counts:{missiles:35}, cas:{k:8,i:20}, detail:'Ballistic missile struck Beit Shemesh. 8 killed, ~20 injured. Sirens across Tel Aviv from 06:00.' },
+					{ ts:'2026-03-01T15:00', types:['missiles','drones'], targets:['Military base'], counts:{missiles:30,drones:50}, cas:{k:0,i:5}, detail:'Afternoon barrages. Mostly intercepted by Iron Dome and Arrow.' },
+					{ ts:'2026-03-02T08:00', types:['drones'], targets:['Residential'], counts:{drones:40}, cas:{k:0,i:3}, detail:'Drone swarms overnight. Sirens in Galilee and central Israel.' },
+				]},
+				{ name:'UAE', color:'#f87171', events:[
+					{ ts:'2026-02-28T20:00', types:['missiles','drones'], targets:['Military base','Airport','Port','Hotel'], counts:{missiles:137,drones:209}, cas:{k:1,i:7}, detail:'Day 1. Fires at Palm Jumeirah Fairmont, Burj Al Arab, Jebel Ali Port, Dubai Airport. 1 killed at Abu Dhabi Airport.' },
+					{ ts:'2026-03-01T04:30', types:['missiles','drones','cruise'], targets:['Hotel','Port','Data center','Military base'], counts:{missiles:28,drones:150,cruise:2}, cas:{k:1,i:15}, detail:'AWS data center hit. French naval base struck. US consulate fire. Dubai Airport Terminal 3 struck.' },
+					{ ts:'2026-03-02T09:00', types:['missiles','drones'], targets:['Residential','Military base'], counts:{missiles:10,drones:80}, cas:{k:0,i:20}, detail:'3rd day of continuous barrages. Debris across Dubai and Abu Dhabi.' },
+					{ ts:'2026-03-03T07:00', types:['drones'], targets:['Residential'], counts:{drones:50}, cas:{k:0,i:10}, detail:'Daily drone waves. UAE air defenses intercept majority.' },
+					{ ts:'2026-03-04T00:00', types:['drones','missiles'], targets:['Embassy/Consulate','Port'], counts:{drones:121,missiles:3}, cas:{k:1,i:40}, detail:'US consulate Dubai struck. 3 ballistic missiles + 121 drones intercepted overnight.' },
+					{ ts:'2026-03-05T19:00', types:['missiles','drones'], targets:['Residential','Industrial'], counts:{missiles:7,drones:60}, cas:{k:0,i:6}, detail:'Safety alerts Abu Dhabi, Dubai, Sharjah. 6 workers injured in ICAD 2 industrial area.' },
+				]},
+				{ name:'Saudi Arabia', color:'#fb923c', events:[
+					{ ts:'2026-02-28T21:00', types:['missiles','drones'], targets:['Capital city','Military base'], counts:{missiles:30,drones:40}, cas:{k:0,i:0}, detail:'Riyadh and eastern region targeted. Saudi defenses repelled all.' },
+					{ ts:'2026-03-02T10:00', types:['drones'], targets:['Embassy/Consulate'], counts:{drones:20}, cas:{k:0,i:0}, detail:'US embassy Riyadh targeted. All intercepted.' },
+				]},
+				{ name:'Bahrain', color:'#60a5fa', events:[
+					{ ts:'2026-02-28T21:00', types:['missiles','drones'], targets:['Military base','Residential'], counts:{missiles:45,drones:9}, cas:{k:0,i:4}, detail:'US Navy 5th Fleet HQ Manama struck. Shahed drone hit tower block. 4 injured.' },
+					{ ts:'2026-03-01T08:00', types:['drones'], targets:['Military base'], counts:{drones:15}, cas:{k:0,i:2}, detail:'Follow-up drone waves on US assets.' },
+				]},
+				{ name:'Qatar', color:'#a78bfa', events:[
+					{ ts:'2026-02-28T22:00', types:['missiles','drones','cruise'], targets:['Military base','Radar station'], counts:{missiles:65,drones:12,cruise:1}, cas:{k:0,i:16}, detail:'Al Udeid Air Base targeted. Long-range radar struck. 16 injured.' },
+					{ ts:'2026-03-04T12:00', types:['drones','cruise'], targets:['Military base'], counts:{drones:10,cruise:2}, cas:{k:0,i:0}, detail:'10 drones + 2 cruise missiles intercepted. 10 IRGC agents arrested.' },
+				]},
+				{ name:'Kuwait', color:'#34d399', events:[
+					{ ts:'2026-02-28T23:00', types:['missiles','drones'], targets:['Military base'], counts:{missiles:97,drones:283}, cas:{k:0,i:0}, detail:'97 missiles + 283 drones via maritime routes. All intercepted.' },
+				]},
+				{ name:'Jordan', color:'#e879f9', events:[
+					{ ts:'2026-02-28T22:00', types:['missiles','drones'], targets:['Airspace'], counts:{missiles:20,drones:29}, cas:{k:0,i:0}, detail:'49 drones and missiles intercepted over Amman and northern Jordan.' },
+				]},
+				{ name:'Oman', color:'#2dd4bf', events:[
+					{ ts:'2026-03-01T14:00', types:['drones'], targets:['Port'], counts:{drones:2}, cas:{k:0,i:1}, detail:'2 drones struck Duqm commercial port. 1 worker injured.' },
+				]},
+				{ name:'Red Sea / Ships', color:'#38bdf8', events:[
+					{ ts:'2026-03-01T10:00', types:['drones'], targets:['Ship (tanker)'], counts:{drones:1}, cas:{k:0,i:4}, detail:'Tanker "Skylight" struck in Strait of Hormuz. 4 mariners wounded.' },
+				]},
+			];
+		}
+
+		async function fetchIranLiveData() {
+			if (_iranFetching) return;
+			_iranFetching = true;
+			const btn = document.getElementById('iranRefreshBtn');
+			if (btn) { btn.textContent = '⏳ Fetching...'; btn.disabled = true; }
+
+			try {
+				const today = new Date().toISOString().split('T')[0];
+				const resp = await fetch('https://api.anthropic.com/v1/messages', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						model: 'claude-sonnet-4-20250514',
+						max_tokens: 4000,
+						tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+						system: `You are a military analyst with precise geographic knowledge. Search the web for ALL confirmed Iran missile, drone, and rocket attacks on other countries from February 28 2026 until today (${today}). Use multiple searches to be thorough. Return ONLY a valid JSON array — no markdown fences, no explanation, no preamble. Schema: [{"name":"Country name","color":"#hex","events":[{"ts":"2026-MM-DDTHH:MM","types":["missiles"|"drones"|"cruise"|"rockets"],"targets":["Military base"|"Residential"|"Airport"|"Port"|"Hotel"|"Ship"|"Embassy"|"Radar"|"Data center"|"Industrial"],"counts":{"missiles":N,"drones":N,"cruise":N,"rockets":N},"cas":{"k":N,"i":N},"lat":DECIMAL_LAT,"lng":DECIMAL_LNG,"location_name":"Specific place name e.g. Dubai International Airport, Palm Jumeirah, Beit Shemesh, Al Udeid Air Base","detail":"1-2 sentence factual description with numbers"}]}]. CRITICAL: lat/lng are MANDATORY for every event — use the exact real-world coordinates of the named location. Colors: Israel=#fbbf24, UAE=#f87171, Saudi Arabia=#fb923c, Bahrain=#60a5fa, Qatar=#a78bfa, Kuwait=#34d399, Jordan=#e879f9, Oman=#2dd4bf, Red Sea / Ships=#38bdf8, Iraq=#a3e635, Syria=#e11d48. Only include attack types actually used. Include every country attacked. Use real verified data.`,
+						messages: [{ role: 'user', content: `Search for: "Iran missile attack 2026", "Iran drone attack Gulf 2026", "Iran strikes UAE Israel Saudi Arabia March 2026". Today is ${today}. Every event MUST have lat/lng of the exact location hit (e.g. Dubai Airport=25.2532,55.3657 — not just country center). Return complete JSON array only.` }]
+					})
+				});
+				const data = await resp.json();
+				const text = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('');
+				const clean = text.replace(/```json[\s\S]*?```/g, s => s.slice(7,-3)).replace(/```/g,'').trim();
+				const jsonMatch = clean.match(/\[[\s\S]*\]/);
+				const parsed = JSON.parse(jsonMatch ? jsonMatch[0] : clean);
+				if (Array.isArray(parsed) && parsed.length > 0) {
+					_iranCountries = parsed;
+					renderIranAttacks();
+					if (_iranMap) buildIranMap();
+					// Update status after render
+					const statusEl = document.getElementById('iranDataStatus');
+					if (statusEl) {
+						const totalEvents = parsed.reduce((s,c)=>s+(c.events||[]).length,0);
+						statusEl.innerHTML = `🟢 Live data · ${parsed.length} countries · ${totalEvents} attack events · updated ${new Date().toLocaleTimeString()}`;
+					}
+				} else {
+					throw new Error('Empty or invalid response');
+				}
+			} catch(e) {
+				// Fall back to hardcoded data
+				if (!_iranCountries) _iranCountries = getIranBaseData();
+				renderIranAttacks();
+				const statusEl = document.getElementById('iranDataStatus');
+				if (statusEl) statusEl.innerHTML = `🔴 Live fetch failed · showing hardcoded data · <span style="cursor:pointer;text-decoration:underline;" onclick="fetchIranLiveData()">retry</span>`;
+			} finally {
+				_iranFetching = false;
+				const btn2 = document.getElementById('iranRefreshBtn');
+				if (btn2) { btn2.textContent = '🔄 Refresh'; btn2.disabled = false; }
+			}
+		}
+
+		function showIranEvent(idx) {
+			const ev  = _iranEventsFlat[idx];
+			const div = document.getElementById('iranEventDetail');
+			if (!ev || !div) return;
+			const TYPE_CFG = {
+				missiles:{label:'Ballistic Missiles',color:'#f87171',icon:'🚀'},
+				drones:  {label:'Drones (Shahed)',   color:'#fb923c',icon:'✈️'},
+				cruise:  {label:'Cruise Missiles',   color:'#fbbf24',icon:'💥'},
+				rockets: {label:'Rockets',           color:'#e879f9',icon:'🎯'},
+			};
+			const hasCas   = ev.cas.k > 0 || ev.cas.i > 0;
+			const countStr = Object.entries(ev.counts).map(([k,v])=>`<span style="color:${TYPE_CFG[k]?.color||'#fff'};font-weight:700;">${TYPE_CFG[k]?.icon||'⚡'} ${v.toLocaleString()} ${TYPE_CFG[k]?.label||k}</span>`).join(' + ');
+			const [datePart, timePart] = ev.ts.split('T');
+			const [yyyy,mm,dd] = datePart.split('-');
+			div.style.display = 'block';
+			div.innerHTML = `
+				<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.55rem;padding-bottom:0.45rem;border-bottom:1px solid rgba(255,255,255,0.08);">
+					<span style="color:${ev.countryColor};font-weight:800;font-size:0.9rem;">${iranFlagImg(ev.countryName)} ${ev.countryName}</span>
+					<span style="color:rgba(255,255,255,0.55);font-size:0.8rem;font-weight:600;">${dd}/${mm}/${yyyy} &nbsp;${timePart} (IL)</span>
+				</div>
+				<div style="margin-bottom:0.35rem;font-size:0.8rem;">${countStr}</div>
+				<div style="margin-bottom:0.35rem;font-size:0.78rem;color:${hasCas?'#f87171':'#34d399'};font-weight:700;">${ev.cas.k>0?'💀 '+ev.cas.k+' killed &nbsp;':''}${ev.cas.i>0?'🩸 '+ev.cas.i+' injured':!hasCas?'✅ No casualties':''}</div>
+				<div style="margin-bottom:0.4rem;font-size:0.77rem;color:rgba(255,255,255,0.5);">🎯 Targets: ${ev.targets.map(t=>`<span style="background:rgba(255,255,255,0.08);padding:0.12rem 0.4rem;border-radius:3px;margin-right:0.25rem;color:rgba(255,255,255,0.75);">${t}</span>`).join('')}</div>
+				<div style="font-size:0.77rem;color:rgba(255,255,255,0.6);line-height:1.55;">${ev.detail}</div>
+			`;
+			div.scrollIntoView({behavior:'smooth',block:'nearest'});
+		}
+
+		function renderIranAttacks() {
+			_iranEventsFlat = [];
+			const COUNTRIES = _iranCountries || getIranBaseData();
+
+			const TYPE_CFG = {
+				missiles:{label:'Ballistic Missiles',color:'#f87171',icon:'🚀'},
+				drones:  {label:'Drones (Shahed)',   color:'#fb923c',icon:'✈️'},
+				cruise:  {label:'Cruise Missiles',   color:'#fbbf24',icon:'💥'},
+				rockets: {label:'Rockets',           color:'#e879f9',icon:'🎯'},
+			};
+
+			const RANGE_CFGS = {
+				'7d': {sec:7,   tickEvery:1,   tickFmt:'dd/mm',   label:'7 Days'},
+				'14d':{sec:14,  tickEvery:2,   tickFmt:'dd/mm',   label:'2 Weeks'},
+				'1m': {sec:30,  tickEvery:5,   tickFmt:'dd/mm',   label:'1 Month'},
+				'3m': {sec:90,  tickEvery:14,  tickFmt:'dd/mm',   label:'3 Months'},
+				'6m': {sec:180, tickEvery:30,  tickFmt:'mm/yyyy', label:'6 Months'},
+				'1y': {sec:365, tickEvery:30,  tickFmt:'mm/yyyy', label:'1 Year'},
+			};
+			const rc    = RANGE_CFGS[_iranTimeRange]||RANGE_CFGS['7d'];
+			const START = new Date('2026-02-28T00:00:00+02:00').getTime();
+			const END   = START + rc.sec*86400000;
+			const SPAN  = END - START;
+			const DAYS  = rc.sec;
+
+			for (const c of COUNTRIES) {
+				for (const ev of c.events) {
+					ev.countryName  = c.name;
+					ev.countryColor = c.color;
+					ev._idx = _iranEventsFlat.length;
+					_iranEventsFlat.push(ev);
+				}
+			}
+
+			const ticks = [];
+			for (let i=0;i<=DAYS;i+=rc.tickEvery) {
+				const d = new Date(START+i*86400000);
+				let lbl = rc.tickFmt==='dd/mm'
+					? String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')
+					: String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
+				ticks.push({pct:i/DAYS*100, lbl});
+			}
+
+			const LABEL_W = 90;
+			const ROW_H   = 44;
+
+			const axisRow = `<div style="position:relative;height:18px;margin-left:${LABEL_W}px;">
+				${ticks.map((t,i)=>{
+					const isLast = i===ticks.length-1;
+					const isFirst = i===0;
+					const transform = isLast ? 'translateX(-100%)' : isFirst ? 'translateX(0%)' : 'translateX(-50%)';
+					return `<div style="position:absolute;left:${t.pct}%;font-size:0.58rem;color:rgba(255,255,255,0.35);transform:${transform};">${t.lbl}</div>`;
+				}).join('')}
+			</div>`;
+
+			const gridLines = ticks.map(t=>`<div style="position:absolute;left:${t.pct}%;top:0;bottom:0;border-left:1px solid rgba(255,255,255,0.05);pointer-events:none;"></div>`).join('');
+
+			const todayPct = Math.min(100,(Date.now()-START)/SPAN*100);
+			const todayLine = todayPct>0&&todayPct<100
+				? `<div style="position:absolute;left:${todayPct}%;top:0;bottom:0;border-left:2px dashed rgba(52,211,153,0.5);pointer-events:none;z-index:3;"><div style="position:absolute;top:0;left:2px;font-size:0.52rem;color:#34d399;">now</div></div>`
+				: '';
+
+			const rows = COUNTRIES.map((country,ci)=>{
+				const dots = country.events.map(ev=>{
+					const evMs = new Date(ev.ts+':00+02:00').getTime();
+					if (evMs < START || evMs > END) return '';
+					const pct   = Math.min(96, Math.max(2, (evMs-START)/SPAN*100));
+					const total = Object.values(ev.counts).reduce((s,v)=>s+v,0);
+					const r     = Math.min(14, Math.max(6, 5+Math.log10(total+1)*3.8));
+					const color = TYPE_CFG[ev.types[0]]?.color||'#94a3b8';
+					const hasCas= ev.cas.k>0||ev.cas.i>0;
+					const [datePart,timePart] = ev.ts.split('T');
+					const [yyyy,mm,dd] = datePart.split('-');
+					const TARGET_ICONS = {
+						'military base':'🪖','airport':'✈️','port':'⚓','hotel':'🏨',
+						'residential':'🏠','ship':'🚢','embassy':'🏛️','radar':'📡',
+						'data center':'💾','industrial':'🏭','capital city':'🏙️',
+						'radar station':'📡','tank':'🚜','submarine':'🌊',
+						'embassy/consulate':'🏛️','ship (tanker)':'🛢️','airspace':'🌐',
+						'airbase':'✈️','air base':'✈️','power plant':'⚡',
+						'oil facility':'🛢️','nuclear site':'☢️','headquarters':'🏢',
+						'bridge':'🌉','highway':'🛣️','communications':'📻',
+						'fuel depot':'⛽','ammunition depot':'💣','naval base':'⚓',
+						'troops':'💂','convoy':'🚛','artillery':'💥',
+					};
+					const getTargetIcon = t => TARGET_ICONS[t.toLowerCase()] || '🎯';
+					const row2  = Object.entries(ev.counts).map(([k,v])=>(TYPE_CFG[k]?.icon||'⚡')+' '+v+' '+(TYPE_CFG[k]?.label||k)).join('\n');
+					const row3  = hasCas ? ((ev.cas.k>0?'💀 '+ev.cas.k+' killed ':'')+( ev.cas.i>0?'🩸 '+ev.cas.i+' injured':'')).trim() : '';
+					const row4  = (ev.targets||[]).map(t=>getTargetIcon(t)+' '+t).join(' · ');
+					const tip   = `${dd}/${mm}/${yyyy} ${timePart}|${row2}|${row3}|${row4}`;
+					return `<div
+						onclick="showIranEvent(${ev._idx})"
+						data-tip="${tip}"
+						onmouseenter="iranTip(this,true)"
+						onmouseleave="iranTip(this,false)"
+						style="position:absolute;left:${pct}%;top:50%;transform:translate(-50%,-50%);width:${r*2}px;height:${r*2}px;border-radius:50%;background:${color};border:${hasCas?'2.5px solid #fff':'1.5px solid rgba(255,255,255,0.15)'};cursor:pointer;box-shadow:0 0 ${hasCas?8:3}px ${color}88;z-index:2;transition:transform 0.15s;"
+						onmousedown="this.style.transform='translate(-50%,-50%) scale(0.9)'"
+						onmouseup="this.style.transform='translate(-50%,-50%) scale(1.3)'"
+					></div>`;
+				}).join('');
+				return `<div style="display:flex;align-items:center;height:${ROW_H}px;border-bottom:1px solid rgba(255,255,255,0.04);background:${ci%2===0?'rgba(255,255,255,0.012)':'transparent'};">
+					<div style="width:${LABEL_W}px;flex-shrink:0;display:flex;align-items:center;gap:0.3rem;padding-right:4px;overflow:hidden;">
+						${iranFlagImg(country.name)}
+						<span style="font-size:0.75rem;font-weight:700;color:${country.color};line-height:1.25;">${country.name}</span>
+					</div>
+					<div style="flex:1;height:100%;position:relative;overflow:visible;">
+						${gridLines}${todayLine}
+						<div style="position:absolute;left:0;right:0;top:50%;border-top:1px dashed rgba(255,255,255,0.04);pointer-events:none;"></div>
+						${dots}
+					</div>
+				</div>`;
+			}).join('');
+
+			const casCards = COUNTRIES.map(c=>{
+				const k     = c.events.reduce((s,e)=>s+e.cas.k, 0);
+				const i     = c.events.reduce((s,e)=>s+e.cas.i, 0);
+				// Sum all weapon counts across all events
+				const totals = {};
+				for (const ev of c.events) {
+					for (const [type, count] of Object.entries(ev.counts||{})) {
+						totals[type] = (totals[type]||0) + count;
+					}
+				}
+				const weaponRows = Object.entries(totals).map(([type,count])=>{
+					const cfg = TYPE_CFG[type];
+					return `<div style="font-size:0.68rem;color:${cfg?.color||'#fff'};">${cfg?.icon||'⚡'} ${count.toLocaleString()}</div>`;
+				}).join('');
+				return `<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-left:3px solid ${c.color};border-radius:6px;padding:0.5rem 0.7rem;">
+					<div style="display:flex;align-items:center;gap:0.35rem;font-size:0.72rem;color:${c.color};font-weight:700;margin-bottom:0.3rem;">${iranFlagImg(c.name)} ${c.name}</div>
+					${weaponRows}
+					${k>0?`<div style="font-size:0.68rem;color:#f87171;margin-top:0.2rem;">💀 ${k} killed</div>`:''}
+					${i>0?`<div style="font-size:0.68rem;color:#fb923c;">🩸 ${i} injured</div>`:''}
+					${k===0&&i===0?`<div style="font-size:0.65rem;color:rgba(255,255,255,0.25);">✅ No casualties</div>`:''}
+				</div>`;
+			}).join('');
+
+			const legend = [
+				{icon:'🚀',label:'Ballistic Missiles',color:'#f87171'},
+				{icon:'✈️',label:'Drones (Shahed)',   color:'#fb923c'},
+				{icon:'💥',label:'Cruise Missiles',   color:'#fbbf24'},
+				{icon:'🎯',label:'Rockets',           color:'#e879f9'},
+			].map(v=>`<span style="display:inline-flex;align-items:center;gap:0.3rem;font-size:0.68rem;"><span style="font-size:0.85rem;">${v.icon}</span><span style="color:${v.color};">${v.label}</span></span>`).join('');
+
+			const WAR_START   = new Date('2026-02-28T00:00:00+02:00').getTime();
+			const daysSinceWar = (Date.now() - WAR_START) / 86400000;
+			const rangeButtons = Object.entries(RANGE_CFGS).filter(([k,v])=>v.sec <= Math.max(7, daysSinceWar+1)).map(([k,v])=>{
+				const active = k===_iranTimeRange;
+				return `<button onclick="setIranRange('${k}')" style="padding:0.2rem 0.55rem;border-radius:4px;font-size:0.72rem;font-weight:600;cursor:pointer;border:1px solid ${active?'#60a5fa':'rgba(255,255,255,0.1)'};background:${active?'rgba(96,165,250,0.15)':'rgba(255,255,255,0.04)'};color:${active?'#60a5fa':'rgba(255,255,255,0.4)'};">${v.label}</button>`;
+			}).join('');
+
+			document.getElementById('iranAttacksContent').innerHTML = `
+				<div id="iranBubbleTip" style="display:none;position:fixed;background:rgba(15,15,20,0.97);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:0.55rem 0.75rem;z-index:9999;pointer-events:none;max-width:220px;box-shadow:0 4px 20px rgba(0,0,0,0.6);">
+					<div id="iranTipR1" style="font-size:0.95rem;color:#60a5fa;font-weight:700;margin-bottom:0.3rem;"></div>
+					<div id="iranTipR2" style="font-size:0.72rem;color:rgba(255,255,255,0.75);margin-bottom:0.2rem;"></div>
+					<div id="iranTipR3" style="font-size:0.72rem;margin-bottom:0.2rem;"></div>
+					<div id="iranTipR4" style="font-size:0.7rem;color:rgba(255,255,255,0.45);"></div>
+				</div>
+				<div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.4rem;margin-bottom:0.55rem;">
+					${rangeButtons}
+					<button id="iranRefreshBtn" onclick="fetchIranLiveData()" style="margin-left:auto;padding:0.2rem 0.65rem;border-radius:4px;font-size:0.72rem;font-weight:600;cursor:pointer;border:1px solid rgba(52,211,153,0.4);background:rgba(52,211,153,0.08);color:#34d399;">🔄 Refresh</button>
+				</div>
+				<div id="iranDataStatus" style="font-size:0.65rem;color:rgba(255,255,255,0.3);margin-bottom:0.5rem;">🟡 Showing cached data · press Refresh for live updates</div>
+				<div style="display:flex;flex-wrap:wrap;gap:0.4rem 1rem;margin-bottom:0.6rem;">${legend}
+					<span style="display:inline-flex;align-items:center;gap:0.3rem;font-size:0.68rem;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:transparent;border:2px solid white;flex-shrink:0;"></span><span style="color:rgba(255,255,255,0.4);">White border = casualties</span></span>
+				</div>
+				<div id="iranEventDetail" style="display:none;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:0.85rem;margin-bottom:0.65rem;"></div>
+				<div id="iranChartScroll" style="overflow:hidden;">
+					<div id="iranChartInner" style="width:100%;">
+						${axisRow}
+						${rows}
+						${axisRow}
+					</div>
+				</div>
+				<div style="margin-top:0.75rem;">
+					<div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.07em;color:rgba(255,255,255,0.3);font-weight:600;margin-bottom:0.4rem;">Casualties by Country</div>
+					<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:0.4rem;">${casCards}</div>
+				</div>
+				<div style="font-size:0.6rem;color:rgba(255,255,255,0.18);margin-top:0.55rem;text-align:center;">Tap any bubble for full details · Sources: UAE MoD, IDF, Reuters, AP · ${new Date().toLocaleDateString('en-GB')}</div>
+				<div style="margin-top:1rem;">
+					<div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.07em;color:rgba(255,255,255,0.3);font-weight:600;margin-bottom:0.5rem;">🗺️ Attack Map</div>
+					<div id="iranMapContainer" style="width:100%;height:500px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);"></div>
+					<div style="font-size:0.62rem;color:rgba(255,255,255,0.2);margin-top:0.4rem;text-align:center;">🟢 Iran &nbsp;·&nbsp; 🔴 Attacked country &nbsp;·&nbsp; Click markers for details</div>
+				</div>
+			`;
+			requestAnimationFrame(() => {
+				const scroll = document.getElementById('iranChartScroll');
+				const inner  = document.getElementById('iranChartInner');
+				if (!scroll || !inner) return;
+				if (scroll.offsetWidth < 550) {
+					scroll.style.overflowX = 'auto';
+					scroll.style.webkitOverflowScrolling = 'touch';
+					scroll.style.touchAction = 'pan-x';
+					inner.style.minWidth = '550px';
+					inner.style.width = 'auto';
+				} else {
+					scroll.style.overflow = 'hidden';
+					inner.style.width = '100%';
+					inner.style.minWidth = '0';
+				}
+				initIranMap();
+			});
+		}
+let _iranMap = null;
+
+		function iranShowTab(tab) {
+			const tl  = document.getElementById('iranTabContentTimeline');
+			const mp  = document.getElementById('iranTabContentMap');
+			const btn1= document.getElementById('iranTabTimeline');
+			const btn2= document.getElementById('iranTabMap');
+			if (!tl||!mp) return;
+			if (tab==='map') {
+				tl.style.display  = 'none';
+				mp.style.display  = 'block';
+				btn1.style.cssText= 'flex:1;padding:0.4rem;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.4);';
+				btn2.style.cssText= 'flex:1;padding:0.4rem;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;border:1px solid #60a5fa;background:rgba(96,165,250,0.15);color:#60a5fa;';
+				initIranMap();
+			} else {
+				tl.style.display  = 'block';
+				mp.style.display  = 'none';
+				btn1.style.cssText= 'flex:1;padding:0.4rem;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;border:1px solid #60a5fa;background:rgba(96,165,250,0.15);color:#60a5fa;';
+				btn2.style.cssText= 'flex:1;padding:0.4rem;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.4);';
+			}
+		}
+
+		function initIranMap() {
+			// Load Leaflet JS dynamically if not yet loaded
+			if (!window.L) {
+				const script = document.createElement('script');
+				script.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+				script.onload = () => buildIranMap();
+				document.head.appendChild(script);
+			} else {
+				buildIranMap();
+			}
+		}
+
+function buildIranMap() {
+			const container = document.getElementById('iranMapContainer');
+			if (!container || !window.L) return;
+			if (_iranMap) { _iranMap.remove(); _iranMap = null; }
+
+			_iranMap = L.map(container, { center:[28,50], zoom:5, zoomControl:true, scrollWheelZoom:true });
+			L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+				attribution:'© OpenStreetMap © CARTO', subdomains:'abcd', maxZoom:10
+			}).addTo(_iranMap);
+
+			// Country ISO3 codes for GeoJSON fetch
+			const COUNTRY_ISO = {
+				'Iran':         'IRN',
+				'Israel':       'ISR',
+				'UAE':          'ARE',
+				'Saudi Arabia': 'SAU',
+				'Bahrain':      'BHR',
+				'Qatar':        'QAT',
+				'Kuwait':       'KWT',
+				'Jordan':       'JOR',
+				'Oman':         'OMN',
+				'Iraq':         'IRQ',
+				'Syria':        'SYR',
+				'Yemen':        'YEM',
+			};
+
+			// Country label centers
+			const COUNTRY_CENTERS = {
+				'Iran':         [32.5, 53.7],
+				'Israel':       [31.5, 35.0],
+				'UAE':          [24.2, 54.5],
+				'Saudi Arabia': [24.7, 46.7],
+				'Bahrain':      [26.1, 50.6],
+				'Qatar':        [25.3, 51.2],
+				'Kuwait':       [29.4, 47.6],
+				'Jordan':       [31.0, 36.5],
+				'Oman':         [21.5, 57.5],
+				'Iraq':         [33.0, 44.0],
+				'Syria':        [35.0, 38.0],
+				'Yemen':        [16.0, 48.0],
+			};
+
+			const TYPE_ICONS = { missiles:'🚀', drones:'✈️', cruise:'💥', rockets:'🎯' };
+			const TARGET_ICONS = {
+				'military base':'🪖','airport':'✈️','port':'⚓','hotel':'🏨',
+				'residential':'🏠','ship':'🚢','embassy':'🏛️','radar':'📡',
+				'data center':'💾','industrial':'🏭','capital city':'🏙️',
+				'radar station':'📡','ship (tanker)':'🛢️','airspace':'🌐',
+				'embassy/consulate':'🏛️','airbase':'✈️','air base':'✈️',
+				'power plant':'⚡','oil facility':'🛢️','nuclear site':'☢️',
+				'headquarters':'🏢','naval base':'⚓','troops':'🪖',
+			};
+			const getTargetIcon = t => TARGET_ICONS[t.toLowerCase()] || '🎯';
+
+			const FF_GREEN = '#39FF14';
+			const FF_RED   = '#FF3333';
+
+			// Load GeoJSON borders for Iran + all attacked countries
+			const countries   = _iranCountries || getIranBaseData();
+			const attackedSet = new Set(countries.map(c=>c.name));
+			const toLoad  = ['Iran', ...attackedSet].filter(n=>COUNTRY_ISO[n]);
+			const iranCenter = [32.5, 53.7];
+
+			// ISO2 codes for individual GeoJSON files
+			const COUNTRY_ISO2 = {
+				'Iran':'IR','Israel':'IL','UAE':'AE','Saudi Arabia':'SA',
+				'Bahrain':'BH','Qatar':'QA','Kuwait':'KW','Jordan':'JO',
+				'Oman':'OM','Iraq':'IQ','Syria':'SY','Yemen':'YE',
+			};
+
+			// English names Nominatim understands
+			const NOMINATIM_NAMES = {
+				'Iran':'Iran','Israel':'Israel','UAE':'United Arab Emirates',
+				'Saudi Arabia':'Saudi Arabia','Bahrain':'Bahrain','Qatar':'Qatar',
+				'Kuwait':'Kuwait','Jordan':'Jordan','Oman':'Oman',
+				'Iraq':'Iraq','Syria':'Syria','Yemen':'Yemen',
+			};
+
+			toLoad.forEach(name => {
+				const isIran  = name === 'Iran';
+				const color   = isIran ? FF_GREEN : FF_RED;
+				const qname   = encodeURIComponent(NOMINATIM_NAMES[name] || name);
+				fetch(`https://nominatim.openstreetmap.org/search?q=${qname}&polygon_geojson=1&format=json&limit=1&featuretype=country`, {
+					headers:{ 'Accept-Language':'en', 'User-Agent':'HamalWarMap/1.0' }
+				})
+				.then(r => r.json())
+				.then(results => {
+					const geo = results?.[0]?.geojson;
+					if (!geo) throw new Error('no geojson');
+					L.geoJSON(geo, {
+						style:{ color, weight:2.5, fillColor:color, fillOpacity:0.15 }
+					}).addTo(_iranMap)
+					  .bindPopup(`<b style="color:${color};">${name}</b>${isIran?' — Origin of attacks':' — Attacked by Iran'}`);
+				})
+				.catch(() => {
+					// Final fallback: use naturalearth via jsdelivr (cached CDN, fast)
+					fetch(`https://cdn.jsdelivr.net/gh/nvkelso/natural-earth-vector@master/geojson/ne_10m_admin_0_countries.geojson`)
+					.then(r=>r.json())
+					.then(world=>{
+						const ISO_MAP = {
+							'Iran':'IRN','Israel':'ISR','UAE':'ARE','Saudi Arabia':'SAU',
+							'Bahrain':'BHR','Qatar':'QAT','Kuwait':'KWT','Jordan':'JOR',
+							'Oman':'OMN','Iraq':'IRQ','Syria':'SYR','Yemen':'YEM',
+						};
+						const feat = world.features.find(f=>f.properties.ADM0_A3===ISO_MAP[name]);
+						if (!feat) return;
+						L.geoJSON(feat, {
+							style:{ color, weight:2.5, fillColor:color, fillOpacity:0.15 }
+						}).addTo(_iranMap)
+						  .bindPopup(`<b style="color:${color};">${name}</b>${isIran?' — Origin of attacks':' — Attacked by Iran'}`);
+					})
+					.catch(()=>{
+						// Absolute last resort: circle
+						const c = COUNTRY_CENTERS[name];
+						if (c) L.circle(c,{radius:200000,color,weight:2.5,fillColor:color,fillOpacity:0.15}).addTo(_iranMap);
+					});
+				});
+			});
+
+			// Iran label
+			L.marker(iranCenter, {
+				icon: L.divIcon({
+					className:'',
+					html:`<div style="color:${FF_GREEN};font-weight:900;font-size:0.8rem;text-shadow:0 0 6px ${FF_GREEN},0 0 12px #000;white-space:nowrap;">🇮🇷 IRAN</div>`,
+					iconAnchor:[20,10],
+				}), interactive:false,
+			}).addTo(_iranMap);
+
+			// Dashed attack lines + country labels + strike markers from live data
+			for (const country of countries) {
+				const center = COUNTRY_CENTERS[country.name];
+				if (!center) continue;
+
+				// Dashed line from Iran
+				L.polyline([iranCenter, center], {
+					color:FF_RED, weight:1, opacity:0.3, dashArray:'4 6'
+				}).addTo(_iranMap);
+
+				// Country label
+				L.marker(center, {
+					icon: L.divIcon({
+						className:'',
+						html:`<div style="color:${FF_RED};font-size:0.68rem;font-weight:900;text-shadow:0 0 4px #000,0 0 8px #000;white-space:nowrap;">${iranFlagImg(country.name)} ${country.name}</div>`,
+						iconAnchor:[30,8],
+					}), interactive:false,
+				}).addTo(_iranMap);
+
+				// Strike markers from live event data
+				for (const ev of (country.events||[])) {
+					const mainType   = (ev.types||[])[0] || 'missiles';
+					const mainTarget = ((ev.targets||[])[0]||'').toLowerCase();
+
+					const placeMarker = (coords, ev, country, mainType, mainTarget) => {
+						const icon    = TYPE_ICONS[mainType] || '💥';
+						const tIcon   = getTargetIcon(mainTarget);
+						const hasCas  = ev.cas && (ev.cas.k>0||ev.cas.i>0);
+						const countStr= Object.entries(ev.counts||{}).map(([k,v])=>`${v} ${k}`).join(', ');
+						const [dp,tp] = ev.ts.split('T');
+						const [y,m,d] = dp.split('-');
+						L.marker(coords, {
+							icon: L.divIcon({
+								className:'',
+								html:`<div style="font-size:1.3rem;filter:drop-shadow(0 0 5px rgba(0,0,0,0.95));cursor:pointer;background:none;border:none;box-shadow:none;">${icon}</div>`,
+								iconSize:[24,24], iconAnchor:[12,12], bgPos:[0,0],
+							}),
+						}).addTo(_iranMap).bindPopup(
+							`<div style="font-size:0.78rem;max-width:200px;line-height:1.6;">
+								<b style="color:${FF_RED};">${iranFlagImg(country.name)} ${country.name}</b><br>
+								<span style="color:#aaa;">${d}/${m}/${y} ${tp}</span><br>
+								${ev.location_name?`<span style="color:#fff;font-weight:600;">${ev.location_name}</span><br>`:''}
+								${icon} ${countStr}<br>
+								${tIcon} ${(ev.targets||[]).join(', ')}
+								${hasCas?`<br><span style="color:#f87171;">💀 ${ev.cas.k} killed &nbsp;🩸 ${ev.cas.i} injured</span>`:''}
+								<br><span style="color:#ccc;font-size:0.72rem;">${ev.detail||''}</span>
+							</div>`
+						);
+					};
+
+					if (ev.lat && ev.lng) {
+						// API returned coordinates — use them directly
+						placeMarker([ev.lat, ev.lng], ev, country, mainType, mainTarget);
+					} else {
+						// No coordinates — geocode the location name via Nominatim
+						const query = ev.location_name
+							? `${ev.location_name}, ${country.name}`
+							: `${(ev.targets||[]).join(' ')}, ${country.name}`;
+						fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`, {
+							headers:{ 'Accept-Language':'en', 'User-Agent':'HamalWarMap/1.0' }
+						})
+						.then(r=>r.json())
+						.then(results => {
+							if (results?.[0]?.lat) {
+								placeMarker([parseFloat(results[0].lat), parseFloat(results[0].lon)], ev, country, mainType, mainTarget);
+							} else if (center) {
+								// Last resort — jitter around country center
+								placeMarker([center[0]+(Math.random()-0.5)*1.2, center[1]+(Math.random()-0.5)*1.2], ev, country, mainType, mainTarget);
+							}
+						})
+						.catch(() => {
+							if (center) placeMarker([center[0]+(Math.random()-0.5)*1.2, center[1]+(Math.random()-0.5)*1.2], ev, country, mainType, mainTarget);
+						});
+						continue; // skip the old marker code below
+					}
+					if (!ev.lat || !ev.lng) continue;
+
+					
+				}
+			}
+
+			setTimeout(() => _iranMap.invalidateSize(), 150);
+		}
+
+		function iranTip(el, show) {
+			const tip = document.getElementById('iranBubbleTip');
+			if (!tip) return;
+			if (!show) { tip.style.display='none'; return; }
+			const parts = (el.dataset.tip||'').split('|');
+			const hasCas = parts[2] && !parts[2].includes('No casualties');
+			document.getElementById('iranTipR1').textContent = parts[0]||'';
+			document.getElementById('iranTipR2').innerHTML   = (parts[1]||'').split('\n').map(l=>`<div>${l}</div>`).join('');
+			const casText = parts[2]||'';
+			const tipR3 = document.getElementById('iranTipR3');
+			tipR3.style.display = casText ? 'block' : 'none';
+			tipR3.innerHTML = casText ? `<span style="color:#f87171;">${casText}</span>` : '';
+			document.getElementById('iranTipR4').textContent = parts[3]||'';
+			const rect = el.getBoundingClientRect();
+			const tw=220, th=100;
+			let left = rect.left + rect.width/2 - tw/2;
+			let top  = rect.top  - th - 8;
+			if (top < 60)                   top  = rect.bottom + 8;
+			if (left < 8)                   left = 8;
+			if (left+tw > window.innerWidth-8) left = window.innerWidth-tw-8;
+			tip.style.left    = left+'px';
+			tip.style.top     = top+'px';
+			tip.style.display = 'block';
+		}
+		// ── End Iran Attacks ──────────────────────────────────────────────────────
+		
 		// ── End Alert Analytics ───────────────────────────────────────────────────
 							 
 			
@@ -4455,15 +5545,15 @@
 			for (const [id, poster] of Object.entries(POSTERS)) {
 				const el = document.getElementById(id);
 				if (!el) continue;
-				el.setAttribute('poster', poster);
-				const overlay = el.closest('.video-container')?.querySelector('.play-overlay');
-				if (overlay) {
-					overlay.style.backgroundImage = `url('${poster}')`;
-					overlay.style.backgroundSize = 'contain';
-					overlay.style.backgroundRepeat = 'no-repeat';
-					overlay.style.backgroundPosition = 'center';
-					overlay.style.backgroundColor = 'rgba(0,0,0,0.55)';
-				}
+				const container = el.closest('.video-container');
+				if (!container) continue;
+				const header = container.querySelector('.video-header');
+				const headerH = header ? header.offsetHeight : 0;
+				const img = document.createElement('img');
+				img.src = poster;
+				img.style.cssText = `position:absolute;top:${headerH}px;left:0;width:100%;height:calc(100% - ${headerH}px);object-fit:fill;z-index:5;pointer-events:none;display:block;`;
+				container.appendChild(img);
+				el.addEventListener('play', () => { img.remove(); }, { once: true });
 			}
 		}
 	</script>
