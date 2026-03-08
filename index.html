@@ -427,7 +427,7 @@
 		}
 
 		.mobile-sidebar-header {
-			background: rgba(0, 0, 0, 0.9);
+			background: linear-gradient(135deg, rgba(10,10,30,0.97) 0%, rgba(79,70,229,0.4) 100%);
 			padding: 1.5rem;
 			display: flex;
 			justify-content: space-between;
@@ -1264,7 +1264,7 @@
 			</div>
 			<div class="stat-item">
 				<i class="fas fa-chart-line"></i>
-				<span>Bandwidth: <span class="stat-value" id="bandwidthUsage">0 Mbps</span></span>
+				<span>Bandwidth: ~ <span class="stat-value" id="bandwidthUsage">0 Mbps</span></span>
 			</div>
 		</div>
 	</div>
@@ -1272,7 +1272,68 @@
     <main class="main-content">
         <div class="grid-container grid-3xY" id="gridContainer">
             <!-- Arab Channels -->
+ 			
             <div class="video-container" data-region="arab">
+                <div class="video-header">
+                    <div class="video-title">Al Arabiya (Saudi)</div>
+                    <div class="country-badge badge-arab">Arab</div>
+                </div>
+                <video class="video-element" id="video4" muted preload="none" controls></video>
+                <div class="play-overlay" onclick="playVideo('video4', 'https://live.alarabiya.net/alarabiapublish/alarabiya.smil/playlist.m3u8')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="loading-indicator"><div class="spinner"></div></div>
+            </div>
+
+			<div class="video-container" data-region="arab">
+                <div class="video-header">
+                    <div class="video-title">Al Aqsa (Hamas)</div>
+                    <div class="country-badge badge-arab">Arab</div>
+                </div>
+                <video class="video-element" id="video2" muted preload="none" controls></video>
+				<div class="play-overlay" onclick="playVideo('video2', 'https://mn-nl.mncdn.com/palabroad/live/playlist.m3u8')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="loading-indicator"><div class="spinner"></div></div>
+            </div>
+
+            <div class="video-container" data-region="arab">
+                <div class="video-header">
+                    <div class="video-title">Al Hadath (Saudi)</div>
+                    <div class="country-badge badge-arab">Arab</div>
+                </div>
+                <video class="video-element" id="video7" muted preload="none" controls></video>
+                <div class="play-overlay" onclick="playVideo('video7', 'https://av.alarabiya.net/alarabiapublish/alhadath.smil/playlist.m3u8')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="loading-indicator"><div class="spinner"></div></div>
+            </div>
+
+            <div class="video-container" data-region="arab">
+                <div class="video-header">
+                    <div class="video-title">Al Jazeera (Muslim Brotherhood)</div>
+                    <div class="country-badge badge-arab">Arab</div>
+                </div>
+                <video class="video-element" id="video5" muted preload="none" controls></video>
+                <div class="play-overlay" onclick="playVideo('video5', 'https://live-hls-web-aja.getaj.net/AJA/index.m3u8')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="loading-indicator"><div class="spinner"></div></div>
+            </div>
+
+            <div class="video-container" data-region="arab">
+                <div class="video-header">
+                    <div class="video-title">Al Jazeera Mubasher (Muslim Brotherhood)</div>
+                    <div class="country-badge badge-arab">Arab</div>
+                </div>
+                <video class="video-element" id="video6" muted preload="none" controls></video>
+                <div class="play-overlay" onclick="playVideo('video6', 'https://live-hls-web-ajm.getaj.net/AJM/05.m3u8')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="loading-indicator"><div class="spinner"></div></div>
+            </div>
+			
+			<div class="video-container" data-region="arab">
                 <div class="video-header">
                     <div class="video-title">Al Manar (Hezbollah)</div>
                     <div class="country-badge badge-arab">Arab</div>
@@ -1287,16 +1348,16 @@
 
 			<div class="video-container" data-region="arab">
                 <div class="video-header">
-                    <div class="video-title">Al-Aqsa (Hamas)</div>
+                    <div class="video-title">Al Masirah (Houtis)</div>
                     <div class="country-badge badge-arab">Arab</div>
                 </div>
-                <video class="video-element" id="video2" muted preload="none" controls></video>
-				<div class="play-overlay" onclick="playVideo('video2', 'https://mn-nl.mncdn.com/palabroad/live/playlist.m3u8')">
+                <video class="video-element" id="video14" muted preload="none" controls></video>
+                <div class="play-overlay" onclick="playVideo('video14', 'https://live.cdnbridge.tv/Almasirah/Almasirah_all/Almasirah/Almasirah_360p/chunks.m3u8')">
                     <i class="fas fa-play"></i>
                 </div>
                 <div class="loading-indicator"><div class="spinner"></div></div>
             </div>
-			
+
 			<div class="video-container" data-region="arab">
                 <div class="video-header">
                     <div class="video-title">Al Mayadeen (Hezbollah/Iran)</div>
@@ -1305,18 +1366,6 @@
                 <video class="video-element" id="video3" muted preload="none" controls></video>
                 <!-- <div class="play-overlay" onclick="playVideo('video3', 'https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000_t64NDgwcA==.m3u8')"> -->
 				<div class="play-overlay" onclick="playVideo('video3', 'https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8')">
-                    <i class="fas fa-play"></i>
-                </div>
-                <div class="loading-indicator"><div class="spinner"></div></div>
-            </div>
-			
-            <div class="video-container" data-region="arab">
-                <div class="video-header">
-                    <div class="video-title">Al Arabiya (Saudi)</div>
-                    <div class="country-badge badge-arab">Arab</div>
-                </div>
-                <video class="video-element" id="video4" muted preload="none" controls></video>
-                <div class="play-overlay" onclick="playVideo('video4', 'https://live.alarabiya.net/alarabiapublish/alarabiya.smil/playlist.m3u8')">
                     <i class="fas fa-play"></i>
                 </div>
                 <div class="loading-indicator"><div class="spinner"></div></div>
@@ -1343,47 +1392,11 @@
 
             <div class="video-container" data-region="arab">
                 <div class="video-header">
-                    <div class="video-title">Al Jazeera (Muslim Brotherhood)</div>
+                    <div class="video-title">Jordan TV</div>
                     <div class="country-badge badge-arab">Arab</div>
                 </div>
-                <video class="video-element" id="video5" muted preload="none" controls></video>
-                <div class="play-overlay" onclick="playVideo('video5', 'https://live-hls-web-aja.getaj.net/AJA/index.m3u8')">
-                    <i class="fas fa-play"></i>
-                </div>
-                <div class="loading-indicator"><div class="spinner"></div></div>
-            </div>
-
-            <div class="video-container" data-region="arab">
-                <div class="video-header">
-                    <div class="video-title">Al Jazeera Mubasher (Muslim Brotherhood)</div>
-                    <div class="country-badge badge-arab">Arab</div>
-                </div>
-                <video class="video-element" id="video6" muted preload="none" controls></video>
-                <div class="play-overlay" onclick="playVideo('video6', 'https://live-hls-web-ajm.getaj.net/AJM/05.m3u8')">
-                    <i class="fas fa-play"></i>
-                </div>
-                <div class="loading-indicator"><div class="spinner"></div></div>
-            </div>
-
-            <div class="video-container" data-region="arab">
-                <div class="video-header">
-                    <div class="video-title">Al Hadath (Saudi)</div>
-                    <div class="country-badge badge-arab">Arab</div>
-                </div>
-                <video class="video-element" id="video7" muted preload="none" controls></video>
-                <div class="play-overlay" onclick="playVideo('video7', 'https://av.alarabiya.net/alarabiapublish/alhadath.smil/playlist.m3u8')">
-                    <i class="fas fa-play"></i>
-                </div>
-                <div class="loading-indicator"><div class="spinner"></div></div>
-            </div>
-
-            <div class="video-container" data-region="arab">
-                <div class="video-header">
-                    <div class="video-title">Palestine Today (Palestinian Islamic Jihad)</div>
-                    <div class="country-badge badge-arab">Arab</div>
-                </div>
-                <video class="video-element" id="video8" muted preload="none" controls></video>
-                <div class="play-overlay" onclick="playVideo('video8', 'https://live.paltodaytv.com/paltv/live/playlist.m3u8')">
+                <video class="video-element" id="video11" muted preload="none" controls></video>
+                <div class="play-overlay" onclick="playVideo('video11', 'https://jrtv-live.ercdn.net/jordanhd/jordanhd_1080p.m3u8')">
                     <i class="fas fa-play"></i>
                 </div>
                 <div class="loading-indicator"><div class="spinner"></div></div>
@@ -1415,23 +1428,11 @@
 
             <div class="video-container" data-region="arab">
                 <div class="video-header">
-                    <div class="video-title">Jordan TV</div>
+                    <div class="video-title">Palestine Today (Palestinian Islamic Jihad)</div>
                     <div class="country-badge badge-arab">Arab</div>
                 </div>
-                <video class="video-element" id="video11" muted preload="none" controls></video>
-                <div class="play-overlay" onclick="playVideo('video11', 'https://jrtv-live.ercdn.net/jordanhd/jordanhd_1080p.m3u8')">
-                    <i class="fas fa-play"></i>
-                </div>
-                <div class="loading-indicator"><div class="spinner"></div></div>
-            </div>
-
-            <div class="video-container" data-region="arab">
-                <div class="video-header">
-                    <div class="video-title">Voice of Lebanon</div>
-                    <div class="country-badge badge-arab">Arab</div>
-                </div>
-                <video class="video-element" id="video12" muted preload="none" controls></video>
-                <div class="play-overlay" onclick="playVideo('video12', 'https://svs.itworkscdn.net/vdltvlive/vdltv.smil/playlist.m3u8')">
+                <video class="video-element" id="video8" muted preload="none" controls></video>
+                <div class="play-overlay" onclick="playVideo('video8', 'https://live.paltodaytv.com/paltv/live/playlist.m3u8')">
                     <i class="fas fa-play"></i>
                 </div>
                 <div class="loading-indicator"><div class="spinner"></div></div>
@@ -1449,25 +1450,13 @@
                 <div class="loading-indicator"><div class="spinner"></div></div>
             </div>
 
-			<div class="video-container" data-region="arab">
+            <div class="video-container" data-region="arab">
                 <div class="video-header">
-                    <div class="video-title">Al Masirah (Houtis)</div>
+                    <div class="video-title">Voice of Lebanon</div>
                     <div class="country-badge badge-arab">Arab</div>
                 </div>
-                <video class="video-element" id="video14" muted preload="none" controls></video>
-                <div class="play-overlay" onclick="playVideo('video14', 'https://live.cdnbridge.tv/Almasirah/Almasirah_all/Almasirah/Almasirah_360p/chunks.m3u8')">
-                    <i class="fas fa-play"></i>
-                </div>
-                <div class="loading-indicator"><div class="spinner"></div></div>
-            </div>
-			
-			<div class="video-container" data-region="arab">
-                <div class="video-header">
-                    <div class="video-title">Al Quds (Hamas/PIJ ?)</div>
-                    <div class="country-badge badge-arab">Arab</div>
-                </div>
-                <video class="video-element" id="video15" muted preload="none" controls></video>
-                <div class="play-overlay" onclick="playVideo('video15', 'https://euc12.playlist.ttvnw.net/v1/playlist/CtAGPegWwpdFdIZ8h_Ur39lqcx-ZsE6wJQJK4NnnylNFvCfv7nQxvDDbRn9yWsNgGV3h5t0fvogAKm9eiZpILV2hnlD4UQ6nEHVEnkqQ71kE7RPckoaPnuwpKzYaDTJs9BYyND6-WQwV2soxTzbQXUrALotwf2ed4unYEwbLKpr4sRVo4gt3qZA9nU4IcGLhbbdUqNW33WuamSVM809h1wMFtNx7qK7-fOYa1MxLJAZLmdLLTqfk1-LY6Nj1zWgIzXE-B0f_28Q61WRkc_pudD7W8QFhjRKmkTGN5mfauwxvmVOeaUg3kpWriRxK7GMmGhSNWha9QSh6fumLGNfEkPDROBSi7IOiuFMx0QVy0zaHuxY1XOR2XfZgO1kt93HfumxEzjOrGwCK2J9oY7I5EUgS6FvyGxMEXrVxa4wu7FCPztv-gFhqO9jfoJnTO7mHDjCFuYONALMyTVXYogW9cTpdU2YQIHpjnR-wPiQeP0QSUkmQb90JaBiyTVX17QMVS7wQpbaBf7GwFs99kGA-Nhu0mPKuGq_Zx4cQuXGmOxF5ln1nM0-hP8eqbx4XKZ0no2mEUkh4IGylyH2CoG06PYO-fHbF6PuGtfAkBnNqB-Rzy_0rR2Tj21w6j0KyHuhrwEDGlRde-rVjFzbso14eHgoqIHwgNpjlYrVw-wHSjiZoIByIo9dTjxPQY51zo29J5pMa5MN6AiF_HLfu2baI0xKPfA9N3ianhUd5ALE6LGUJJyjfqSHhlEb7uiff5ZoIebvNk3szsomblo2x--4Cc_3oduhqjD8zYqbUmLKG2Z5HBm65rJFb9JO502a9P3aZK1F9FXwsktsqylaGi__so33IvUukqTEatT-hyY4BoQhaeEE31wb2Q43x8SoXbe0PWlkuhZogQU8RnyNEk1O3ruGd7LuFGSYskCFml5CBrvCck2d-Zg7amV0zgv2f7g8KK_mhdEIcFCZ3yP5XnAFmhXxlIm4srZSw93m3FUzt4uKZmlSG-1UM1qGZVTB1LhPzKACaCq8VT0gbtDYGPnUQwv9ECGce10-p56ew6IDp3AkY8ts3E3MqfsIWYpys42W2U90AOu-TptX6LWfUy-OlyhZYYoYbGZWdVXhpM4GMGNSDlp8aDPNgmxtIWMG_ec_52yABKglldS13ZXN0LTIwxw4.m3u8')">
+                <video class="video-element" id="video12" muted preload="none" controls></video>
+                <div class="play-overlay" onclick="playVideo('video12', 'https://svs.itworkscdn.net/vdltvlive/vdltv.smil/playlist.m3u8')">
                     <i class="fas fa-play"></i>
                 </div>
                 <div class="loading-indicator"><div class="spinner"></div></div>
@@ -1542,6 +1531,31 @@
             <!-- USA Channels -->
             <div class="video-container" data-region="usa">
                 <div class="video-header">
+                    <div class="video-title">ABC News</div>
+                    <div class="country-badge badge-usa">USA</div>
+                </div>
+                <video class="video-element" id="video25" muted preload="none" controls></video>
+                <!-- <div class="play-overlay" onclick="playVideo('video25', 'https://lnc-abc-news.tubi.video/index.m3u8')"> -->
+                <div class="play-overlay" onclick="playVideo('video25', 'https://live-manifest.production-public.tubi.io/live/14e4f5f2-9787-4c49-8554-f2ad109764a7/playlist.m3u8')">
+					<i class="fas fa-play"></i>
+                </div>
+                <div class="loading-indicator"><div class="spinner"></div></div>
+            </div>
+
+            <div class="video-container" data-region="usa">
+                <div class="video-header">
+                    <div class="video-title">CBS News</div>
+                    <div class="country-badge badge-usa">USA</div>
+                </div>
+                <video class="video-element" id="video26" muted preload="none" controls></video>
+                <div class="play-overlay" onclick="playVideo('video26', 'https://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8648e8f134e82a470f83d562deeca/master.m3u8')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="loading-indicator"><div class="spinner"></div></div>
+            </div>
+
+			<div class="video-container" data-region="usa">
+                <div class="video-header">
                     <div class="video-title">CNN</div>
                     <div class="country-badge badge-usa">USA</div>
                 </div>
@@ -1594,30 +1608,6 @@
                 <div class="loading-indicator"><div class="spinner"></div></div>
             </div>
 
-            <div class="video-container" data-region="usa">
-                <div class="video-header">
-                    <div class="video-title">ABC News</div>
-                    <div class="country-badge badge-usa">USA</div>
-                </div>
-                <video class="video-element" id="video25" muted preload="none" controls></video>
-                <!-- <div class="play-overlay" onclick="playVideo('video25', 'https://lnc-abc-news.tubi.video/index.m3u8')"> -->
-                <div class="play-overlay" onclick="playVideo('video25', 'https://live-manifest.production-public.tubi.io/live/14e4f5f2-9787-4c49-8554-f2ad109764a7/playlist.m3u8')">
-					<i class="fas fa-play"></i>
-                </div>
-                <div class="loading-indicator"><div class="spinner"></div></div>
-            </div>
-
-            <div class="video-container" data-region="usa">
-                <div class="video-header">
-                    <div class="video-title">CBS News</div>
-                    <div class="country-badge badge-usa">USA</div>
-                </div>
-                <video class="video-element" id="video26" muted preload="none" controls></video>
-                <div class="play-overlay" onclick="playVideo('video26', 'https://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8648e8f134e82a470f83d562deeca/master.m3u8')">
-                    <i class="fas fa-play"></i>
-                </div>
-                <div class="loading-indicator"><div class="spinner"></div></div>
-            </div>
 
             <div class="video-container" data-region="usa">
                 <div class="video-header">
@@ -1721,18 +1711,6 @@
 
             <div class="video-container" data-region="world">
                 <div class="video-header">
-                    <div class="video-title">Sky News (UK)</div>
-                    <div class="country-badge badge-world">World</div>
-                </div>
-                <video class="video-element" id="video32" muted preload="none" controls></video>
-                <div class="play-overlay" onclick="playVideo('video32', 'https://linear417-gb-hls3-prd-ak.cdn.skycdp.com/100e/Content/HLS_004_1080_30/Live/channel(skynews)/index_1080.m3u8')">
-                    <i class="fas fa-play"></i>
-                </div>
-                <div class="loading-indicator"><div class="spinner"></div></div>
-            </div>
-
-            <div class="video-container" data-region="world">
-                <div class="video-header">
                     <div class="video-title">Global News (Canada)</div>
                     <div class="country-badge badge-world">World</div>
                 </div>
@@ -1750,6 +1728,18 @@
                 </div>
                 <video class="video-element" id="video34" muted preload="none" controls></video>
                 <div class="play-overlay" onclick="playVideo('video34', 'https://rt-glb.rttv.com/live/rtnews/playlist.m3u8')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="loading-indicator"><div class="spinner"></div></div>
+            </div>
+			
+            <div class="video-container" data-region="world">
+                <div class="video-header">
+                    <div class="video-title">Sky News (UK)</div>
+                    <div class="country-badge badge-world">World</div>
+                </div>
+                <video class="video-element" id="video32" muted preload="none" controls></video>
+                <div class="play-overlay" onclick="playVideo('video32', 'https://linear417-gb-hls3-prd-ak.cdn.skycdp.com/100e/Content/HLS_004_1080_30/Live/channel(skynews)/index_1080.m3u8')">
                     <i class="fas fa-play"></i>
                 </div>
                 <div class="loading-indicator"><div class="spinner"></div></div>
@@ -2749,10 +2739,6 @@
 					<i class="fas fa-chevron-down"></i>
 				</button>
 				<div class="custom-dropdown-list" id="warMapsDropdown-list">
-					<div class="custom-dropdown-item disabled">Alerts</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://www.tzevaadom.co.il/', 'warMapsDropdown')">🚨 Tzofar - Tzeva Adom</div>
-					<div class="custom-dropdown-item" onclick="openUrl('https://www.oref.org.il/heb', 'warMapsDropdown')">🚨 Pikud Ha-oref</div>
-					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">Israel war 2026</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://e.infogram.com/66fd30d8-aac7-47e3-be4f-62fe8dc46bf2?parent_url=https%3A%2F%2Fwww.mako.co.il%2Fnews-specials%2Fdata_n12%2FArticle-42dc9c9ee73ac91026.htm&src=embed#async_embed', 'warMapsDropdown')">🎯 Iran Strikes (Israel & US)</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://e.infogram.com/9558c27e-2622-4277-98d1-6b5623d78ac8?parent_url=https%3A%2F%2Fwww.mako.co.il%2Fnews-military%2FIsrael_iran_war%2FArticle-f841a61b945ac91027.htm&amp;src=embed#async_embed', 'warMapsDropdown')">🎯 Alarms by city</div>
@@ -2799,6 +2785,10 @@
 					<i class="fas fa-chevron-down"></i>
 				</button>
 				<div class="custom-dropdown-list" id="newsSitesDropdown-list">
+					<div class="custom-dropdown-item disabled">🚨 Alerts 🚨</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://www.tzevaadom.co.il/', 'warMapsDropdown')">Tzofar - Tzeva Adom</div>
+					<div class="custom-dropdown-item" onclick="openUrl('https://www.oref.org.il/heb', 'warMapsDropdown')">Pikud Ha-oref</div>
+					<div class="custom-dropdown-item separator"></div>
 					<div class="custom-dropdown-item disabled">🇮🇱 Israeli</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://www.0404.co.il/', 'newsSitesDropdown')">0404</div>
 					<div class="custom-dropdown-item" onclick="openUrl('https://www.calcalist.co.il', 'newsSitesDropdown')">Calcalist</div>
@@ -2991,11 +2981,6 @@
 				</div>
 			</div>
         </div>
-		<div class="mobile-tool-section" style="margin-top: -1.5rem;">
-			<button class="ai-sum-btn" onclick="openAiSum(); closeMobileMenu();">
-				<i class="fas fa-robot"></i> AI Summary
-			</button>
-		</div>
 
         <div class="mobile-tool-section">
             <h4><i class="fas fa-search"></i> Search Location</h4>
@@ -3006,21 +2991,27 @@
 					<i class="fas fa-search"></i>
 				</button>
 			</div>
+			
+			<div style="margin-top:1.25rem;margin-bottom:1.25rem;border-top:1px solid rgba(255,255,255,0.08);"></div>
+
+			<button onclick="openAiSum(); closeMobileMenu();" style="width:100%;padding:0.75rem;background:rgba(96,165,250,0.12);border:1px solid rgba(96,165,250,0.35);border-radius:8px;color:#60a5fa;;font-size:0.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+				<i class="fas fa-robot"></i> AI News Summary
+			</button>
+
 			<button onclick="openAlertAnalytics(); closeMobileMenu();" style="margin-top:0.75rem;width:100%;padding:0.75rem;background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.4);border-radius:8px;color:#f87171;font-size:0.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
 				<i class="fas fa-rocket"></i> Israel Alert Analytics
 			</button>
+			
 			<button onclick="openIranAttacks(); closeMobileMenu();" style="margin-top:0.5rem;width:100%;padding:0.75rem;background:rgba(251,146,60,0.12);border:1px solid rgba(251,146,60,0.35);border-radius:8px;color:#fb923c;font-size:0.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
 				<i class="fas fa-globe"></i> Iran's Attacks Since 28/2/2026
 			</button>
-			<button onclick="openIranArsenal(); closeMobileMenu();" style="margin-top:0.5rem;width:100%;padding:0.75rem;background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.35);border-radius:8px;color:#a78bfa;font-size:0.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-				<i class="fas fa-bomb"></i> Iran's Arsenal vs Israel
-			</button>
-			<button onclick="openHezbollahArsenal(); closeMobileMenu();" style="margin-top:0.5rem;width:100%;padding:0.75rem;background:rgba(34,197,94,0.10);border:1px solid rgba(34,197,94,0.3);border-radius:8px;color:#4ade80;font-size:0.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-				<i class="fas fa-bomb"></i> Hezbollah's Arsenal vs Israel
-			</button>
-			<button onclick="openHamasArsenal(); closeMobileMenu();" style="margin-top:0.5rem;width:100%;padding:0.75rem;background:rgba(234,179,8,0.10);border:1px solid rgba(234,179,8,0.3);border-radius:8px;color:#facc15;font-size:0.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-				<i class="fas fa-bomb"></i> Hamas's Arsenal vs Israel
-			</button>																																																																																									
+			
+			<div style="margin-top:1.25rem;margin-bottom:1.25rem;border-top:1px solid rgba(255,255,255,0.08);"></div>
+
+			<button onclick="openArsenal('iran'); closeMobileMenu();" style="margin-top:0.5rem;width:100%;padding:0.75rem;background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.35);border-radius:8px;color:#a78bfa;font-size:0.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+				<i class="fas fa-bomb"></i> Main Arsenal vs Israel
+			</button>	
+			
 		</div>
     </div>
 </div>
@@ -3073,45 +3064,23 @@
 		</div>
 	</div>
 
-<!-- Hezbollah Arsenal Overlay -->
-	<div class="ai-sum-overlay" id="hezbollahArsenalOverlay">
-		<div class="ai-sum-panel">
-			<div class="ai-sum-header">
-				<div class="ai-sum-title">
-					<i class="fas fa-bomb" style="color:#4ade80;"></i>
-					<span style="background:linear-gradient(135deg,#4ade80,#facc15);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Hezbollah's Arsenal vs Israel</span>
-				</div>
-				<button class="ai-sum-close" onclick="closeHezbollahArsenal()">&#215;</button>
-			</div>
-			<div id="hezbollahArsenalContent" style="padding:1.5rem;"></div>
-		</div>
-	</div>
-
-	<!-- Hamas Arsenal Overlay -->
-	<div class="ai-sum-overlay" id="hamasArsenalOverlay">
-		<div class="ai-sum-panel">
-			<div class="ai-sum-header">
-				<div class="ai-sum-title">
-					<i class="fas fa-bomb" style="color:#facc15;"></i>
-					<span style="background:linear-gradient(135deg,#facc15,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Hamas's Arsenal vs Israel</span>
-				</div>
-				<button class="ai-sum-close" onclick="closeHamasArsenal()">&#215;</button>
-			</div>
-			<div id="hamasArsenalContent" style="padding:1.5rem;"></div>
-		</div>
-	</div>
-
-	<!-- Iran Arsenal Overlay -->
-	<div class="ai-sum-overlay" id="iranArsenalOverlay">
+<!-- Combined Arsenal Overlay -->
+	<div class="ai-sum-overlay" id="arsenalOverlay">
 		<div class="ai-sum-panel">
 			<div class="ai-sum-header">
 				<div class="ai-sum-title">
 					<i class="fas fa-bomb" style="color:#a78bfa;"></i>
-					<span style="background:linear-gradient(135deg,#a78bfa,#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Iran's Arsenal That Can Reach Israel</span>
+					<span style="background:linear-gradient(135deg,#a78bfa,#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Main Arsenal vs Israel (up to 3/2026)</span>
 				</div>
-				<button class="ai-sum-close" onclick="closeIranArsenal()">&#215;</button>
+				<button class="ai-sum-close" onclick="closeArsenal()">&#215;</button>
+			</div>
+			<!-- Tabs -->
+			<div style="display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.08);padding:0 1.5rem;">
+				<button id="arsenalTabIran" onclick="switchArsenalTab('iran')" style="padding:0.6rem 1.2rem;background:none;border:none;border-bottom:2px solid #a78bfa;color:#a78bfa;font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:0.4rem;"><img src="flags/ir.png" style="width:20px;height:14px;border-radius:2px;object-fit:cover;"> Iran</button>
+				<button id="arsenalTabHizbollah" onclick="switchArsenalTab('hizbollah')" style="padding:0.6rem 1.2rem;background:none;border:none;border-bottom:2px solid transparent;color:rgba(255,255,255,0.35);font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:0.4rem;"><img src="flags/Hezbollah.png" style="width:20px;height:14px;border-radius:2px;object-fit:cover;"> Hezbollah</button>
 			</div>
 			<div id="iranArsenalContent" style="padding:1.5rem;overflow:visible;"></div>
+			<div id="hezbollahArsenalContent" style="padding:1.5rem;display:none;"></div>
 		</div>
 	</div>
 	
@@ -3981,6 +3950,77 @@
 			const scoreC=rawScore>=7?'#f87171':rawScore>=4?'#fb923c':rawScore>=2?'#fbbf24':'#34d399';
 			const scoreLbl=rawScore>=7?'CRITICAL':rawScore>=4?'HIGH':rawScore>=2?'MODERATE':rawScore>0?'LOW':'NONE';
 
+			// ── Dashboards ────────────────────────────────────────────────────────────
+			const _IL_OFF = 7200; // UTC+2 (Israel Standard Time; change to 10800 for DST / UTC+3)
+			const _todS2 = Math.floor((now + _IL_OFF) / 86400) * 86400 - _IL_OFF;			const SINCE_328 = 1743120000; // 28 Mar 2026 00:00 UTC
+			const SINCE_228 = 1740700800; // 28 Feb 2026 00:00 UTC
+			const DIST_COLS = {'North':'#fb923c','Center':'#60a5fa','South (Gaza)':'#f87171','Jerusalem':'#a78bfa','West Bank':'#e879f9','Other':'#94a3b8'};
+
+			const _arc = (segs, total, cx, cy, r, centerLbl) => {
+				if (!total) return `<text x="${cx}" y="${cy+4}" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="8">No data</text>`;
+				const circ=2*Math.PI*r; let off=0, out='';
+				for (const s of segs) { const dash=(s.v/total)*circ; out+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.c}" stroke-width="11" stroke-dasharray="${dash.toFixed(1)} ${(circ-dash).toFixed(1)}" stroke-dashoffset="${(-off).toFixed(1)}" transform="rotate(-90 ${cx} ${cy})" opacity="0.85"/>`; off+=dash; }
+				return out+`<text x="${cx}" y="${cy-3}" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9" font-weight="700">${total}</text><text x="${cx}" y="${cy+9}" text-anchor="middle" fill="rgba(255,255,255,0.32)" font-size="7">${centerLbl}</text>`;
+			};
+			const _legend = (segs, total) => segs.length ? segs.map(s=>`<div style="display:flex;align-items:center;gap:4px;margin-bottom:3px;"><div style="width:7px;height:7px;border-radius:50%;background:${s.c};flex-shrink:0;"></div><span style="font-size:0.6rem;color:rgba(255,255,255,0.55);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.lbl}</span><span style="font-size:0.6rem;color:rgba(255,255,255,0.3);">${total?Math.round(s.v/total*100):'0'}%</span></div>`).join('') : '<span style="font-size:0.6rem;color:rgba(255,255,255,0.25);">No data</span>';
+			const _dCard = (title, inner) => `<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:0.85rem;display:flex;flex-direction:column;gap:0.4rem;min-width:0;overflow:hidden;"><div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:0.07em;color:rgba(255,255,255,0.35);font-weight:600;margin-bottom:0.2rem;">${title}</div>${inner}</div>`;
+
+			// Row 1 – Chart 1: daily events past 7 days (line + markers)
+			const _wkL=[], _wkC=[];
+			for(let i=6;i>=0;i--){const ds=_todS2-i*86400,de=ds+86400;const cnt=ndEvents.filter(ev=>{const t=Math.min(...ev.alerts.map(a=>a.time));return t>=ds&&t<de;}).length;const d=new Date(ds*1000);_wkL.push((d.getMonth()+1)+'/'+(d.getDate()));_wkC.push(cnt);}
+			const _wkMax=Math.max(..._wkC,1),_svgW=230,_svgH=68,_svgPad=10;
+			const _xs=_wkC.map((_,i)=>_svgPad+i*(_svgW-_svgPad*2)/6);
+			const _ys=_wkC.map(v=>_svgH-4-(v/_wkMax)*(_svgH-16));
+			let _lineSvg=`<line x1="${_svgPad}" y1="${_svgH-4}" x2="${_svgW-_svgPad}" y2="${_svgH-4}" stroke="rgba(255,255,255,0.06)" stroke-width="1"/><polyline points="${_xs.map((x,i)=>x+','+_ys[i]).join(' ')}" fill="none" stroke="rgba(96,165,250,0.5)" stroke-width="1.5" stroke-linejoin="round"/>`;
+			_xs.forEach((x,i)=>{_lineSvg+=`<circle cx="${x}" cy="${_ys[i]}" r="3.5" fill="#60a5fa" opacity="0.9"/>`;if(_wkC[i]>0)_lineSvg+=`<text x="${x}" y="${_ys[i]-7}" text-anchor="middle" fill="#60a5fa" font-size="8" font-weight="700">${_wkC[i]}</text>`;_lineSvg+=`<text x="${x}" y="${_svgH+6}" text-anchor="middle" fill="rgba(255,255,255,0.28)" font-size="7">${_wkL[i]}</text>`;});
+
+			// Row 1 – Chart 2: total attacks by type since 28/3/2026 (column)
+			const _stC={};
+			for(const a of ndAlerts){if(a.time>=SINCE_328){const t=parseInt(a.threat);_stC[t]=(_stC[t]||0)+1;}}
+			const _stE=Object.entries(_stC).sort((a,b)=>b[1]-a[1]);
+			const _stMax=Math.max(..._stE.map(([,v])=>v),1),_stN=_stE.length||1,_stBW=Math.min(26,Math.floor(210/_stN*0.7));
+			let _stSvg='';
+			_stE.forEach(([t,v],i)=>{const x=10+i*(210/_stN);const bH=Math.round((v/_stMax)*58);const c=AA_THREAT_COLORS[parseInt(t)]||'#94a3b8';const lbl=(AA_THREAT_LABELS[parseInt(t)]||'Other').split('/')[0].trim().substring(0,8);_stSvg+=`<rect x="${x}" y="${62-bH}" width="${_stBW}" height="${Math.max(bH,2)}" fill="${c}" rx="2" opacity="0.85"/><text x="${x+_stBW/2}" y="${Math.max(62-bH-3,5)}" text-anchor="middle" fill="${c}" font-size="8">${v}</text><text x="${x+_stBW/2}" y="76" text-anchor="middle" fill="rgba(255,255,255,0.32)" font-size="7">${lbl}</text>`;});
+			if(!_stE.length)_stSvg=`<text x="110" y="42" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="9">No data since 28/3</text>`;
+
+			// Row 1 – Chart 3: today's waves by type (donut)
+			const _tdTC={};
+			for(const a of ndAlerts){if(a.time>=_todS2){const t=parseInt(a.threat);_tdTC[t]=(_tdTC[t]||0)+1;}}
+			const _tdTSegs=Object.entries(_tdTC).map(([t,v])=>({v,c:AA_THREAT_COLORS[parseInt(t)]||'#94a3b8',lbl:(AA_THREAT_LABELS[parseInt(t)]||'Other').split('/')[0].trim()}));
+			const _tdTTot=_tdTSegs.reduce((s,x)=>s+x.v,0);
+
+			// Row 2 – Chart 4: today's waves by district (donut)
+			const _tdDC={};
+			for(const a of ndAlerts){if(a.time>=_todS2)for(const c of(a.cities||[])){const r=AA_getRegion(c).r;_tdDC[r]=(_tdDC[r]||0)+1;}}
+			const _tdDSegs=Object.entries(_tdDC).map(([r,v])=>({v,c:DIST_COLS[r]||'#94a3b8',lbl:r}));
+			const _tdDTot=_tdDSegs.reduce((s,x)=>s+x.v,0);
+
+			// Row 2 – Chart 5: attack waves by hour today (column)
+			const _hrC=Array(24).fill(0);
+			for(const a of ndAlerts){if(a.time>=_todS2){const h=new Date(a.time*1000).getHours();_hrC[h]++;}}
+			const _hrMax=Math.max(..._hrC,1),_hrW=Math.floor(228/24);
+			let _hrSvg='';
+			_hrC.forEach((v,h)=>{const bH=Math.round((v/_hrMax)*60);const isN=h<6||h>=22;const c=v===0?'rgba(255,255,255,0.05)':isN?'#a78bfa':'#f87171';_hrSvg+=`<rect x="${h*(_hrW+1)}" y="${62-bH}" width="${_hrW}" height="${Math.max(bH,v>0?2:0)}" fill="${c}" rx="1" opacity="0.85"/>`;if(v>0&&bH>8)_hrSvg+=`<text x="${h*(_hrW+1)+_hrW/2}" y="${62-bH-2}" text-anchor="middle" fill="${c}" font-size="6">${v}</text>`;if(h%6===0)_hrSvg+=`<text x="${h*(_hrW+1)+_hrW/2}" y="76" text-anchor="middle" fill="rgba(255,255,255,0.28)" font-size="7">${h}:00</text>`;});
+
+			// Row 2 – Chart 6: total waves since 28/2/2026 by district (donut)
+			const _sDistC={};
+			for(const a of ndAlerts){if(a.time>=SINCE_228)for(const c of(a.cities||[])){const r=AA_getRegion(c).r;_sDistC[r]=(_sDistC[r]||0)+1;}}
+			const _sDistSegs=Object.entries(_sDistC).map(([r,v])=>({v,c:DIST_COLS[r]||'#94a3b8',lbl:r}));
+			const _sDistTot=_sDistSegs.reduce((s,x)=>s+x.v,0);
+
+			// ─ Render ─
+			html+=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
+				${_dCard('Daily Attacks — Past Week',`<svg viewBox="0 0 ${_svgW} ${_svgH+10}" style="width:100%;overflow:visible;">${_lineSvg}</svg>`)}
+				${_dCard('Total Attacks by Type — Since 28/3/2026',`<svg viewBox="0 0 230 82" style="width:100%;overflow:visible;">${_stSvg}</svg>`)}
+				${_dCard("Today's Waves by Type",`<div style="display:flex;align-items:center;gap:0.5rem;"><svg viewBox="0 0 90 90" style="width:86px;height:86px;flex-shrink:0;"><circle cx="45" cy="45" r="32" fill="rgba(255,255,255,0.03)"/>${_arc(_tdTSegs,_tdTTot,45,45,32,'waves')}</svg><div style="flex:1;overflow:hidden;">${_legend(_tdTSegs,_tdTTot)}</div></div>`)}
+			</div>
+			<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin-top:0.75rem;">
+				${_dCard("Today's Waves by District",`<div style="display:flex;align-items:center;gap:0.5rem;"><svg viewBox="0 0 90 90" style="width:86px;height:86px;flex-shrink:0;"><circle cx="45" cy="45" r="32" fill="rgba(255,255,255,0.03)"/>${_arc(_tdDSegs,_tdDTot,45,45,32,'areas')}</svg><div style="flex:1;overflow:hidden;">${_legend(_tdDSegs,_tdDTot)}</div></div>`)}
+				${_dCard('Attack Waves by Hour — Today',`<svg viewBox="0 0 230 82" style="width:100%;overflow:visible;">${_hrSvg}</svg><div style="display:flex;gap:1rem;margin-top:0.25rem;"><span style="font-size:0.6rem;color:rgba(248,113,113,0.7);">▮ Day</span><span style="font-size:0.6rem;color:rgba(139,92,246,0.7);">▮ Night (22–06)</span></div>`)}
+				${_dCard('Total Waves by District — Since 28/2/2026',`<div style="display:flex;align-items:center;gap:0.5rem;"><svg viewBox="0 0 90 90" style="width:86px;height:86px;flex-shrink:0;"><circle cx="45" cy="45" r="32" fill="rgba(255,255,255,0.03)"/>${_arc(_sDistSegs,_sDistTot,45,45,32,'waves')}</svg><div style="flex:1;overflow:hidden;">${_legend(_sDistSegs,_sDistTot)}</div></div>`)}
+			</div>`;
+			// ── End Dashboards ─────────────────────────────────────────────────────────
+
 			// Status
 			const minAgo=latestTime?Math.round((now-latestTime)/60):null;
 			const timeStr=minAgo===null?'—':minAgo<2?'🔴 Just now':minAgo<60?`🟠 ${minAgo}m ago`:minAgo<1440?`🟡 ${Math.round(minAgo/60)}h ago`:`🟢 ${Math.round(minAgo/1440)}d ago`;
@@ -4483,127 +4523,101 @@
 			{
 				category: 'Long-Range Ballistic Missiles',
 				items: [
-					{ name:'Scud-D',        wiki:'Scud missile',          range_km:700, payload_kg:985, accuracy:'~450m CEP', status:'Operational', used_against_israel:false, notes:'Soviet-origin ballistic missile. Can reach all of Israel including Tel Aviv and Dimona. Most feared long-range asset.' },
-					{ name:'Scud-C',        wiki:'Scud missile',          range_km:500, payload_kg:770, accuracy:'~700m CEP', status:'Operational', used_against_israel:false, notes:'Extended range Scud variant transferred via Syria. Capable of hitting deep into Israel.' },
-					{ name:'Zelzal-2',      wiki:'Zelzal-2',         range_km:210, payload_kg:600, accuracy:'unguided',  status:'Operational', used_against_israel:false, notes:'Iranian-supplied heavy unguided rocket. 600kg warhead can cause massive damage in dense areas.' },
-					{ name:'Fateh-110',     wiki:'Fateh-110',             range_km:300, payload_kg:500, accuracy:'~10m CEP',  status:'Operational', used_against_israel:true,  notes:'Precision-guided Iranian ballistic missile. First used by Hezbollah in November 2024. Can precisely target military bases anywhere in Israel.' },
-					{ name:'Qadr-1',        wiki:'Fateh-110',             range_km:190, payload_kg:500, accuracy:'~50m CEP',  status:'Operational', used_against_israel:true,  notes:'Iranian Fateh-100 early variant. 500kg warhead used in 2024 war against Israeli positions.' },
-					{ name:'Qadr-2',        wiki:'Zelzal rocket',         range_km:250, payload_kg:405, accuracy:'~30m CEP',  status:'Operational', used_against_israel:true,  notes:'Zelzal-2 retrofitted with precision guidance kit. Used in 2024 against Israeli targets including Haifa area.' },
+					{ name:'Scud-D',        wiki:'Scud missile',          range_km:700, payload_kg:985, accuracy:'INS ~450m CEP', status:'Operational', used_against_israel:false, notes:'Soviet-origin ballistic missile. Can reach all of Israel including Tel Aviv and Dimona. Most feared long-range asset.' },
+					{ name:'Scud-C',        wiki:'Scud missile',          range_km:500, payload_kg:770, accuracy:'INS ~700m CEP', status:'Operational', used_against_israel:false, notes:'Extended range Scud variant transferred via Syria. Capable of hitting deep into Israel.' },
+					{ name:'Zelzal-2',      wiki:'Zelzal-2',         range_km:210, payload_kg:600, accuracy:'UNguided',  status:'Operational', used_against_israel:false, notes:'Iranian-supplied heavy unguided rocket. 600kg warhead can cause massive damage in dense areas.' },
+					{ name:'Fateh-110',     wiki:'Fateh-110',             range_km:300, payload_kg:500, accuracy:'GPS/INS ~10m CEP',  status:'Operational', used_against_israel:true,  notes:'Precision-guided Iranian ballistic missile. First used by Hezbollah in November 2024. Can precisely target military bases anywhere in Israel.' },
+					{ name:'Qadr-1 (early Fateh-110)',        wiki:'Fateh-110',             range_km:190, payload_kg:500, accuracy:'INS ~50m CEP',  status:'Operational', used_against_israel:true,  notes:'Iranian Fateh-100 early variant. 500kg warhead used in 2024 war against Israeli positions.' },
+					{ name:'Qadr-2 (Guided Zelzal-2)',        wiki:'Zelzal-1',         range_km:250, payload_kg:405, accuracy:'INS+precision guidance kit ~30m CEP',  status:'Operational', used_against_israel:true,  notes:'Zelzal-2 retrofitted with precision guidance kit. Used in 2024 against Israeli targets including Haifa area.' },
 				]
 			},
 			{
 				category: 'Medium-Range Rockets',
 				items: [
-					{ name:'Nasr-2',        wiki:'Nasr (rocket)',         range_km:150, payload_kg:140, accuracy:'guided',    status:'Operational', used_against_israel:true,  notes:'Precision-guided 302mm rocket. First used October 2024. Can reach Tel Aviv from southern Lebanon.' },
-					{ name:'Fadi-6',        wiki:'',          range_km:225, payload_kg:140, accuracy:'~200m CEP', status:'Operational', used_against_israel:true,  notes:'302mm rocket with guidance kit. First used November 2024. Range covers all of northern and central Israel.' },
-					{ name:'Nasr-1',        wiki:'Nasr-1',          range_km:100, payload_kg:100, accuracy:'guided',    status:'Operational', used_against_israel:true,  notes:'M-302 retrofitted with guidance system. Used extensively in 2024. Reached Haifa and Krayot.' },
-					{ name:'Fadi-2',        wiki:'',          range_km:100, payload_kg:170, accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'302mm unguided rocket, Syrian-origin M-302. Used heavily in 2024 conflict against Haifa metro area.' },
-					{ name:'Fadi-1',        wiki:'Fajr-3 rocket',         range_km:70,  payload_kg:83,  accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'220mm unguided rocket. First used in the 2024 war, targeting Jezreel Valley and Krayot suburbs of Haifa.' },
-					{ name:'Fajr-5',        wiki:'Fajr-5',                range_km:75,  payload_kg:90,  accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Iranian-supplied 333mm rocket. Puts Tel Aviv in range from Lebanon. Used in 2006 and subsequent conflicts.' },
-					{ name:'Khaibar-1 (M-302)', wiki:'Khaibar-1',      range_km:100, payload_kg:144, accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Syrian-made Chinese-designed rocket. Can target Tel Aviv. Puts ~3.5 million Israelis within range.' },
+					{ name:'Nasr-2 (Guided M-302)',        wiki:'',         range_km:150, payload_kg:140, accuracy:'GPS guidance kit',    status:'Operational', used_against_israel:true,  notes:'Precision-guided 302mm rocket. First used October 2024. Can reach Tel Aviv from southern Lebanon.' },
+					{ name:'Fadi-6 (Guided 302mm)',        wiki:'',          range_km:225, payload_kg:140, accuracy:'INS ~200m CEP', status:'Operational', used_against_israel:true,  notes:'302mm rocket with guidance kit. First used November 2024. Range covers all of northern and central Israel.' },
+					{ name:'Nasr-1 (Guided Anti-ship)',        wiki:'Nasr-1',          range_km:35, payload_kg:150, accuracy:'GPS guidance kit',    status:'Operational', used_against_israel:true,  notes:'M-302 retrofitted with guidance system. Used extensively in 2024. Reached Haifa and Krayot.' },
+					{ name:'Fadi-1 (Syrian M-220mm)',        wiki:'',         range_km:70,  payload_kg:83,  accuracy:'UNguided',  status:'Operational', used_against_israel:true,  notes:'220mm unguided rocket. First used in the 2024 war, targeting Jezreel Valley and Krayot suburbs of Haifa.' },
+					{ name:'Fajr-5',        wiki:'Fajr-5',                range_km:75,  payload_kg:90,  accuracy:'UNguided',  status:'Operational', used_against_israel:true,  notes:'Iranian-supplied 333mm rocket. Puts Tel Aviv in range from Lebanon. Used in 2006 and subsequent conflicts.' },
+					{ name:'Khaibar-1 (Fadi-2, M-302)', wiki:'Khaibar-1',      range_km:150, payload_kg:170, accuracy:'UNguided',  status:'Operational', used_against_israel:true,  notes:'Syrian-made Chinese-designed rocket. Can target Tel Aviv. Puts ~3.5 million Israelis within range.' },
 				]
 			},
 			{
 				category: 'Short-Range Rockets',
 				items: [
-					{ name:'Burkan 2',        wiki:'Burkan-2',         range_km:10,  payload_kg:500, accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Enormous 500kg warhead, 150m destruction radius. Used extensively in 2024 against IDF border positions. Most destructive short-range weapon.' },
-					{ name:'Raad-1 (Fajr-3)',        wiki:'Fajr-3 (artillery rocket)',         range_km:65,  payload_kg:45,  accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Uragan-type 220mm rocket. Can target Haifa from Lebanon. Fired in large salvos to overwhelm Iron Dome.' },
-					{ name:'Katyusha (122mm)', wiki:'Katyusha rocket',    range_km:40,  payload_kg:19,  accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Soviet-origin BM-21 Grad rocket. Primary weapon of Hezbollah since 2006. Tens of thousands stockpiled. Can reach Haifa.' },
-					{ name:'Falaq-1',       wiki:'Falaq-1',          range_km:11,  payload_kg:120, accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Iranian 333mm heavy rocket. Large warhead for short range. Used for devastating attacks on border communities.' },
-					{ name:'Falaq-2',       wiki:'Falaq-2',          range_km:11,  payload_kg:120, accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Iranian 333mm heavy rocket. Large warhead for short range. Used for devastating attacks on border communities.' },
-					{ name:'Grad (122mm)',   wiki:'BM-21 Grad',                range_km:40, payload_kg:20, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Russian-origin smuggled rocket. More reliable than Qassam. Used in mass barrages to overwhelm Iron Dome.' },
+					{ name:'Burkan 2',        wiki:'Burkan-2',         range_km:10,  payload_kg:500, accuracy:'UNguided',  status:'Operational', used_against_israel:true,  notes:'Enormous 500kg warhead, 150m destruction radius. Used extensively in 2024 against IDF border positions. Most destructive short-range weapon.' },
+					{ name:'Raad-1 (Fajr-3)',        wiki:'Fajr-3 (artillery rocket)',         range_km:65,  payload_kg:45,  accuracy:'UNguided',  status:'Operational', used_against_israel:true,  notes:'Uragan-type 220mm rocket. Can target Haifa from Lebanon. Fired in large salvos to overwhelm Iron Dome.' },
+					{ name:'Katyusha (122mm)', wiki:'Katyusha rocket',    range_km:40,  payload_kg:19,  accuracy:'UNguided',  status:'Operational', used_against_israel:true,  notes:'Soviet-origin BM-21 Grad rocket. Primary weapon of Hezbollah since 2006. Tens of thousands stockpiled. Can reach Haifa.' },
+					{ name:'Falaq-1',       wiki:'Falaq-1',          range_km:11,  payload_kg:120, accuracy:'UNguided',  status:'Operational', used_against_israel:true,  notes:'Iranian 333mm heavy rocket. Large warhead for short range. Used for devastating attacks on border communities.' },
+					{ name:'Falaq-2',       wiki:'Falaq-2',          range_km:11,  payload_kg:120, accuracy:'UNguided',  status:'Operational', used_against_israel:true,  notes:'Iranian 333mm heavy rocket. Large warhead for short range. Used for devastating attacks on border communities.' },
+					{ name:'Grad (122mm)',   wiki:'BM-21 Grad',                range_km:40, payload_kg:20, accuracy:'UNguided', status:'Operational', used_against_israel:true, notes:'Russian-origin smuggled rocket. More reliable than Qassam. Used in mass barrages to overwhelm Iron Dome.' },
+					{ name:'Sayyad-2',      wiki:'Sayyad-2',          range_km:150,  payload_kg:45,  accuracy:'GPS/INS ~10m CEP', status:'Operational', used_against_israel:true,  notes:'Iranian-built UAV. Used for reconnaissance over Israeli positions and explosive-laden attack missions.' },
 				]
 			},
 			{
 				category: 'Drones (UAV)',
 				items: [
-					{ name:'Shahed-136',    wiki:'Shahed 136',            range_km:2000, payload_kg:50,  accuracy:'~5m CEP',  status:'Operational', used_against_israel:true,  notes:'Iran-supplied loitering munition. Used against Israel multiple times since Oct 2023. Slow but nearly silent and cheap.' },
-					{ name:'Mirsad-1',      wiki:'Mirsad-1',              range_km:150,  payload_kg:40,  accuracy:'~10m CEP', status:'Operational', used_against_israel:true,  notes:'Iranian-origin drone used since 2004. Deployed for both reconnaissance and strike missions against Israel.' },
-					{ name:'Ababil-T',      wiki:'HESA Ababil',          range_km:150,  payload_kg:45,  accuracy:'~10m CEP', status:'Operational', used_against_israel:true,  notes:'Iranian-built UAV. Used for reconnaissance over Israeli positions and explosive-laden attack missions.' },
-					{ name:'Sayyad 107',      wiki:'',          range_km:150,  payload_kg:45,  accuracy:'~10m CEP', status:'Operational', used_against_israel:true,  notes:'Iranian-built UAV. Used for reconnaissance over Israeli positions and explosive-laden attack missions.' },
-					{ name:'Shahed 101',      wiki:'',          range_km:150,  payload_kg:45,  accuracy:'~10m CEP', status:'Operational', used_against_israel:true,  notes:'Iranian-built UAV. Used for reconnaissance over Israeli positions and explosive-laden attack missions.' },
+					{ name:'Shahed-136',    wiki:'Shahed 136',            range_km:2000, payload_kg:50,  accuracy:'GPS/INS (loitering) ~5m CEP',  status:'Operational', used_against_israel:true,  notes:'Iran-supplied loitering munition. Used against Israel multiple times since Oct 2023. Slow but nearly silent and cheap.' },
+					{ name:'Ababil-T (Mirsad-1)',      wiki:'HESA Ababil',          range_km:150,  payload_kg:45,  accuracy:'GPS/INS ~10m CEP', status:'Operational', used_against_israel:true,  notes:'Iranian-built UAV. Used for reconnaissance over Israeli positions and explosive-laden attack missions.' },
+					{ name:'Shahed 101',      wiki:'Shahed drones',          range_km:150,  payload_kg:45,  accuracy:'GPS/INS ~10m CEP', status:'Operational', used_against_israel:true,  notes:'Iranian-built UAV. Used for reconnaissance over Israeli positions and explosive-laden attack missions.' },
 				]
 			},
 			{
 				category: 'Anti-Ship & Anti-Tank',
 				items: [
-					{ name:'C-802 (Noor)',  wiki:'C-802',                 range_km:120,  payload_kg:165, accuracy:'active radar', status:'Operational', used_against_israel:true,  notes:'Used to hit Israeli corvette INS Hanit in 2006. Can threaten Israel\'s offshore Leviathan gas platforms.' },
-					{ name:'Kornet ATGM',   wiki:'9M133 Kornet',          range_km:5.5,  payload_kg:7,   accuracy:'laser guided', status:'Operational', used_against_israel:true,  notes:'Russian anti-tank missile. Destroyed multiple Merkava tanks in 2006 and used extensively in 2024 war.' },
-					{ name:'Almas-3',       wiki:'Almas (missile)',        range_km:8,    payload_kg:8,   accuracy:'imaging IR',   status:'Operational', used_against_israel:true,  notes:'Iranian fire-and-forget ATGM. Used in 2024 against IDF forces crossing the border.' },
+					{ name:'C-802 (Noor)',  wiki:'C-802',                 range_km:120,  payload_kg:165, accuracy:'Active radar homing', status:'Operational', used_against_israel:true,  notes:'Used to hit Israeli corvette INS Hanit in 2006. Can threaten Israel\'s offshore Leviathan gas platforms.' },
+					{ name:'Kornet ATGM',   wiki:'9M133 Kornet',          range_km:5.5,  payload_kg:7,   accuracy:'Laser guided', status:'Operational', used_against_israel:true,  notes:'Russian anti-tank missile. Destroyed multiple Merkava tanks in 2006 and used extensively in 2024 war.' },
+					{ name:'Almas-3',       wiki:'Almas (missile)',        range_km:8,    payload_kg:8,   accuracy:'Imaging IR (Fire&Forget)',   status:'Operational', used_against_israel:true,  notes:'Iranian fire-and-forget ATGM. Used in 2024 against IDF forces crossing the border.' },
 				]
 			}
 		];
 
-		let _hezbollahSort = 'range';
-		function openHezbollahArsenal() {
-			document.getElementById('hezbollahArsenalOverlay').classList.add('active');
+		var _hezbollahSort = 'range';
+		var _arsenalActiveTab = 'iran';
+
+		function openArsenal(tab) {
+			_arsenalActiveTab = tab || 'iran';
+			document.getElementById('arsenalOverlay').classList.add('active');
 			document.body.style.overflow = 'hidden';
-			renderGroupArsenal('hezbollahArsenalContent', HEZBOLLAH_ARSENAL_DATA, '_hezbollahSort', '#4ade80', 'renderHezbollahArsenal');
+			switchArsenalTab(_arsenalActiveTab, true);
 		}
-		function closeHezbollahArsenal() {
-			document.getElementById('hezbollahArsenalOverlay').classList.remove('active');
+		function closeArsenal() {
+			document.getElementById('arsenalOverlay').classList.remove('active');
 			document.body.style.overflow = 'auto';
 		}
+		function switchArsenalTab(tab, forceRender) {
+			_arsenalActiveTab = tab;
+			const iranContent  = document.getElementById('iranArsenalContent');
+			const hzbContent   = document.getElementById('hezbollahArsenalContent');
+			const tabIran      = document.getElementById('arsenalTabIran');
+			const tabHzb       = document.getElementById('arsenalTabHizbollah');
+			if (tab === 'iran') {
+				iranContent.style.display  = '';
+				hzbContent.style.display   = 'none';
+				tabIran.style.color        = '#a78bfa';
+				tabIran.style.borderBottomColor = '#a78bfa';
+				tabHzb.style.color         = 'rgba(255,255,255,0.35)';
+				tabHzb.style.borderBottomColor  = 'transparent';
+				if (forceRender || !iranContent.innerHTML.trim()) renderIranArsenal(IRAN_ARSENAL_DATA);
+			} else {
+				hzbContent.style.display   = '';
+				iranContent.style.display  = 'none';
+				tabHzb.style.color         = '#4ade80';
+				tabHzb.style.borderBottomColor = '#4ade80';
+				tabIran.style.color        = 'rgba(255,255,255,0.35)';
+				tabIran.style.borderBottomColor = 'transparent';
+				if (forceRender || !hzbContent.innerHTML.trim()) renderGroupArsenal('hezbollahArsenalContent', HEZBOLLAH_ARSENAL_DATA, '_hezbollahSort', '#4ade80', 'renderHezbollahArsenal');
+			}
+		}
+		function openHezbollahArsenal() { openArsenal('hizbollah'); }
+		function closeHezbollahArsenal() { closeArsenal(); }
+		function openIranArsenal() { openArsenal('iran'); }
+		function closeIranArsenal() { closeArsenal(); }
 		function sortHezbollahArsenal(by) {
 			_hezbollahSort = by;
 			renderGroupArsenal('hezbollahArsenalContent', HEZBOLLAH_ARSENAL_DATA, '_hezbollahSort', '#4ade80', 'renderHezbollahArsenal');
 		}
-		function renderHezbollahArsenal() { openHezbollahArsenal(); }
-
-		// ── Hamas Arsenal ─────────────────────────────────────────────────────────
-		const HAMAS_ARSENAL_DATA = [
-			{
-				category: 'Long-Range Rockets',
-				items: [
-					{ name:'M-302 (R-160)',  wiki:'M-302 rocket',          range_km:180, payload_kg:144, accuracy:'unguided',  status:'Operational', used_against_israel:true,  notes:'Syrian-supplied Chinese-designed rocket. Longest-range in Hamas arsenal. Can hit Haifa, Tel Aviv, Jerusalem from Gaza.' },
-					{ name:'R-160',          wiki:'Palestinian rocket arsenal', range_km:160, payload_kg:60, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Locally produced long-range rocket. Named after Hamas commander Abdel-Aziz Rantissi. First used in 2014 war.' },
-					{ name:'A-120 (Ayyash)', wiki:'Palestinian rocket arsenal', range_km:220, payload_kg:100, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Hamas\'s longest-range domestically produced rocket. First used in May 2021. Can reach central Israel including Ben Gurion Airport.' },
-					{ name:'J-90 (Jabari)',  wiki:'Palestinian rocket arsenal', range_km:90,  payload_kg:60,  accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Named after IQB commander Ahmed Jabari. Medium-range rocket targeting Tel Aviv and Ben Gurion Airport area.' },
-				]
-			},
-			{
-				category: 'Medium-Range Rockets',
-				items: [
-					{ name:'M-75',           wiki:'Palestinian rocket arsenal', range_km:80, payload_kg:60, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Hamas-built version of Iranian Fajr-5. Reached Tel Aviv in 2012, first Hamas rocket to do so. Named after Ibrahim al-Makadmeh.' },
-					{ name:'SH-85',          wiki:'Palestinian rocket arsenal', range_km:85, payload_kg:60, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Named after Hamas commander Mohammed Abu Shamala. Can target Tel Aviv and greater central Israel from Gaza.' },
-					{ name:'Fajr-5',         wiki:'Fajr-5',                     range_km:75, payload_kg:90, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Iranian-supplied 333mm rocket. Put Tel Aviv in range from Gaza for first time in 2012 conflict.' },
-					{ name:'J-80 (Jabari)',  wiki:'Palestinian rocket arsenal', range_km:80, payload_kg:50, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Longer-range variant named after Ahmed Jabari. Used in 2014 and 2021 to target Tel Aviv area.' },
-					{ name:'Sajjeel-55',     wiki:'Palestinian rocket arsenal', range_km:55, payload_kg:40, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Domestically produced medium-range rocket first seen in 2014 war. Targets cities in southern and central Israel.' },
-				]
-			},
-			{
-				category: 'Short-Range Rockets',
-				items: [
-					{ name:'S-40',           wiki:'Palestinian rocket arsenal', range_km:40, payload_kg:30, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Named after its range. Used in 2019 and 2021 against Ashkelon, Ashdod, Beersheba. Produced locally in large numbers.' },
-					{ name:'Qassam-3',       wiki:'Qassam rocket',             range_km:16, payload_kg:10, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Most numerous Hamas rocket. Primitive homemade design but produced in the thousands. Targets border communities.' },
-					{ name:'Grad (122mm)',   wiki:'BM-21 Grad',                range_km:40, payload_kg:20, accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Russian-origin smuggled rocket. More reliable than Qassam. Used in mass barrages to overwhelm Iron Dome.' },
-					{ name:'Al-Quds',        wiki:'Palestinian rocket arsenal', range_km:16, payload_kg:9,  accuracy:'unguided', status:'Operational', used_against_israel:true, notes:'Palestinian Islamic Jihad rocket based on Qassam design. Slightly heavier and more reliable than original Qassam.' },
-				]
-			},
-			{
-				category: 'Drones & Naval',
-				items: [
-					{ name:'Shehab UAV',     wiki:'Palestinian rocket arsenal', range_km:200, payload_kg:10, accuracy:'guided', status:'Operational', used_against_israel:true, notes:'Hamas attack drone unveiled 2021. Used on October 7 2023 to disable Iron Dome radar systems before the ground attack.' },
-					{ name:'Al-Asef Torpedo', wiki:'Palestinian rocket arsenal', range_km:5,  payload_kg:50, accuracy:'guided', status:'Operational', used_against_israel:true, notes:'Hamas underwater torpedo first revealed October 2023. Used in naval commando operations. Threatens Israeli naval vessels and offshore gas infrastructure.' },
-				]
-			}
-		];
-
-		let _hamasSort = 'range';
-		function openHamasArsenal() {
-			document.getElementById('hamasArsenalOverlay').classList.add('active');
-			document.body.style.overflow = 'hidden';
-			renderGroupArsenal('hamasArsenalContent', HAMAS_ARSENAL_DATA, '_hamasSort', '#facc15', 'renderHamasArsenal');
-		}
-		function closeHamasArsenal() {
-			document.getElementById('hamasArsenalOverlay').classList.remove('active');
-			document.body.style.overflow = 'auto';
-		}
-		function sortHamasArsenal(by) {
-			_hamasSort = by;
-			renderGroupArsenal('hamasArsenalContent', HAMAS_ARSENAL_DATA, '_hamasSort', '#facc15', 'renderHamasArsenal');
-		}
-		function renderHamasArsenal() { openHamasArsenal(); }
+		function renderHezbollahArsenal() { switchArsenalTab('hizbollah', true); }
 
 		// ── Shared arsenal renderer ────────────────────────────────────────────────
 		function renderGroupArsenal(contentId, data, sortVar, accentColor, rerenderFn) {
@@ -4621,7 +4635,9 @@
 			const sorted = data.map(cat => ({
 				...cat,
 				items: [...(cat.items||[])].sort((a,b) =>
-					currentSort === 'payload' ? (b.payload_kg||0)-(a.payload_kg||0) : (b.range_km||0)-(a.range_km||0)
+					currentSort === 'payload' ? (b.payload_kg||0)-(a.payload_kg||0) :
+					currentSort === 'name'    ? a.name.localeCompare(b.name) :
+					(b.range_km||0)-(a.range_km||0)
 				)
 			}));
 
@@ -4632,8 +4648,9 @@
 			let html = `
 				<div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;">
 					<span style="font-size:0.7rem;color:rgba(255,255,255,0.35);">Sort by:</span>
-					<button onclick="${rerenderFn === 'renderHezbollahArsenal' ? 'sortHezbollahArsenal' : 'sortHamasArsenal'}('range')"   style="${btnStyle('range')}">📏 Range</button>
-					<button onclick="${rerenderFn === 'renderHezbollahArsenal' ? 'sortHezbollahArsenal' : 'sortHamasArsenal'}('payload')" style="${btnStyle('payload')}">💣 Payload</button>
+					<button onclick="sortHezbollahArsenal('name')"    style="${btnStyle('name')}">🔤 Name</button>
+					<button onclick="sortHezbollahArsenal('range')"   style="${btnStyle('range')}">📏 Range</button>
+					<button onclick="sortHezbollahArsenal('payload')" style="${btnStyle('payload')}">💣 Payload</button>
 				</div>`;
 
 			for (const cat of sorted) {
@@ -4697,41 +4714,41 @@
 			{
 				category: 'Ballistic Missiles',
 				items: [
-					{ name:'Sejjil-2',              wiki:'Sejjil',                   range_km:2500, payload_kg:750,  accuracy:'30–50m CEP',  status:'Operational', used_against_israel:false, notes:'Solid-fuel MRBM, fastest launch time of any Iranian ballistic missile. Can reach all of Israel in ~11 min.' },
-					{ name:'Khorramshahr-4 (Kheibar)', wiki:'Kheibar (missile)',        range_km:2000, payload_kg:1500, accuracy:'30m CEP',     status:'Operational', used_against_israel:true,  notes:'Used in October 2024 True Promise II attack. MaRV warhead allows maneuvering during reentry, harder to intercept.' },
-					{ name:'Fattah-1 (Hypersonic)', wiki:'Fattah (missile)',          range_km:1400, payload_kg:500,  accuracy:'~10m CEP',   status:'Operational', used_against_israel:true,  notes:'Iran\'s first claimed hypersonic glide missile. Used in October 2024 attack on Israel. Travels at Mach 13–15, extremely difficult to intercept.' },
-					{ name:'Fattah-2 (Hypersonic)', wiki:'Fattah-2',                  range_km:1500, payload_kg:500,  accuracy:'~10m CEP',   status:'Operational', used_against_israel:true,  notes:'Upgraded Fattah with enhanced maneuverability. Used in March 2026 attacks on Israel and US Gulf bases. Penetrated multiple air defense systems.' },
-					{ name:'Ghadr-110',             wiki:'Ghadr-110',                range_km:2000, payload_kg:750,  accuracy:'30–50m CEP', status:'Operational', used_against_israel:true,  notes:'Liquid-fuel variant of Shahab-3. Used in multiple strikes on Israel in 2024. Improved guidance over Shahab-3.' },
-					{ name:'Emad',                  wiki:'Emad (missile)',            range_km:1700, payload_kg:750,  accuracy:'~500m CEP',  status:'Operational', used_against_israel:false, notes:'Shahab-3 derivative with maneuverable reentry vehicle. Assessed by CSIS as reaching all of Israel.' },
-					{ name:'Kheibar Shekan',        wiki:'Kheibar Shekan',           range_km:1450, payload_kg:500,  accuracy:'~30m CEP',   status:'Operational', used_against_israel:true,  notes:'Solid-fuel, fin-guided MRBM with satellite navigation. Used in April and October 2024 attacks. Struck Nevatim Air Base.' },
-					{ name:'Haj Qasem',             wiki:'Haj Qasem (missile)',      range_km:1400, payload_kg:500,  accuracy:'~30m CEP',   status:'Operational', used_against_israel:true,  notes:'Named after Qasem Soleimani. Solid-fuel MRBM with guidance fins. Used in True Promise II (October 2024).' },
-					{ name:'Shahab-3',              wiki:'Shahab-3',                 range_km:1300, payload_kg:760,  accuracy:'~2500m CEP', status:'Operational', used_against_israel:false, notes:'Iran\'s workhorse liquid-fuel MRBM. Older system, less accurate but in large quantities. Backbone of Iranian arsenal for decades.' },
-					{ name:'Qasem Basir',           wiki:'Qasem Basir',              range_km:1500, payload_kg:500,  accuracy:'~30m CEP',   status:'Operational', used_against_israel:false, notes:'Iran\'s newest solid-fuel MRBM unveiled in 2025. High maneuverability in terminal phase designed to evade Arrow and Patriot interception systems.' },
+					{ name:'Sejjil-2',              wiki:'Sejjil',                   range_km:2500, payload_kg:750,  accuracy:'INS/GPS 30–50m CEP',  status:'Operational', used_against_israel:false, notes:'Solid-fuel MRBM, fastest launch time of any Iranian ballistic missile. Can reach all of Israel in ~11 min.' },
+					{ name:'Khorramshahr-4 (Kheibar)', wiki:'Kheibar (missile)',        range_km:2000, payload_kg:1500, accuracy:'MaRV (maneuvering reentry) 30m CEP',     status:'Operational', used_against_israel:true,  notes:'Used in October 2024 True Promise II attack. MaRV warhead allows maneuvering during reentry, harder to intercept.' },
+					{ name:'Fattah-1 (Hypersonic)', wiki:'Fattah (missile)',          range_km:1400, payload_kg:500,  accuracy:'Hypersonic glide + INS ~10m CEP',   status:'Operational', used_against_israel:true,  notes:'Iran\'s first claimed hypersonic glide missile. Used in October 2024 attack on Israel. Travels at Mach 13–15, extremely difficult to intercept.' },
+					{ name:'Fattah-2 (Hypersonic)', wiki:'Fattah-2',                  range_km:1500, payload_kg:500,  accuracy:'Hypersonic glide + MaRV ~10m CEP',   status:'Operational', used_against_israel:true,  notes:'Upgraded Fattah with enhanced maneuverability. Used in March 2026 attacks on Israel and US Gulf bases. Penetrated multiple air defense systems.' },
+					{ name:'Ghadr-110',             wiki:'Ghadr-110',                range_km:2000, payload_kg:750,  accuracy:'INS/GPS 30–50m CEP', status:'Operational', used_against_israel:true,  notes:'Liquid-fuel variant of Shahab-3. Used in multiple strikes on Israel in 2024. Improved guidance over Shahab-3.' },
+					{ name:'Emad',                  wiki:'Emad (missile)',            range_km:1700, payload_kg:750,  accuracy:'MaRV (maneuverable RV)~500m CEP',  status:'Operational', used_against_israel:false, notes:'Shahab-3 derivative with maneuverable reentry vehicle. Assessed by CSIS as reaching all of Israel.' },
+					{ name:'Kheibar Shekan',        wiki:'Kheibar Shekan',           range_km:1450, payload_kg:500,  accuracy:'GPS/INS + fin guidance ~30m CEP',   status:'Operational', used_against_israel:true,  notes:'Solid-fuel, fin-guided MRBM with satellite navigation. Used in April and October 2024 attacks. Struck Nevatim Air Base.' },
+					{ name:'Haj Qasem',             wiki:'Haj Qasem (missile)',      range_km:1400, payload_kg:500,  accuracy:'GPS/INS + fin guidance ~30m CEP',   status:'Operational', used_against_israel:true,  notes:'Named after Qasem Soleimani. Solid-fuel MRBM with guidance fins. Used in True Promise II (October 2024).' },
+					{ name:'Shahab-3',              wiki:'Shahab-3',                 range_km:1300, payload_kg:760,  accuracy:'Inertial only (~2500m CEP, very imprecise) ~2500m CEP', status:'Operational', used_against_israel:false, notes:'Iran\'s workhorse liquid-fuel MRBM. Older system, less accurate but in large quantities. Backbone of Iranian arsenal for decades.' },
+					{ name:'Qasem Basir',           wiki:'Qasem Basir',              range_km:1500, payload_kg:500,  accuracy:'GPS/INS ~30m CEP',   status:'Operational', used_against_israel:false, notes:'Iran\'s newest solid-fuel MRBM unveiled in 2025. High maneuverability in terminal phase designed to evade Arrow and Patriot interception systems.' },
 				]
 			},
 			{
 				category: 'Cruise Missiles',
 				items: [
-					{ name:'Soumar',   wiki:'Soumar (missile)',   range_km:3000, payload_kg:450, accuracy:'~5m CEP', status:'Operational', used_against_israel:false, notes:'Iran\'s longest-range cruise missile. Based on Soviet Kh-55 design. Flies low to evade radar. Rarely used operationally.' },
-					{ name:'Hoveyzeh', wiki:'Hoveyzeh (cruise missile)', range_km:1350, payload_kg:450, accuracy:'~5m CEP', status:'Operational', used_against_israel:true,  notes:'Terrain-hugging cruise missile. Used in April 2024 attack on Israel alongside ballistic missiles and drones.' },
-					{ name:'Paveh',    wiki:'Paveh cruise missile',    range_km:1650, payload_kg:500, accuracy:'~5m CEP', status:'Operational', used_against_israel:true,  notes:'Long-range terrain-hugging cruise missile unveiled in 2023. Used in attacks on Israel and US bases in the region. Flies at low altitude to evade radar.' },
+					{ name:'Soumar',   wiki:'Soumar (missile)',   range_km:3000, payload_kg:450, accuracy:'GPS + terrain-following ~5m CEP', status:'Operational', used_against_israel:false, notes:'Iran\'s longest-range cruise missile. Based on Soviet Kh-55 design. Flies low to evade radar. Rarely used operationally.' },
+					{ name:'Hoveyzeh', wiki:'Hoveyzeh (cruise missile)', range_km:1350, payload_kg:450, accuracy:'GPS + terrain-following ~5m CEP', status:'Operational', used_against_israel:true,  notes:'Terrain-hugging cruise missile. Used in April 2024 attack on Israel alongside ballistic missiles and drones.' },
+					{ name:'Paveh',    wiki:'Paveh cruise missile',    range_km:1650, payload_kg:500, accuracy:'GPS + terrain-following ~5m CEP', status:'Operational', used_against_israel:true,  notes:'Long-range terrain-hugging cruise missile unveiled in 2023. Used in attacks on Israel and US bases in the region. Flies at low altitude to evade radar.' },
 				]
 			},
 			{
 				category: 'Drones (UAV)',
 				items: [
-					{ name:'Shahed-136 (Geran-2)', wiki:'Shahed 136',  range_km:2500, payload_kg:50,  accuracy:'~5m CEP',  status:'Operational', used_against_israel:true,  notes:'One-way loitering munition. Used en masse (170+) in April 2024 to saturate Israeli air defenses. Cheap and produced in large numbers.' },
-					{ name:'Shahed-238',           wiki:'Shahed 238',  range_km:2000, payload_kg:50,  accuracy:'~5m CEP',  status:'Operational', used_against_israel:true,  notes:'Jet-powered upgrade of Shahed-136. 185 used in April 2024 attack. Faster and harder to intercept than propeller variant.' },
-					{ name:'Arash-2 (Kian-2)',     wiki:'Arash-2',     range_km:1600, payload_kg:100, accuracy:'~10m CEP', status:'Operational', used_against_israel:false, notes:'Large loitering munition, larger warhead than Shahed series. Can carry heavier payload for more destructive strikes.' },
-					{ name:'Karrar',               wiki:'Karrar (UAV)',range_km:1000, payload_kg:500, accuracy:'~10m CEP', status:'Operational', used_against_israel:false, notes:'Jet-powered combat UAV. Can carry bombs or anti-ship missiles. Also used as decoy to overwhelm air defense radars.' },
+					{ name:'Shahed-136 (Geran-2)', wiki:'Shahed 136',  range_km:2500, payload_kg:50,  accuracy:'GPS/INS (loitering munition) ~5m CEP',  status:'Operational', used_against_israel:true,  notes:'One-way loitering munition. Used en masse (170+) in April 2024 to saturate Israeli air defenses. Cheap and produced in large numbers.' },
+					{ name:'Shahed-238',           wiki:'Shahed 238',  range_km:2000, payload_kg:50,  accuracy:'GPS/INS (loitering munition) ~5m CEP',  status:'Operational', used_against_israel:true,  notes:'Jet-powered upgrade of Shahed-136. 185 used in April 2024 attack. Faster and harder to intercept than propeller variant.' },
+					{ name:'Arash-2 (Kian-2)',     wiki:'Arash-2',     range_km:1600, payload_kg:100, accuracy:'GPS/INS ~10m CEP', status:'Operational', used_against_israel:false, notes:'Large loitering munition, larger warhead than Shahed series. Can carry heavier payload for more destructive strikes.' },
+					{ name:'Karrar',               wiki:'Karrar (UAV)',range_km:1000, payload_kg:500, accuracy:'GPS/INS ~10m CEP', status:'Operational', used_against_israel:false, notes:'Jet-powered combat UAV. Can carry bombs or anti-ship missiles. Also used as decoy to overwhelm air defense radars.' },
 				]
 			},
 			{
 				category: 'Submarines',
 				items: [
-					{ name:'Fateh-class',        wiki:'IRIS Fateh',            range_km:1000, payload_kg:null, accuracy:'N/A', status:'Operational', used_against_israel:false, notes:'Iran\'s most advanced domestically-built submarine. Can launch cruise missiles. Primarily a Gulf/regional threat.' },
-					{ name:'Ghadir-class',       wiki:'Ghadir-class submarine', range_km:600,  payload_kg:null, accuracy:'N/A', status:'Operational', used_against_israel:false, notes:'21 units in service. Small coastal submarines designed for Persian Gulf operations, mining, and surprise attacks on shipping.' },
-					{ name:'Kilo-class (877EKM)', wiki:'Kilo-class submarine',  range_km:6000, payload_kg:null, accuracy:'N/A', status:'Operational', used_against_israel:false, notes:'3 Russian-built subs. Can fire cruise missiles. Range enough to operate in Red Sea and Mediterranean.' },
+					{ name:'Fateh-class',        wiki:'IRIS Fateh',            range_km:1000, payload_kg:null, accuracy:'Cruise missile guidance', status:'Operational', used_against_israel:false, notes:'Iran\'s most advanced domestically-built submarine. Can launch cruise missiles. Primarily a Gulf/regional threat.' },
+					{ name:'Ghadir-class',       wiki:'Ghadir-class submarine', range_km:600,  payload_kg:null, accuracy:'Torpedo/mine — no missile guidance', status:'Operational', used_against_israel:false, notes:'21 units in service. Small coastal submarines designed for Persian Gulf operations, mining, and surprise attacks on shipping.' },
+					{ name:'Kilo-class (877EKM)', wiki:'Kilo-class submarine',  range_km:6000, payload_kg:null, accuracy:'Cruise missile guidance', status:'Operational', used_against_israel:false, notes:'3 Russian-built subs. Can fire cruise missiles. Range enough to operate in Red Sea and Mediterranean.' },
 				]
 			}
 		];
@@ -4798,9 +4815,8 @@
 			const sorted = categories.map(cat => ({
 				...cat,
 				items: [...(cat.items||[])].sort((a,b) => {
-					if (_arsenalSort === 'payload') {
-						return (b.payload_kg||0) - (a.payload_kg||0);
-					}
+					if (_arsenalSort === 'payload') return (b.payload_kg||0) - (a.payload_kg||0);
+					if (_arsenalSort === 'name')    return a.name.localeCompare(b.name);
 					return (b.range_km||0) - (a.range_km||0);
 				})
 			}));
@@ -4812,6 +4828,7 @@
 			let html = `
 				<div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;">
 					<span style="font-size:0.7rem;color:rgba(255,255,255,0.35);">Sort by:</span>
+					<button class="arsenal-sort-btn" data-sort="name"    onclick="sortIranArsenal('name')"    style="${btnStyle('name')}">🔤 Name</button>
 					<button class="arsenal-sort-btn" data-sort="range"   onclick="sortIranArsenal('range')"   style="${btnStyle('range')}">📏 Range</button>
 					<button class="arsenal-sort-btn" data-sort="payload" onclick="sortIranArsenal('payload')" style="${btnStyle('payload')}">💣 Payload</button>
 				</div>`;
