@@ -41,43 +41,23 @@ Done			// delete Irinn tv stream
 Done			// delete SNN tv stream
 Done			// delete alhurra tv stream
 Done			// some of the "News sites" links dont work
-
-
+Done			// דף עם כל הטילים של אירן 
+Done			// check Al-Quds tv stream
+Done			// add iran attacks on other countries and what kind of attack and which weapons did they use
+Done			// לתקן את הטילים של חיזבאללה וחמאס
+Done			// Add "sort by name" to missiles
+Done			// Change the missiles so the page will load and user can change between tabs of Iran, Hezbollah, Hamas
+Done			// check who is guided and how?
+NO			// add realtime alert from TZOFAR
+NO			// אפשרות למסך מלא לכמה פליירים (לדוגמא, בחירה של 4 פליירים שיוצגו על כל המסך)
 
 
 
 -----======Nice to have=====-----
 // online translation (subtitles) of streaming videos
 // קישור ללוח שנה של מחבלים
-// אפשרות למסך מלא לכמה פליירים (לדוגמא, בחירה של 4 פליירים שיוצגו על כל המסך)
-Done			// דף עם כל הטילים של אירן 
-// דף עם כל הטילים של חיזבאללה
-https://www.google.com/search?q=%D7%9B%D7%9C+%D7%94%D7%98%D7%99%D7%9C%D7%99%D7%9D+%D7%A9%D7%9C+%D7%97%D7%99%D7%96%D7%91%D7%90%D7%9C%D7%9C%D7%94&sca_esv=26102ee7b85ee816&rlz=1C1CHZN_enIL1001IL1001&sxsrf=ANbL-n4pvdv4Z6NBFc9XS6-RGexkL0yCYw%3A1772449125666&udm=50&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3ppPEReeCOS7s1VbbZz2TLt2sOibMbYx2XAHg-v8xM5VMjbOMePxx0DsGneV4EHbo20TbbcXYFzsCn-jOryZyK6dEkLVtu-UOmRvancIS4iFtFPJRH3fldFe4pL_cjjJjsWe61mB53U2GqUksvJGiTceCT6u_gmhtOSn5Uffw2VREu0x7A&aep=1&ntc=1&sa=X&ved=2ahUKEwjP8pHEh4GTAxXkhP0HHS1ODjwQ2J8OegQIExAE&biw=1718&bih=1270&dpr=1&mstk=AUtExfDmuj--MeggilTOZfle6i8TscKflOxlloxk-ARDiKQstjfBdItDg-HCmMEYmBI_1THD5cQsDaZdBlEM7PVMued8PAj7EAl-j4s8jJsiUdRVjn1jqLhMhYu8_fotrocYBb_6BfcjdXk-QhmwwMc764u0qH8uAkaKy5MiUfiwrshm36ZnGZ6clC3N2qiVIxGJEuiTrIteublPWXDvjYWNpcmEApMmLA4IP6vVKKFB5q50rRmtyNtI4CA9ImxZLZQjTncX59l_c2tbzQ&csuir=1&mtid=q9Wqad_eCL6rkdUPoLituAI
-// דף עם כל הטילים של חמאס
-https://www.google.com/search?q=%D7%9B%D7%9C+%D7%94%D7%98%D7%99%D7%9C%D7%99%D7%9D+%D7%A9%D7%9C+%D7%97%D7%9E%D7%90%D7%A1&sca_esv=26102ee7b85ee816&rlz=1C1CHZN_enIL1001IL1001&sxsrf=ANbL-n5hI6mYlgIvCm16CsawT7rZA3Li8g%3A1772449134181&udm=50&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3ppPEReeCOS7s1VbbZz2TLt2sOibMbYx2XAHg-v8xM5VMjbOMePxx0DsGneV4EHbo20TbbcXYFzsCn-jOryZyK6dEkLVtu-UOmRvancIS4iFtFPJRH3fldFe4pL_cjjJjsWe61mB53U2GqUksvJGiTceCT6u_gmhtOSn5Uffw2VREu0x7A&aep=1&ntc=1&sa=X&ved=2ahUKEwikypnIh4GTAxUQgP0HHb89Cu8Q2J8OegQIExAE&biw=1718&bih=1270&dpr=1&mstk=AUtExfA-vW9gCasR6nRF23VC69EVhRxuo8MWGoUlmhNQc91nhohHDagg6tKYH_HdYsVJkLC-0AyrtGiBLSAMxJyn7QC9VBAUAgkhmot8E79uwIO1zmBqo3HTtFZZOz5LWMUsc6wzqXPx_CstpXKi84I3m_vzC90wbLIZWek&csuir=1&mtid=hdWqaZbtC76rkdUPoLituAI
 
 -----======Mast have=====-----
-// add realtime alert from TZOFAR
 // the analytics display on iphone exceeds the iPhone screen
 // לערוך את סטטיסטיקה על נפילות הטילים
-// check Al-Quds tv stream
-Done			// add iran attacks on other countries and what kind of attack and which weapons did they use
-// לתקן את הטילים של חיזבאללה וחמאס
 
-
-
-
-// Al Quds TV - Palestinian Islamic Jihad (PIJ)
-	Streaming: https://euc12.playlist.ttvnw.net/v1/playlist/CtAGPegWwpdFdIZ8h_Ur39lqcx-ZsE6wJQJK4NnnylNFvCfv7nQxvDDbRn9yWsNgGV3h5t0fvogAKm9eiZpILV2hnlD4UQ6nEHVEnkqQ71kE7RPckoaPnuwpKzYaDTJs9BYyND6-WQwV2soxTzbQXUrALotwf2ed4unYEwbLKpr4sRVo4gt3qZA9nU4IcGLhbbdUqNW33WuamSVM809h1wMFtNx7qK7-fOYa1MxLJAZLmdLLTqfk1-LY6Nj1zWgIzXE-B0f_28Q61WRkc_pudD7W8QFhjRKmkTGN5mfauwxvmVOeaUg3kpWriRxK7GMmGhSNWha9QSh6fumLGNfEkPDROBSi7IOiuFMx0QVy0zaHuxY1XOR2XfZgO1kt93HfumxEzjOrGwCK2J9oY7I5EUgS6FvyGxMEXrVxa4wu7FCPztv-gFhqO9jfoJnTO7mHDjCFuYONALMyTVXYogW9cTpdU2YQIHpjnR-wPiQeP0QSUkmQb90JaBiyTVX17QMVS7wQpbaBf7GwFs99kGA-Nhu0mPKuGq_Zx4cQuXGmOxF5ln1nM0-hP8eqbx4XKZ0no2mEUkh4IGylyH2CoG06PYO-fHbF6PuGtfAkBnNqB-Rzy_0rR2Tj21w6j0KyHuhrwEDGlRde-rVjFzbso14eHgoqIHwgNpjlYrVw-wHSjiZoIByIo9dTjxPQY51zo29J5pMa5MN6AiF_HLfu2baI0xKPfA9N3ianhUd5ALE6LGUJJyjfqSHhlEb7uiff5ZoIebvNk3szsomblo2x--4Cc_3oduhqjD8zYqbUmLKG2Z5HBm65rJFb9JO502a9P3aZK1F9FXwsktsqylaGi__so33IvUukqTEatT-hyY4BoQhaeEE31wb2Q43x8SoXbe0PWlkuhZogQU8RnyNEk1O3ruGd7LuFGSYskCFml5CBrvCck2d-Zg7amV0zgv2f7g8KK_mhdEIcFCZ3yP5XnAFmhXxlIm4srZSw93m3FUzt4uKZmlSG-1UM1qGZVTB1LhPzKACaCq8VT0gbtDYGPnUQwv9ECGce10-p56ew6IDp3AkY8ts3E3MqfsIWYpys42W2U90AOu-TptX6LWfUy-OlyhZYYoYbGZWdVXhpM4GMGNSDlp8aDPNgmxtIWMG_ec_52yABKglldS13ZXN0LTIwxw4.m3u8
-
-//			<div class="video-container" data-region="arab">
-                <div class="video-header">
-                    <div class="video-title">Al Quds (Hamas/PIJ ?)</div>
-                    <div class="country-badge badge-arab">Arab</div>
-                </div>
-                <video class="video-element" id="video42" muted preload="none" controls></video>
-                <div class="play-overlay" onclick="playVideo('video42', 'https://euc12.playlist.ttvnw.net/v1/playlist/CtAGPegWwpdFdIZ8h_Ur39lqcx-ZsE6wJQJK4NnnylNFvCfv7nQxvDDbRn9yWsNgGV3h5t0fvogAKm9eiZpILV2hnlD4UQ6nEHVEnkqQ71kE7RPckoaPnuwpKzYaDTJs9BYyND6-WQwV2soxTzbQXUrALotwf2ed4unYEwbLKpr4sRVo4gt3qZA9nU4IcGLhbbdUqNW33WuamSVM809h1wMFtNx7qK7-fOYa1MxLJAZLmdLLTqfk1-LY6Nj1zWgIzXE-B0f_28Q61WRkc_pudD7W8QFhjRKmkTGN5mfauwxvmVOeaUg3kpWriRxK7GMmGhSNWha9QSh6fumLGNfEkPDROBSi7IOiuFMx0QVy0zaHuxY1XOR2XfZgO1kt93HfumxEzjOrGwCK2J9oY7I5EUgS6FvyGxMEXrVxa4wu7FCPztv-gFhqO9jfoJnTO7mHDjCFuYONALMyTVXYogW9cTpdU2YQIHpjnR-wPiQeP0QSUkmQb90JaBiyTVX17QMVS7wQpbaBf7GwFs99kGA-Nhu0mPKuGq_Zx4cQuXGmOxF5ln1nM0-hP8eqbx4XKZ0no2mEUkh4IGylyH2CoG06PYO-fHbF6PuGtfAkBnNqB-Rzy_0rR2Tj21w6j0KyHuhrwEDGlRde-rVjFzbso14eHgoqIHwgNpjlYrVw-wHSjiZoIByIo9dTjxPQY51zo29J5pMa5MN6AiF_HLfu2baI0xKPfA9N3ianhUd5ALE6LGUJJyjfqSHhlEb7uiff5ZoIebvNk3szsomblo2x--4Cc_3oduhqjD8zYqbUmLKG2Z5HBm65rJFb9JO502a9P3aZK1F9FXwsktsqylaGi__so33IvUukqTEatT-hyY4BoQhaeEE31wb2Q43x8SoXbe0PWlkuhZogQU8RnyNEk1O3ruGd7LuFGSYskCFml5CBrvCck2d-Zg7amV0zgv2f7g8KK_mhdEIcFCZ3yP5XnAFmhXxlIm4srZSw93m3FUzt4uKZmlSG-1UM1qGZVTB1LhPzKACaCq8VT0gbtDYGPnUQwv9ECGce10-p56ew6IDp3AkY8ts3E3MqfsIWYpys42W2U90AOu-TptX6LWfUy-OlyhZYYoYbGZWdVXhpM4GMGNSDlp8aDPNgmxtIWMG_ec_52yABKglldS13ZXN0LTIwxw4.m3u8')">
-                    <i class="fas fa-play"></i>
-                </div>
-                <div class="loading-indicator"><div class="spinner"></div></div>
-            </div>
