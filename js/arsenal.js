@@ -7,9 +7,9 @@ async function translateArsenalNote(text, el) {
 		const res = await fetch(url);
 		const data = await res.json();
 		const translated = data[0].reduce((acc, seg) => acc + (seg[0] || ''), '');
-		if (el && translated) { el.textContent = translated; el.style.display = ''; }
+		if (el && el.isConnected && translated) { el.textContent = translated; el.style.display = ''; }
 	} catch(e) {
-		if (el) el.style.display = 'none';
+		if (el && el.isConnected) el.style.display = 'none';
 	}
 }
 
@@ -429,4 +429,5 @@ function renderIranArsenal(categories) {
 	
 	addArsenalTranslations('iranArsenalContent');
 }
+
 // ── End Iran Arsenal ──────────────────────────────────────────────────────
