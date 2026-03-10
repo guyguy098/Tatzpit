@@ -1,0 +1,68 @@
+.custom-dropdown {
+	position: relative;
+	width: 100%;
+}
+
+.custom-dropdown-selected {
+	width: 100%;
+	padding: 0.75rem;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 6px;
+	color: white;
+	font-size: 1rem;
+	cursor: pointer;
+	text-align: left;
+	direction: ltr;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.custom-dropdown-list {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	background: rgba(26, 26, 46, 0.98);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 6px;
+	z-index: 9999;
+	max-height: 380px;
+	overflow-y: auto;
+	direction: ltr;
+	text-align: left;
+}
+
+.custom-dropdown-list.open {
+	display: block;
+}
+
+.custom-dropdown-item {
+	padding: 0.6rem 0.75rem;
+	color: white;
+	cursor: pointer;
+	font-size: 0.9rem;
+	direction: ltr;
+	text-align: left;
+	font-family: Arial, 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+}
+
+.custom-dropdown-item:hover {
+	background: rgba(255,255,255,0.1);
+}
+
+.custom-dropdown-item.disabled {
+	color: #aaa;
+	font-style: italic;
+	cursor: default;
+	font-size: 0.8rem;
+	padding: 0.3rem 0.75rem;
+}
+
+.custom-dropdown-item.separator {
+	border-top: 1px solid #444;
+	padding: 0;
+	margin: 2px 0;
+}
