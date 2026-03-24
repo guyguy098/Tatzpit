@@ -1,0 +1,81 @@
+{
+  "updated": "2026-03-05T19:00:00.000Z",
+  "source": "Manual seed — waiting for first GitHub Action run",
+  "articles_processed": 0,
+  "countries": [
+    {
+      "name": "Israel",
+      "color": "#fbbf24",
+      "events": [
+        { "ts": "2026-02-28T22:00", "types": ["missiles","drones"], "targets": ["Residential","Military base"], "counts": {"missiles":70,"drones":100}, "cas": {"k":1,"i":12}, "lat": 32.0853, "lng": 34.7818, "location_name": "Tel Aviv", "detail": "~70 ballistic missiles + 100 drones. 1 woman killed in Tel Aviv from shrapnel. Iron Dome/Arrow intercepted majority." },
+        { "ts": "2026-03-01T06:00", "types": ["missiles"], "targets": ["Residential"], "counts": {"missiles":35}, "cas": {"k":8,"i":20}, "lat": 31.7469, "lng": 34.9878, "location_name": "Beit Shemesh", "detail": "Ballistic missile struck Beit Shemesh. 8 killed, ~20 injured. Sirens across Tel Aviv from 06:00." },
+        { "ts": "2026-03-01T15:00", "types": ["missiles","drones"], "targets": ["Military base"], "counts": {"missiles":30,"drones":50}, "cas": {"k":0,"i":5}, "lat": 31.8, "lng": 34.9, "location_name": "Central Israel", "detail": "Afternoon barrages. Mostly intercepted by Iron Dome and Arrow." },
+        { "ts": "2026-03-02T08:00", "types": ["drones"], "targets": ["Residential"], "counts": {"drones":40}, "cas": {"k":0,"i":3}, "lat": 32.8, "lng": 35.5, "location_name": "Galilee", "detail": "Drone swarms overnight. Sirens in Galilee and central Israel." }
+      ]
+    },
+    {
+      "name": "UAE",
+      "color": "#f87171",
+      "events": [
+        { "ts": "2026-02-28T20:00", "types": ["missiles","drones"], "targets": ["Military base","Airport","Port","Hotel"], "counts": {"missiles":137,"drones":209}, "cas": {"k":1,"i":7}, "lat": 25.2532, "lng": 55.3657, "location_name": "Dubai Airport / Palm Jumeirah", "detail": "Day 1. Fires at Palm Jumeirah Fairmont, Burj Al Arab, Jebel Ali Port, Dubai Airport. 1 killed at Abu Dhabi Airport." },
+        { "ts": "2026-03-01T04:30", "types": ["missiles","drones","cruise"], "targets": ["Hotel","Port","Data center","Military base"], "counts": {"missiles":28,"drones":150,"cruise":2}, "cas": {"k":1,"i":15}, "lat": 24.4539, "lng": 54.3773, "location_name": "Abu Dhabi", "detail": "AWS data center hit. French naval base struck. US consulate fire. Dubai Airport Terminal 3 struck." },
+        { "ts": "2026-03-02T09:00", "types": ["missiles","drones"], "targets": ["Residential","Military base"], "counts": {"missiles":10,"drones":80}, "cas": {"k":0,"i":20}, "lat": 25.2048, "lng": 55.2708, "location_name": "Dubai", "detail": "3rd day of continuous barrages. Debris across Dubai and Abu Dhabi." },
+        { "ts": "2026-03-03T07:00", "types": ["drones"], "targets": ["Residential"], "counts": {"drones":50}, "cas": {"k":0,"i":10}, "lat": 25.2048, "lng": 55.2708, "location_name": "Dubai", "detail": "Daily drone waves. UAE air defenses intercept majority." },
+        { "ts": "2026-03-04T00:00", "types": ["drones","missiles"], "targets": ["Embassy/Consulate","Port"], "counts": {"drones":121,"missiles":3}, "cas": {"k":1,"i":40}, "lat": 25.2290, "lng": 55.2870, "location_name": "US Consulate Dubai", "detail": "US consulate Dubai struck. 3 ballistic missiles + 121 drones intercepted overnight." },
+        { "ts": "2026-03-05T19:00", "types": ["missiles","drones"], "targets": ["Residential","Industrial"], "counts": {"missiles":7,"drones":60}, "cas": {"k":0,"i":6}, "lat": 24.4250, "lng": 54.6500, "location_name": "ICAD 2 industrial area, Abu Dhabi", "detail": "Safety alerts Abu Dhabi, Dubai, Sharjah. 6 workers injured in ICAD 2 industrial area." }
+      ]
+    },
+    {
+      "name": "Saudi Arabia",
+      "color": "#fb923c",
+      "events": [
+        { "ts": "2026-02-28T21:00", "types": ["missiles","drones"], "targets": ["Capital city","Military base"], "counts": {"missiles":30,"drones":40}, "cas": {"k":0,"i":0}, "lat": 24.7136, "lng": 46.6753, "location_name": "Riyadh", "detail": "Riyadh and eastern region targeted. Saudi defenses repelled all." },
+        { "ts": "2026-03-02T10:00", "types": ["drones"], "targets": ["Embassy/Consulate"], "counts": {"drones":20}, "cas": {"k":0,"i":0}, "lat": 24.7115, "lng": 46.6726, "location_name": "US Embassy Riyadh", "detail": "US embassy Riyadh targeted. All intercepted." }
+      ]
+    },
+    {
+      "name": "Bahrain",
+      "color": "#60a5fa",
+      "events": [
+        { "ts": "2026-02-28T21:00", "types": ["missiles","drones"], "targets": ["Military base","Residential"], "counts": {"missiles":45,"drones":9}, "cas": {"k":0,"i":4}, "lat": 26.2285, "lng": 50.5860, "location_name": "US Navy 5th Fleet HQ, Manama", "detail": "US Navy 5th Fleet HQ Manama struck. Shahed drone hit tower block. 4 injured." },
+        { "ts": "2026-03-01T08:00", "types": ["drones"], "targets": ["Military base"], "counts": {"drones":15}, "cas": {"k":0,"i":2}, "lat": 26.2285, "lng": 50.5860, "location_name": "Manama", "detail": "Follow-up drone waves on US assets." }
+      ]
+    },
+    {
+      "name": "Qatar",
+      "color": "#a78bfa",
+      "events": [
+        { "ts": "2026-02-28T22:00", "types": ["missiles","drones","cruise"], "targets": ["Military base","Radar station"], "counts": {"missiles":65,"drones":12,"cruise":1}, "cas": {"k":0,"i":16}, "lat": 25.1174, "lng": 51.3150, "location_name": "Al Udeid Air Base", "detail": "Al Udeid Air Base targeted. Long-range radar struck. 16 injured." },
+        { "ts": "2026-03-04T12:00", "types": ["drones","cruise"], "targets": ["Military base"], "counts": {"drones":10,"cruise":2}, "cas": {"k":0,"i":0}, "lat": 25.1174, "lng": 51.3150, "location_name": "Al Udeid Air Base", "detail": "10 drones + 2 cruise missiles intercepted. 10 IRGC agents arrested." }
+      ]
+    },
+    {
+      "name": "Kuwait",
+      "color": "#34d399",
+      "events": [
+        { "ts": "2026-02-28T23:00", "types": ["missiles","drones"], "targets": ["Military base"], "counts": {"missiles":97,"drones":283}, "cas": {"k":0,"i":0}, "lat": 29.3375, "lng": 47.9774, "location_name": "Kuwait military facilities", "detail": "97 missiles + 283 drones via maritime routes. All intercepted." }
+      ]
+    },
+    {
+      "name": "Jordan",
+      "color": "#e879f9",
+      "events": [
+        { "ts": "2026-02-28T22:00", "types": ["missiles","drones"], "targets": ["Airspace"], "counts": {"missiles":20,"drones":29}, "cas": {"k":0,"i":0}, "lat": 31.9454, "lng": 35.9284, "location_name": "Amman airspace", "detail": "49 drones and missiles intercepted over Amman and northern Jordan." }
+      ]
+    },
+    {
+      "name": "Oman",
+      "color": "#2dd4bf",
+      "events": [
+        { "ts": "2026-03-01T14:00", "types": ["drones"], "targets": ["Port"], "counts": {"drones":2}, "cas": {"k":0,"i":1}, "lat": 21.0500, "lng": 57.0667, "location_name": "Duqm commercial port", "detail": "2 drones struck Duqm commercial port. 1 worker injured." }
+      ]
+    },
+    {
+      "name": "Red Sea / Ships",
+      "color": "#38bdf8",
+      "events": [
+        { "ts": "2026-03-01T10:00", "types": ["drones"], "targets": ["Ship (tanker)"], "counts": {"drones":1}, "cas": {"k":0,"i":4}, "lat": 26.5667, "lng": 56.2500, "location_name": "Strait of Hormuz", "detail": "Tanker 'Skylight' struck in Strait of Hormuz. 4 mariners wounded." }
+      ]
+    }
+  ]
+}
