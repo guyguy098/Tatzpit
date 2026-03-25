@@ -1,3 +1,5 @@
+const CORS_PROXY = 'tatzpit-proxy.guyguy098.workers.dev/?url=';
+
 let activeStreams = new Set();
 let loadedStreams = new Map();
 let videoListenerControllers = new Map();
