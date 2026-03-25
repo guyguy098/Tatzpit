@@ -66,39 +66,35 @@ async function fetchAlertAnalytics() {
 	content.style.display = 'none';
 	btn.disabled = true;
 
+	const ALERT_API = 'https://api.tzevaadom.co.il/alerts-history';
 	let data = null;
 
-	// Step 1: Try static JSON (works on GitHub Pages, updated by Actions every 30 min)
-	try {
-		const resp = await fetch(`data/alert-history.json?v=${Math.floor(Date.now()/60000)}`);
-		if (resp.ok) {
-			const json = await resp.json();
-			if (json.events && Array.isArray(json.events) && json.events.length > 0) {
-				data = json.events;
-				console.log(`Alert data loaded from static JSON: ${data.length} events (updated: ${json.updated})`);
-			}
-		}
-	} catch(e) { console.warn('Static alert JSON not available:', e.message); }
+	// Try fetching via our Cloudflare proxy first, then public fallbacks
+	const proxies = [
+		CORS_PROXY + encodeURIComponent(ALERT_API),
+		'https://api.allorigins.win/raw?url=' + encodeURIComponent(ALERT_API),
+		'https://corsproxy.io/?' + encodeURIComponent(ALERT_API),
+	];
 
-	// Step 2: Fallback — try CORS proxies for live data
-	if (!data) {
-		const ALERT_API = 'https://api.tzevaadom.co.il/alerts-history';
-		for (const proxy of [
-			'https://api.allorigins.win/raw?url='+encodeURIComponent(ALERT_API),
-			'https://corsproxy.io/?url='+encodeURIComponent(ALERT_API)
-		]) {
-			try {
-				const r = await fetch(proxy, { cache:'no-store', signal: AbortSignal.timeout(8000) });
-				if (r.ok) { data = await r.json(); if (Array.isArray(data) && data.length) break; data = null; }
-			} catch(e) {}
-		}
+	for (const proxyUrl of proxies) {
+		try {
+			const r = await fetch(proxyUrl, { cache: 'no-store', signal: AbortSignal.timeout(10000) });
+			if (r.ok) {
+				const json = await r.json();
+				if (Array.isArray(json) && json.length > 0) {
+					data = json;
+					console.log(`Alert data fetched via proxy: ${data.length} events`);
+					break;
+				}
+			}
+		} catch(e) { console.warn('Proxy failed:', e.message); }
 	}
 
 	loading.classList.remove('active');
 	btn.disabled = false;
 
 	if (!data || !Array.isArray(data) || !data.length) {
-		content.innerHTML = '<p style="color:rgba(255,255,255,0.4);text-align:center;padding:3rem;">Could not fetch alert data. The data pipeline may not have run yet.<br><span style="font-size:0.75rem;color:rgba(255,255,255,0.25);margin-top:0.5rem;display:inline-block;">If running locally, place alert-history.json in the data/ folder.</span></p>';
+		content.innerHTML = '<p style="color:rgba(255,255,255,0.4);text-align:center;padding:3rem;">Could not fetch alert data. Try again shortly.</p>';
 		content.style.display = 'block';
 		return;
 	}
@@ -600,59 +596,63 @@ async function fetchTelegramIntercepts() {
 	const div = document.getElementById('telegramInterceptDiv');
 	if (!div) return;
 
-	let found = null;
+	const TG_URL = 'https://t.me/s/IDFSpokesperson';
+	let html = null;
 
-	// Step 1: Try static JSON (updated by GitHub Actions pipeline)
-	try {
-		const resp = await fetch(`data/telegram-idf.json?v=${Math.floor(Date.now()/60000)}`);
-		if (resp.ok) {
-			const json = await resp.json();
-			if (json.messages && json.messages.length > 0) {
-				found = json.messages;
-				console.log(`Telegram data loaded from static JSON: ${found.length} messages (updated: ${json.updated})`);
-			}
-		}
-	} catch(e) { console.warn('Static Telegram JSON not available:', e.message); }
+	// Try our Cloudflare proxy first, then public fallbacks
+	const proxies = [
+		CORS_PROXY + encodeURIComponent(TG_URL),
+		'https://api.allorigins.win/raw?url=' + encodeURIComponent(TG_URL),
+		'https://corsproxy.io/?' + encodeURIComponent(TG_URL),
+	];
 
-	// Step 2: Fallback — try CORS proxy for live scraping
-	if (!found) {
-		const TG_URL = 'https://t.me/s/IDFSpokesperson';
-		let html = null;
-		for (const proxy of [
-			'https://api.allorigins.win/raw?url=' + encodeURIComponent(TG_URL),
-			'https://corsproxy.io/?url=' + encodeURIComponent(TG_URL),
-		]) {
-			try {
-				const r = await fetch(proxy, { cache: 'no-store', signal: AbortSignal.timeout(8000) });
-				if (r.ok) { html = await r.text(); break; }
-			} catch(e) {}
-		}
-		if (html) {
-			const parser   = new DOMParser();
-			const doc      = parser.parseFromString(html, 'text/html');
-			const msgEls   = doc.querySelectorAll('.tgme_widget_message_text');
-			const keywords = /intercept|rocket|missile|launched|fired|UAV|drone|projectile|aerial|threat|iron dome/i;
-			const numberRx = /(\d+)\s*(rocket|missile|projectile|UAV|drone|aerial)/gi;
-			const interceptRx = /intercept(?:ed)?\s+(\d+)/gi;
-			found = [];
-			msgEls.forEach(el => {
-				const text = el.innerText || el.textContent || '';
-				if (keywords.test(text) && found.length < 6) {
-					const nums = [], m1 = [...text.matchAll(numberRx)], m2 = [...text.matchAll(interceptRx)];
-					m1.forEach(m=>nums.push(m[0])); m2.forEach(m=>nums.push('intercepted '+m[1]));
-					const tEl = el.closest('.tgme_widget_message')?.querySelector('time');
-					const ts  = tEl ? tEl.getAttribute('datetime') : null;
-					found.push({ text: text.slice(0,220).replace(/\n+/g,' '), nums, ts });
+	for (const proxyUrl of proxies) {
+		try {
+			const r = await fetch(proxyUrl, { cache: 'no-store', signal: AbortSignal.timeout(10000) });
+			if (r.ok) {
+				const text = await r.text();
+				if (text.length > 20000 && text.includes('message')) {
+					html = text;
+					console.log(`Telegram fetched via proxy: ${text.length} chars`);
+					break;
 				}
-			});
-			if (!found.length) found = null;
-		}
+			}
+		} catch(e) {}
 	}
 
-	// Render results
-	if (!found || !found.length) {
+	if (!html) {
 		div.innerHTML = `<div style="color:rgba(255,255,255,0.35);font-size:0.8rem;text-align:center;padding:0.5rem;">
-			<div style="margin-bottom:0.5rem;">No recent intercept reports available.</div>
+			<div style="margin-bottom:0.5rem;">Could not load Telegram data.</div>
+			<a href="https://t.me/s/IDFSpokesperson" target="_blank" style="color:#34d399;text-decoration:underline;">Open IDF Spokesperson channel directly ↗</a>
+		</div>`;
+		return;
+	}
+
+	const parser = new DOMParser();
+	const doc = parser.parseFromString(html, 'text/html');
+	const msgEls = doc.querySelectorAll('.tgme_widget_message_text');
+	const keywords = /intercept|rocket|missile|launched|fired|UAV|drone|projectile|aerial|threat|iron dome|שיגור|יירוט|רקט|טיל|כטב"מ|מל"ט/i;
+	const numberRx = /(\d+)\s*(rocket|missile|projectile|UAV|drone|aerial|רקט|טיל|כטב"מ|שיגור|מל"ט)/gi;
+	const interceptRx = /intercept(?:ed)?\s+(\d+)/gi;
+	const found = [];
+
+	msgEls.forEach(el => {
+		const text = el.innerText || el.textContent || '';
+		if ((keywords.test(text) || found.length < 3) && found.length < 8) {
+			const nums = [];
+			const m1 = [...text.matchAll(numberRx)];
+			const m2 = [...text.matchAll(interceptRx)];
+			m1.forEach(m => nums.push(m[0]));
+			m2.forEach(m => nums.push('intercepted ' + m[1]));
+			const tEl = el.closest('.tgme_widget_message')?.querySelector('time');
+			const ts = tEl ? new Date(tEl.getAttribute('datetime')).toLocaleString('en-IL', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'}) : '';
+			found.push({ text: text.slice(0, 220).replace(/\n+/g, ' '), nums, ts });
+		}
+	});
+
+	if (!found.length) {
+		div.innerHTML = `<div style="color:rgba(255,255,255,0.35);font-size:0.8rem;text-align:center;padding:0.5rem;">
+			<div style="margin-bottom:0.5rem;">No recent intercept reports found.</div>
 			<a href="https://t.me/s/IDFSpokesperson" target="_blank" style="color:#34d399;text-decoration:underline;">Open IDF Spokesperson channel directly ↗</a>
 		</div>`;
 		return;
@@ -660,19 +660,17 @@ async function fetchTelegramIntercepts() {
 
 	div.innerHTML = `
 		<div style="display:flex;flex-direction:column;gap:0.55rem;width:100%;">
-			${found.map(f => {
-				const tsFormatted = f.ts ? new Date(f.ts).toLocaleString('en-IL',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '';
-				return `
+			${found.map(f => `
 				<div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.15);border-radius:8px;padding:0.6rem 0.8rem;">
 					<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;margin-bottom:0.3rem;">
 						<div style="display:flex;flex-wrap:wrap;gap:0.3rem;">
-							${(f.nums||[]).map(n=>`<span style="background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.3);border-radius:4px;padding:0.1rem 0.4rem;font-size:0.72rem;color:#34d399;font-weight:700;">${n}</span>`).join('')}
+							${f.nums.map(n => `<span style="background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.3);border-radius:4px;padding:0.1rem 0.4rem;font-size:0.72rem;color:#34d399;font-weight:700;">${n}</span>`).join('')}
 						</div>
-						<span style="font-size:0.65rem;color:rgba(255,255,255,0.25);white-space:nowrap;">${tsFormatted}</span>
+						<span style="font-size:0.65rem;color:rgba(255,255,255,0.25);white-space:nowrap;">${f.ts}</span>
 					</div>
-					<div style="font-size:0.74rem;color:rgba(255,255,255,0.55);line-height:1.4;">${f.text}${f.text.length>=220?'…':''}</div>
-				</div>`;
-			}).join('')}
+					<div style="font-size:0.74rem;color:rgba(255,255,255,0.55);line-height:1.4;">${f.text}${f.text.length >= 220 ? '…' : ''}</div>
+				</div>
+			`).join('')}
 			<a href="https://t.me/s/IDFSpokesperson" target="_blank" style="font-size:0.72rem;color:rgba(52,211,153,0.6);text-align:right;">Open full IDF Spokesperson channel ↗</a>
 		</div>`;
 }
