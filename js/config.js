@@ -1,4 +1,4 @@
-const CORS_PROXY = 'tatzpit-proxy.guyguy098.workers.dev/?url=';
+const CORS_PROXY = 'https://tatzpit-proxy.guyguy098.workers.dev/?url=';
 
 let activeStreams = new Set();
 let loadedStreams = new Map();
