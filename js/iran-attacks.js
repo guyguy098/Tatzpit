@@ -219,8 +219,10 @@ async function fetchIranLiveData() {
 }
 
 function _iranSaveKeyAndFetch() {
-	const key = document.getElementById('iranGeminiKey')?.value?.trim();
+	const keyEl = document.getElementById('iranGeminiKey');
+	const key = keyEl?.value?.trim();
 	if (key && key.length >= 10) {
+		keyEl.dataset.userTyped = 'true';
 		localStorage.setItem('iranGeminiKey', key);
 		// Also sync to AI Summary panel if it exists
 		const aiKeyEl = document.getElementById('geminiApiKey');
@@ -232,9 +234,11 @@ function _iranSaveKeyAndFetch() {
 }
 
 async function _iranBackgroundEnhance() {
-	const geminiKey = (document.getElementById('iranGeminiKey')?.value || '').trim()
-		|| (document.getElementById('geminiApiKey')?.value || '').trim()
-		|| localStorage.getItem('iranGeminiKey') || '';
+	// Don't auto-use stored key — the server pipeline handles updates.
+	// Only use key if user explicitly typed one in the Iran panel's input field.
+	const iranKeyEl = document.getElementById('iranGeminiKey');
+	const geminiKey = (iranKeyEl && iranKeyEl.value && iranKeyEl.dataset.userTyped === 'true')
+		? iranKeyEl.value.trim() : '';
 
 	// Fetch GDELT
 	_iranSetStatus(_iranStatusBase() + ' · <span style="color:#fb923c;">📡 Searching GDELT...</span>');
