@@ -16,13 +16,19 @@ const DATA_FILE = path.join(__dirname, '..', 'data', 'iran-attacks.json');
 
 // ── GDELT queries ──────────────────────────────────────────────────────────
 const GDELT_QUERIES = [
-	'iran missile attack 2026',
-	'iran drone attack gulf',
-	'iran strikes Israel UAE Saudi',
+	'iran attack',
+	'iran missile',
+	'iran drone strike',
+	'iran Israel attack',
+	'iran UAE attack',
+	'iran Saudi attack',
+	'IRGC attack',
+	'shahed drone',
 	'iran ballistic missile',
-	'IRGC attack Middle East',
-	'iran cruise missile',
-	'shahed drone attack',
+	'iran war',
+	'iran strikes',
+	'iran ceasefire',
+	'iran military',
 ];
 
 async function fetchGDELT() {
