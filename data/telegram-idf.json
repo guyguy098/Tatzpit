@@ -1,9 +1,9 @@
 {
-  "updated": "2026-08-07T08:17:22.123Z",
+  "updated": "2026-08-07T09:33:44.580Z",
   "source": "IDF Spokesperson Telegram",
   "message_count": 0,
   "debug": {
-    "page_size": 9701,
+    "page_size": 9700,
     "has_widget_class": false,
     "timestamps_found": 0,
     "raw_messages_found": 0
